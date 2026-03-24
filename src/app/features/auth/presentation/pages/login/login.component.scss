@@ -1,0 +1,495 @@
+// --- Design Tokens ---
+$font-family: 'Inter', -apple-system, sans-serif;
+
+// Colors - Slate/Indigo Modern Enterprise Palette
+$bg-body: #f1f5f9; // Slate 100
+$bg-surface: #ffffff;
+$bg-input: #f8fafc; // Slate 50
+$bg-input-hover: #f1f5f9;
+
+$text-primary: #0f172a; // Slate 900
+$text-secondary: #64748b; // Slate 500
+$text-muted: #94a3b8; // Slate 400
+
+$brand-primary: #4f46e5; // Indigo 600
+$brand-primary-hover: #4338ca; // Indigo 700
+$brand-light: #e0e7ff; // Indigo 100
+$brand-dark: #0f172a;
+
+$error-color: #ef4444; // Red 500
+$error-bg: #fef2f2; // Red 50
+$error-border: #fecaca; // Red 200
+
+// Shadows and Radii
+$radius-xl: 24px;
+$radius-lg: 16px;
+$radius-md: 10px;
+$radius-sm: 6px;
+
+$shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+$shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+$shadow-primary: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+$shadow-focus: 0 0 0 4px rgba(79, 70, 229, 0.15);
+$shadow-focus-error: 0 0 0 4px rgba(239, 68, 68, 0.15);
+
+
+// --- Base Resets ---
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: $font-family;
+  background-color: $bg-body;
+  background-image: radial-gradient(circle at 50% 0%, #e2e8f0 0%, $bg-body 50%);
+  color: $text-primary;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// --- Layout Wrapper ---
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.login-glass-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  background: $bg-surface;
+  border-radius: $radius-xl;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
+  overflow: hidden;
+  height: 720px;
+  max-height: 90vh;
+  position: relative;
+  z-index: 1;
+}
+
+// --- Left Branding Panel ---
+.login-branding {
+  flex: 5;
+  background: linear-gradient(145deg, $brand-dark 0%, #1e1b4b 100%);
+  color: white;
+  position: relative;
+  display: none; 
+  overflow: hidden;
+
+  @media (min-width: 900px) {
+    display: flex;
+  }
+
+  .svg-background {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.8;
+    
+    svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .branding-content {
+    position: relative;
+    z-index: 10;
+    padding: 4rem;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: auto;
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        border-radius: $radius-md;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #818cf8;
+      }
+      
+      .logo-text {
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        background: linear-gradient(90deg, #fff, #a5b4fc);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    .branding-message {
+      margin-top: auto;
+      margin-bottom: 4rem;
+
+      h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        margin-bottom: 1.5rem;
+        color: white;
+      }
+
+      p {
+        font-size: 1.125rem;
+        color: #94a3b8;
+        line-height: 1.6;
+        max-width: 420px;
+        font-weight: 300;
+      }
+    }
+
+    .branding-footer {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: #64748b;
+      
+      .accessibility-dots {
+        display: flex;
+        gap: 4px;
+        
+        span {
+          display: block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #4f46e5;
+          opacity: 0.6;
+          &:nth-child(2) { opacity: 0.8; }
+          &:nth-child(3) { opacity: 1; }
+        }
+      }
+    }
+  }
+}
+
+// --- Right Form Panel ---
+.login-form-section {
+  flex: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg-surface;
+  padding: 2rem;
+
+  @media (min-width: 900px) {
+    padding: 3rem;
+  }
+}
+
+.form-content-wrapper {
+  width: 100%;
+  max-width: 380px;
+}
+
+.form-header {
+  margin-bottom: 2.5rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: 1rem;
+    margin: 0;
+  }
+}
+
+// --- Alert ---
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 1rem 1.25rem;
+  border-radius: $radius-md;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  
+  &.alert-error {
+    background-color: $error-bg;
+    color: #991b1b;
+    border: 1px solid $error-border;
+    
+    svg {
+      color: $error-color;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+  }
+
+  &.slide-down {
+    animation: slideDown 0.3s ease-out forwards;
+  }
+}
+
+// --- Enterprise Form Elements ---
+.enterprise-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    
+    label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: $text-primary;
+      transition: color 0.2s;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .forgot-link {
+        font-size: 0.8125rem;
+        color: $brand-primary;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+        
+        &:hover {
+          color: $brand-primary-hover;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: $bg-input;
+      border: 1px solid #e2e8f0;
+      border-radius: $radius-md;
+      transition: all 0.2s ease-in-out;
+      
+      .input-icon {
+        position: absolute;
+        left: 14px;
+        display: flex;
+        align-items: center;
+        color: $text-muted;
+        transition: color 0.2s ease;
+      }
+
+      input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        padding: 0.875rem 1rem 0.875rem 2.75rem;
+        font-size: 1rem;
+        color: $text-primary;
+        font-weight: 500;
+        outline: none;
+        border-radius: inherit;
+
+        &::placeholder {
+          color: #cbd5e1;
+          font-weight: 400;
+        }
+      }
+
+      .btn-icon {
+        position: absolute;
+        right: 14px;
+        background: transparent;
+        border: none;
+        color: $text-muted;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: color 0.2s, background 0.2s;
+        
+        &:hover {
+          color: $text-secondary;
+          background: rgba(0,0,0,0.05);
+        }
+      }
+    }
+
+    // States interactions
+    &:hover .input-wrapper {
+      border-color: #cbd5e1;
+      background: $bg-input-hover;
+    }
+
+    &.is-focused {
+      label {
+        color: $brand-primary;
+      }
+      .input-wrapper {
+        background: $bg-surface;
+        border-color: $brand-primary;
+        box-shadow: $shadow-focus;
+        
+        .input-icon {
+          color: $brand-primary;
+        }
+      }
+    }
+
+    &.has-error {
+      label {
+        color: $error-color;
+      }
+      .input-wrapper {
+        background: $bg-surface;
+        border-color: $error-color;
+        box-shadow: none;
+        &:focus-within {
+          box-shadow: $shadow-focus-error;
+        }
+        .input-icon {
+          color: $error-color;
+        }
+      }
+    }
+
+    .error-text {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: $error-color;
+      animation: fadeIn 0.3s ease;
+    }
+  }
+
+  // --- CTA Button ---
+  .form-actions {
+    margin-top: 0.5rem;
+  }
+
+  .btn-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 52px;
+    background: linear-gradient(180deg, $brand-primary 0%, $brand-primary-hover 100%);
+    color: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: $radius-md;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: $shadow-soft;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: $shadow-primary;
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+      box-shadow: none;
+    }
+
+    &.loading, &:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+      border-color: transparent;
+      box-shadow: none;
+      &::after { display: none; }
+    }
+
+    .btn-loader {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+    }
+
+    .spinner {
+      animation: rotate 2s linear infinite;
+      width: 20px;
+      height: 20px;
+      
+      .path {
+        stroke: white;
+        stroke-linecap: round;
+        animation: dash 1.5s ease-in-out infinite;
+      }
+    }
+  }
+}
+
+// --- Animations ---
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dash {
+  0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+  50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+}
+
+// Typography Entrance
+.fadeInUp {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  
+  &.delay-1 { animation-delay: 0.1s; }
+  &.delay-2 { animation-delay: 0.2s; }
+}
+
+@keyframes fadeInUpAnim {
+  to { opacity: 1; transform: translateY(0); }
+}
