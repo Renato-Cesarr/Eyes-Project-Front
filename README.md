@@ -1,3 +1,6 @@
+# Eyes-Project-Front
+Aplicação front-end do Eyes Project, desenvolvida em Angular, responsável pelo painel administrativo do sistema. Permite gerenciamento de usuários, solicitação e aprovação de acessos, além de visualização de informações e integração com serviços de back-end e IA.
+
 # EyesProjectFront
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.3.
