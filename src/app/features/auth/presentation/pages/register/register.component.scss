@@ -1,0 +1,42 @@
+@import '../login/login.component.scss';
+
+// Specific overrides if needed
+.back-link {
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  
+  &:hover {
+    color: #4f46e5;
+    text-decoration: underline;
+  }
+}
+
+.success-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  
+  .success-icon {
+    margin-bottom: 1rem;
+    background: #f0fdf4;
+    padding: 1rem;
+    border-radius: 50%;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: #0f172a;
+  }
+  
+  p {
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+  }
+}

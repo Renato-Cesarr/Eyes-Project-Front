@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,16 +8,39 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dashboard-home.component.html',
   styleUrls: ['./dashboard-home.component.scss']
 })
-export class DashboardHomeComponent {
-  // Temporary mock data for greeting
-  currentDate = new Date();
+export class DashboardHomeComponent implements OnInit, OnDestroy {
   adminName = 'Administrador Principal';
-  
-  // Mock system stats
-  stats = [
-    { label: 'Usuários Ativos', value: '1,240', trend: '+12%', isPositive: true },
-    { label: 'Solicitações Pendentes', value: '38', trend: '-5%', isPositive: false },
-    { label: 'Acessos Hoje', value: '8.4k', trend: '+22%', isPositive: true },
-    { label: 'Alertas do Sistema', value: '2', trend: 'Crítico', isPositive: false, isWarning: true }
-  ];
+  greeting = 'Bem-vindo(a) de volta';
+  currentDateStr = '';
+  private timer: any;
+
+  ngOnInit() {
+    this.updateTime();
+    this.timer = setInterval(() => {
+      this.updateTime();
+    }, 60000);
+  }
+
+  ngOnDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+  }
+
+  updateTime() {
+    const now = new Date();
+    const hour = now.getHours();
+    
+    if (hour < 12) this.greeting = 'Bom dia';
+    else if (hour < 18) this.greeting = 'Boa tarde';
+    else this.greeting = 'Boa noite';
+
+    const options: Intl.DateTimeFormatOptions = { 
+      weekday: 'long', 
+      day: 'numeric', 
+      month: 'long' 
+    };
+    let dateStr = now.toLocaleDateString('pt-BR', options);
+    this.currentDateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+  }
 }

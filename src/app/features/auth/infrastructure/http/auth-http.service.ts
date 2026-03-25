@@ -1,50 +1,40 @@
-import { Injectable } from '@angular/core';
-import { Observable, delay, of, throwError } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../../environments/environment';
 import { AuthRepository } from '../../domain/repositories/auth.repository';
 import { AuthCredentials, AuthResponse } from '../../domain/models/auth-credentials.model';
 import { User } from '../../domain/models/user.model';
+import { SetupPasswordRequest, UserRegistrationRequest } from '../../domain/models/auth-requests.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthHttpService implements AuthRepository {
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = `${environment.apiUrl}`;
   
-  // Simulated HTTP call
   login(credentials: AuthCredentials): Observable<AuthResponse> {
-    if (credentials.email === 'admin@empresa.com' && credentials.password === 'admin123') {
-      const mockUser: User = {
-        id: '1',
-        name: 'Administrador Principal',
-        email: 'admin@empresa.com',
-        role: 'admin',
-        permissions: ['all']
-      };
-      
-      const response: AuthResponse = {
-        user: mockUser,
-        token: 'mock-jwt-token-xyz-123',
-        expiresIn: 3600
-      };
-      
-      return of(response).pipe(delay(1500)); // Simulate 1.5s network delay
-    }
-    
-    return throwError(() => new Error('Credenciais inválidas.')).pipe(delay(1000));
+    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, credentials);
+  }
+
+  register(data: UserRegistrationRequest): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/v1/users`, data);
+  }
+
+  setupPassword(data: SetupPasswordRequest): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/v1/users/setup-password`, data);
   }
   
   logout(): void {
-    // Clear local storage and tokens
     localStorage.removeItem('auth_token');
   }
 
   me(): Observable<User> {
-    // Simulated token based fetch
-    return of<User>({
-      id: '1',
-      name: 'Administrador Principal',
-      email: 'admin@empresa.com',
-      role: 'admin',
-      permissions: ['all']
-    }).pipe(delay(500));
+    // Usually fetching from /api/auth/me or similar based on backend. 
+    // We'll mock it for now since the endpoint details weren't explicitly provided,
+    // or return a basic user. 
+    return this.http.get<User>(`${this.apiUrl}/auth/me`);
   }
 }
+
