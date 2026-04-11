@@ -4,8 +4,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    setupFiles: ['./src/test-setup.ts'],
     coverage: {
-      provider: 'istanbul',
+      provider: 'v8',
       reporter: ['lcovonly', 'clover', 'text-summary'],
       reportsDirectory: './coverage',
       include: ['src/app/**/*.ts'],

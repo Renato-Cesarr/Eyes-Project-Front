@@ -1,4 +1,3 @@
-import 'zone.js/testing';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { DashboardHomeComponent } from './dashboard-home.component';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
