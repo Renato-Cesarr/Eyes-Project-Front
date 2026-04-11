@@ -6,7 +6,7 @@ export default defineConfig({
     environment: 'jsdom',
     coverage: {
       provider: 'v8',
-      reporter: ['lcovonly', 'text'],
+      reporter: ['lcovonly', 'text', 'json'],
       reportsDirectory: './coverage',
       include: ['src/**/*.ts'],
       exclude: ['src/**/*.spec.ts', 'src/main.ts', 'src/environments/**']
