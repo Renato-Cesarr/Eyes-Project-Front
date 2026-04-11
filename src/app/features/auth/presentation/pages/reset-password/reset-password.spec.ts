@@ -10,7 +10,7 @@ describe('ResetPassword', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ResetPassword],
-      providers: [provideRouter([])]
+      providers: [provideRouter([{ path: 'login', component: class {} }])]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ResetPassword);
