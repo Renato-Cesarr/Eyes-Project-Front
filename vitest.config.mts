@@ -5,10 +5,10 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     coverage: {
-      provider: 'v8',
-      reporter: ['lcov', 'text', 'text-summary'],
+      provider: 'istanbul', // Mudando para istanbul para maior estabilidade no reporte físico
+      reporter: ['lcovonly', 'text', 'text-summary'],
       reportsDirectory: './coverage',
-      // No Vitest v4+, a inclusão é feita via include/exclude
+      all: true,
       include: ['src/app/**/*.ts'],
       exclude: [
         'src/app/**/*.spec.ts',
