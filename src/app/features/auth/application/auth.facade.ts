@@ -2,7 +2,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthCredentials } from '../domain/models/auth-credentials.model';
-import { SetupPasswordRequest, UserRegistrationRequest } from '../domain/models/auth-requests.model';
+import { ForgotPasswordRequest, ResetPasswordRequest, SetupPasswordRequest, UserRegistrationRequest } from '../domain/models/auth-requests.model';
 import { User } from '../domain/models/user.model';
 import { AuthRepository } from '../domain/repositories/auth.repository';
 import { AuthHttpService } from '../infrastructure/http/auth-http.service';
@@ -76,6 +76,14 @@ export class AuthFacade {
 
   setupPassword(data: SetupPasswordRequest): Observable<void> {
     return this.authRepository.setupPassword(data);
+  }
+
+  forgotPassword(data: ForgotPasswordRequest): Observable<void> {
+    return this.authRepository.forgotPassword(data);
+  }
+
+  resetPassword(data: ResetPasswordRequest): Observable<void> {
+    return this.authRepository.resetPassword(data);
   }
 
   logout(): void {

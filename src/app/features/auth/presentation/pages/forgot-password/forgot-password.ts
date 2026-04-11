@@ -9,54 +9,37 @@ import { ButtonComponent } from '../../../../../shared/ui/button/button.componen
 import { ToastService } from '../../../../../shared/utils/toast.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-forgot-password',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink, AuthLayout, FormCard, ButtonComponent],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  templateUrl: './forgot-password.html',
+  styleUrls: ['./forgot-password.scss']
 })
-export class RegisterComponent {
+export class ForgotPassword {
   private fb = inject(FormBuilder);
   public authFacade = inject(AuthFacade);
   private toastService = inject(ToastService);
 
-  public focusState = signal<string | null>(null);
-  public isLoading = signal(false);
+  public isSubmitted = signal(false);
 
-  registerForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
+  forgotForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]]
   });
 
   onSubmit(): void {
-    if (this.registerForm.valid) {
-      this.isLoading.set(true);
-      this.authFacade.register(this.registerForm.getRawValue()).subscribe({
+    if (this.forgotForm.valid) {
+      this.authFacade.forgotPassword(this.forgotForm.getRawValue()).subscribe({
         next: () => {
-          this.isLoading.set(false);
-          this.toastService.success('Convite enviado com sucesso para o e-mail informado.');
-          this.registerForm.reset();
+          this.isSubmitted.set(true);
+          this.toastService.success('Link de recuperação enviado para o seu e-mail.');
         },
         error: (err) => {
-          this.isLoading.set(false);
-          const msg = err.error?.message || 'Erro inesperado ao cadastrar o usuário.';
+          const msg = err.error?.message || 'Erro ao processar solicitação.';
           this.toastService.error(msg);
         }
       });
     } else {
-      this.registerForm.markAllAsTouched();
+      this.forgotForm.markAllAsTouched();
     }
   }
-
-
-
-  isFieldInvalid(field: string): boolean {
-    const control = this.registerForm.get(field);
-    return !!(control && control.invalid && (control.dirty || control.touched));
-  }
-
-  setFocus(field: string | null): void {
-    this.focusState.set(field);
-  }
 }
-

@@ -3,11 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { AuthFacade } from '../../../application/auth.facade';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { AuthLayout } from '../../../../../shared/ui/auth-layout/auth-layout';
+import { FormCard } from '../../../../../shared/ui/form-card/form-card';
+import { ButtonComponent } from '../../../../../shared/ui/button/button.component';
+import { ToastService } from '../../../../../shared/utils/toast.service';
 
 @Component({
   selector: 'app-setup-password',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, AuthLayout, FormCard, ButtonComponent],
   templateUrl: './setup-password.component.html',
   styleUrls: ['./setup-password.component.scss']
 })
@@ -16,6 +20,7 @@ export class SetupPasswordComponent implements OnInit {
   public authFacade = inject(AuthFacade);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private toastService = inject(ToastService);
 
   public focusState = signal<string | null>(null);
   public passwordVisible = signal(false);
@@ -23,13 +28,6 @@ export class SetupPasswordComponent implements OnInit {
   public isLoading = signal(false);
   
   public token = signal<string | null>(null);
-  // Toast state
-  public toast = signal<{ show: boolean, type: 'success' | 'error', title: string, message: string }>({
-    show: false,
-    type: 'success',
-    title: '',
-    message: ''
-  });
 
   setupForm = this.fb.nonNullable.group({
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -41,17 +39,12 @@ export class SetupPasswordComponent implements OnInit {
       if (params['token']) {
         this.token.set(params['token']);
       } else {
-        this.showToast('error', 'Token Inválido', 'Nenhum token foi fornecido na URL. Solicite um novo link.');
+        this.toastService.error('Token não fornecido. Solicite um novo convite.');
       }
     });
   }
 
-  showToast(type: 'success' | 'error', title: string, message: string): void {
-    this.toast.set({ show: true, type, title, message });
-    setTimeout(() => {
-      this.toast.update(t => ({ ...t, show: false }));
-    }, 6000);
-  }
+
 
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password');
@@ -70,7 +63,7 @@ export class SetupPasswordComponent implements OnInit {
 
   onSubmit(): void {
     if (!this.token()) {
-       this.showToast('error', 'Sem Permissão', 'Token de configuração não encontrado. Tente novamente a partir do e-mail recebido.');
+       this.toastService.error('Token de configuração não encontrado. Acesse via link do e-mail.');
        return;
     }
 
@@ -83,15 +76,15 @@ export class SetupPasswordComponent implements OnInit {
       }).subscribe({
         next: () => {
           this.isLoading.set(false);
-          this.showToast('success', 'Tudo Pronto!', 'Sua senha foi configurada com sucesso. Você será redirecionado para o Entrar!');
+          this.toastService.success('Senha configurada com sucesso. Redirecionando...');
           setTimeout(() => {
              this.router.navigate(['/login']);
           }, 2500);
         },
         error: (err) => {
           this.isLoading.set(false);
-          const msg = err.error?.message || 'Falha ao definir nova senha. O link pode estar expirado.';
-          this.showToast('error', 'Erro na Definição', msg);
+          const msg = err.error?.message || 'Falha ao definir nova senha.';
+          this.toastService.error(msg);
         }
       });
     } else {
