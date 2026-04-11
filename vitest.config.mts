@@ -4,14 +4,19 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    include: ['src/**/*.spec.ts'],
     coverage: {
       provider: 'v8',
-      enabled: true,
-      reporter: ['lcovonly', 'clover', 'text'],
+      reporter: ['lcovonly', 'clover', 'text', 'text-summary'],
       reportsDirectory: './coverage/eyes-project-front',
-      include: ['src/**/*.ts'],
-      exclude: ['src/**/*.spec.ts', 'src/main.ts', 'src/environments/**']
+      // No Vitest v4+, a inclusão é feita via include/exclude
+      include: ['src/app/**/*.ts'],
+      exclude: [
+        'src/app/**/*.spec.ts',
+        'src/app/**/*.model.ts',
+        'src/main.ts',
+        'src/app/app.config.ts',
+        'src/environments/**'
+      ]
     },
   },
 });
