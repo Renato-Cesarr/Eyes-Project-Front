@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MainLayoutComponent } from './main-layout.component';
-import { Router } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
@@ -10,20 +9,20 @@ describe('MainLayoutComponent', () => {
   let router: Router;
 
   beforeEach(async () => {
-    const routerMock = {
-      navigate: vi.fn()
-    };
-
     await TestBed.configureTestingModule({
-      imports: [MainLayoutComponent, RouterTestingModule],
+      imports: [MainLayoutComponent],
       providers: [
-        { provide: Router, useValue: routerMock }
+        provideRouter([]) // Use modern router provisioning
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainLayoutComponent);
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
+    
+    // Mock only the navigate method on the real router instance
+    vi.spyOn(router, 'navigate').mockImplementation(async () => true);
+    
     fixture.detectChanges();
   });
 

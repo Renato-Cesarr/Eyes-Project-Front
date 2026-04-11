@@ -1,3 +1,4 @@
+import 'zone.js/testing';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { SetupPasswordComponent } from './setup-password.component';
 import { AuthFacade } from '../../../application/auth.facade';
