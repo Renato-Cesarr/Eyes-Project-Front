@@ -32,10 +32,11 @@ jobs:
       - name: Rodar testes
         run: npm run test:ci
 
-      - name: Debug Coverage
+      - name: De-bug Coverage
         run: |
           ls -R coverage || echo "Coverage not found"
-          [ -f coverage/lcov.info ] && head -n 10 coverage/lcov.info
+          # Converte o JSON do Angular para LCOV para o Sonar entender
+          npx nyc report --reporter=lcovonly --temp-dir=coverage/eyes-project-front --report-dir=coverage
 
       - name: Rodar SonarCloud
         env:
