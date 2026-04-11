@@ -4,10 +4,12 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    include: ['src/**/*.spec.ts'],
     coverage: {
       provider: 'v8',
-      reporter: ['lcovonly', 'text', 'json'],
-      reportsDirectory: './coverage',
+      enabled: true,
+      reporter: ['lcovonly', 'clover', 'text'],
+      reportsDirectory: './coverage/eyes-project-front',
       include: ['src/**/*.ts'],
       exclude: ['src/**/*.spec.ts', 'src/main.ts', 'src/environments/**']
     },
