@@ -1,0 +1,28 @@
+.form-card {
+  background: rgba(30, 41, 59, 0.7); // Transparent slate
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.card-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-subtitle {
+  color: #94a3b8;
+  font-size: 1rem;
+}

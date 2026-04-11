@@ -1,0 +1,10 @@
+<div class="form-card">
+  <div class="card-header">
+    <h1 class="card-title">{{ title() }}</h1>
+    <p class="card-subtitle" *ngIf="subtitle()">{{ subtitle() }}</p>
+  </div>
+  
+  <div class="card-content">
+    <ng-content></ng-content>
+  </div>
+</div>

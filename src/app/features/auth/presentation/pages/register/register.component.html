@@ -1,0 +1,48 @@
+<app-auth-layout>
+  <app-form-card title="Solicitar Acesso" subtitle="Preencha os dados abaixo para receber um convite por e-mail">
+    
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <div class="form-group" [class.invalid]="isFieldInvalid('name')">
+        <label for="name">Nome Completo</label>
+        <div class="input-wrapper">
+          <input 
+            id="name" 
+            type="text" 
+            formControlName="name" 
+            placeholder="Seu nome"
+            (focus)="setFocus('name')"
+            (blur)="setFocus(null)">
+        </div>
+        <small class="error-msg" *ngIf="isFieldInvalid('name')">Nome deve ter pelo menos 3 caracteres</small>
+      </div>
+
+      <div class="form-group" [class.invalid]="isFieldInvalid('email')">
+        <label for="email">E-mail Corporativo</label>
+        <div class="input-wrapper">
+          <input 
+            id="email" 
+            type="email" 
+            formControlName="email" 
+            placeholder="seu@email.com"
+            (focus)="setFocus('email')"
+            (blur)="setFocus(null)">
+        </div>
+        <small class="error-msg" *ngIf="isFieldInvalid('email')">E-mail inválido ou obrigatório</small>
+      </div>
+
+      <app-button 
+        variant="primary" 
+        label="Enviar Solicitação" 
+        type="submit"
+        [loading]="isLoading()"
+        [disabled]="registerForm.invalid">
+      </app-button>
+
+      <div class="footer-links">
+        <span>Já tem uma conta?</span>
+        <a routerLink="/login">Voltar para o Login</a>
+      </div>
+    </form>
+
+  </app-form-card>
+</app-auth-layout>

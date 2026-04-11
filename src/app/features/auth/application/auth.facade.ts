@@ -1,5 +1,8 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { AuthCredentials } from '../domain/models/auth-credentials.model';
+import { ForgotPasswordRequest, ResetPasswordRequest, SetupPasswordRequest, UserRegistrationRequest } from '../domain/models/auth-requests.model';
 import { User } from '../domain/models/user.model';
 import { AuthRepository } from '../domain/repositories/auth.repository';
 import { AuthHttpService } from '../infrastructure/http/auth-http.service';
@@ -15,10 +18,7 @@ export interface AuthState {
   providedIn: 'root'
 })
 export class AuthFacade {
-  // We explicitly bind the interface to our concrete implementation here via Inject, 
-  // or provide it in app.config.ts. For simplicity with Standalone + Clean, 
-  // we can inject the abstract class if mapped, or the concrete directly if strict mapping isn't set up yet.
-  // In a real enterprise app, you'd map AuthRepository to AuthHttpService in providers.
+  // We explicitly bind the interface to our concrete implementation here via Inject.
   private readonly authRepository: AuthRepository = inject(AuthHttpService);
   private readonly router = inject(Router);
 
@@ -41,7 +41,6 @@ export class AuthFacade {
 
     this.authRepository.login(credentials).subscribe({
       next: (response) => {
-        // Save token (normally handled by Infra/Interceptors)
         localStorage.setItem('auth_token', response.token);
         
         this.state.update(s => ({ 
@@ -51,18 +50,40 @@ export class AuthFacade {
           errorMessage: null 
         }));
         
-        // Redirect to dashboard
         this.router.navigate(['/dashboard']);
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => {
+        let msg = 'Erro inesperado na autenticação.';
+        if (err.status === 401 || err.status === 403) {
+          msg = 'Credenciais inválidas.';
+        } else if (err.error && err.error.message) {
+          msg = err.error.message;
+        }
+
         this.state.update(s => ({
           ...s,
           user: null,
           status: 'error',
-          errorMessage: err.message || 'Erro inesperado na autenticação.'
+          errorMessage: msg
         }));
       }
     });
+  }
+
+  register(data: UserRegistrationRequest): Observable<User> {
+    return this.authRepository.register(data);
+  }
+
+  setupPassword(data: SetupPasswordRequest): Observable<void> {
+    return this.authRepository.setupPassword(data);
+  }
+
+  forgotPassword(data: ForgotPasswordRequest): Observable<void> {
+    return this.authRepository.forgotPassword(data);
+  }
+
+  resetPassword(data: ResetPasswordRequest): Observable<void> {
+    return this.authRepository.resetPassword(data);
   }
 
   logout(): void {
@@ -71,3 +92,4 @@ export class AuthFacade {
     this.router.navigate(['/login']);
   }
 }
+

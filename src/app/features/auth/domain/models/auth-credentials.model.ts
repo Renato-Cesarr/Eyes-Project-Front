@@ -6,5 +6,4 @@ export interface AuthCredentials {
 export interface AuthResponse {
   user: import('./user.model').User;
   token: string;
-  expiresIn: number;
 }

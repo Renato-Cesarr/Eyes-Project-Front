@@ -22,6 +22,7 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
+            "polyfills": ["zone.js"],
             "inlineStyleLanguage": "scss",
             "assets": [
               {
@@ -70,7 +71,10 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "setupFiles": ["src/test-setup.ts"]
+          }
         }
       }
     }

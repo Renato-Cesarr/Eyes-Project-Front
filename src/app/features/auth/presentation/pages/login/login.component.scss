@@ -457,7 +457,33 @@ $shadow-focus-error: 0 0 0 4px rgba(239, 68, 68, 0.15);
       }
     }
   }
+
+  // --- Register Link ---
+  .register-link-container {
+    margin-top: 1.5rem;
+    text-align: center;
+    
+    p {
+      color: $text-secondary;
+      font-size: 0.875rem;
+      margin: 0;
+    }
+
+    .register-link {
+      color: $brand-primary;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+      margin-left: 0.25rem;
+
+      &:hover {
+        color: $brand-primary-hover;
+        text-decoration: underline;
+      }
+    }
+  }
 }
+
 
 // --- Animations ---
 @keyframes slideDown {
@@ -493,3 +519,86 @@ $shadow-focus-error: 0 0 0 4px rgba(239, 68, 68, 0.15);
 @keyframes fadeInUpAnim {
   to { opacity: 1; transform: translateY(0); }
 }
+
+// --- Floating Toast Notifications ---
+.toast-container {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  border-radius: $radius-md;
+  background: white;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  max-width: 420px;
+  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  position: relative;
+  overflow: hidden;
+  border-left: 4px solid transparent;
+
+  .toast-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .toast-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    
+    .toast-title {
+      font-weight: 700;
+      color: $text-primary;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    
+    .toast-message {
+      color: $text-secondary;
+      font-size: 0.875rem;
+      margin: 4px 0 0 0;
+      line-height: 1.4;
+    }
+  }
+
+  .toast-close {
+    background: transparent;
+    border: none;
+    color: $text-muted;
+    cursor: pointer;
+    padding: 2px;
+    display: flex;
+    transition: color 0.2s;
+
+    &:hover { color: $text-primary; }
+  }
+
+  &.toast-success {
+    border-left-color: #22c55e;
+    .toast-icon { color: #22c55e; }
+  }
+
+  &.toast-error {
+    border-left-color: #ef4444;
+    .toast-icon { color: #ef4444; }
+  }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
