@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardHomeComponent } from './dashboard-home.component';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
@@ -43,18 +43,23 @@ describe('DashboardHomeComponent', () => {
     vi.setSystemTime(testDate);
     component.updateTime();
     
-    // Capitalized first letter of long date string in pt-BR
     expect(component.currentDateStr).toBeTruthy();
     expect(typeof component.currentDateStr).toBe('string');
   });
 
-  it('should update time every minute', fakeAsync(() => {
+  it('should update time every minute', () => {
+    // Arrange
+    vi.useFakeTimers();
     const updateSpy = vi.spyOn(component, 'updateTime');
+    
+    // Act
     component.ngOnInit();
     
-    tick(60001); // 60 seconds
+    // Assert
+    vi.advanceTimersByTime(60001); // 60 seconds
     expect(updateSpy).toHaveBeenCalled();
     
     component.ngOnDestroy();
-  }));
+    vi.useRealTimers();
+  });
 });
