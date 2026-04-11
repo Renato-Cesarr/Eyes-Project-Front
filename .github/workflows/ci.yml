@@ -32,13 +32,10 @@ jobs:
       - name: Rodar testes
         run: npm test -- --watch=false --browsers=chromium --coverage
 
+      - name: Debug Coverage
+        run: ls -R coverage || echo "Coverage not found"
+
       - name: Rodar SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          npx sonar-scanner \
-            -Dsonar.projectKey=Renato-Cesarr_Eyes-Project-Front \
-            -Dsonar.organization=renato-cesarr \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.token=$SONAR_TOKEN \
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+        run: npx sonar-scanner
