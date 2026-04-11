@@ -30,7 +30,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Rodar testes
-        run: npm test -- --watch=false --browsers=chromium --coverage
+        run: npm run test:ci
 
       - name: Debug Coverage
         run: ls -R coverage || echo "Coverage not found"
