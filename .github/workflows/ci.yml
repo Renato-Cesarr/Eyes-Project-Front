@@ -26,8 +26,11 @@ jobs:
       - name: Build Angular
         run: npm run build --if-present
 
+      - name: Instalar Navegadores do Playwright
+        run: npx playwright install --with-deps chromium
+
       - name: Rodar testes
-        run: npm test -- --watch=false --browsers=ChromeHeadless
+        run: npm test -- --watch=false --browsers=chromium
 
       - name: Rodar SonarCloud
         run: |
