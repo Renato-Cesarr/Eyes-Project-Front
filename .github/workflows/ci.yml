@@ -30,7 +30,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Rodar testes
-        run: npm test -- --watch=false --browsers=chromium
+        run: npm test -- --watch=false --browsers=chromium --coverage
 
       - name: Rodar SonarCloud
         env:
@@ -40,4 +40,5 @@ jobs:
             -Dsonar.projectKey=Renato-Cesarr_Eyes-Project-Front \
             -Dsonar.organization=renato-cesarr \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.token=$SONAR_TOKEN
+            -Dsonar.token=$SONAR_TOKEN \
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
