@@ -37,6 +37,10 @@
         <small class="error-msg" *ngIf="isFieldInvalid('password')">Senha obrigatória (mín. 6 caracteres)</small>
       </div>
 
+      <div *ngIf="authFacade.error()" class="api-error">
+        {{ authFacade.error() }}
+      </div>
+
       <app-button 
         variant="primary" 
         label="Entrar na conta" 
