@@ -13,6 +13,7 @@ describe('FormCard', () => {
 
     fixture = TestBed.createComponent(FormCard);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('title', 'Teste');
     await fixture.whenStable();
   });
 
