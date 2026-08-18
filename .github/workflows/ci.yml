@@ -32,7 +32,7 @@ jobs:
         run: npm run build --if-present
 
       - name: Instalar Navegadores do Playwright
-        run: npx playwright install --with-deps chromium
+        run: npx --no-install playwright install chromium
 
       - name: Rodar testes
         run: npm run test:ci
