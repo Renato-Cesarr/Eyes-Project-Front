@@ -41,9 +41,9 @@ jobs:
         run: |
           ls -R coverage || echo "Coverage not found"
           # Converte o JSON do Angular para LCOV para o Sonar entender
-          npx nyc report --reporter=lcovonly --temp-dir=coverage/eyes-project-front --report-dir=coverage
+          npx --no-install nyc report --reporter=lcovonly --temp-dir=coverage/eyes-project-front --report-dir=coverage
 
       - name: Rodar SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: npx sonar-scanner
+        run: npm run sonar
