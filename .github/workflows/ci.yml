@@ -18,16 +18,21 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Validar toolchain
+        shell: pwsh
+        run: ./scripts/check-toolchain.ps1
 
       - name: Instalar dependências
-        run: npm install
+        run: npm ci
 
       - name: Build Angular
         run: npm run build --if-present
 
       - name: Instalar Navegadores do Playwright
-        run: npx playwright install --with-deps chromium
+        run: npx --no-install playwright install chromium
 
       - name: Rodar testes
         run: npm run test:ci
@@ -36,9 +41,9 @@ jobs:
         run: |
           ls -R coverage || echo "Coverage not found"
           # Converte o JSON do Angular para LCOV para o Sonar entender
-          npx nyc report --reporter=lcovonly --temp-dir=coverage/eyes-project-front --report-dir=coverage
+          npx --no-install nyc report --reporter=lcovonly --temp-dir=coverage/eyes-project-front --report-dir=coverage
 
       - name: Rodar SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: npx sonar-scanner
+        run: npm run sonar
