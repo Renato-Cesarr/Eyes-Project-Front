@@ -1,6 +1,28 @@
 # Eyes-Project-Front
 Aplicação front-end do Eyes Project, desenvolvida em Angular, responsável pelo painel administrativo do sistema. Permite gerenciamento de usuários, solicitação e aprovação de acessos, além de visualização de informações e integração com serviços de back-end e IA.
 
+## Toolchain fixado
+
+- Node.js `22.23.2` LTS, declarado em `.nvmrc` e `engines`;
+- npm `10.9.8`, declarado em `packageManager` e `engines`;
+- dependências instaladas exclusivamente com `npm ci` a partir do
+  `package-lock.json`.
+
+No Windows, instale uma versão compatível do NVM, selecione o Node declarado e
+valide o ambiente:
+
+```powershell
+nvm install 22.23.2
+nvm use 22.23.2
+npm install --global npm@10.9.8
+./scripts/check-toolchain.ps1
+npm ci
+```
+
+Não regenere o `package-lock.json` usando outra versão de Node ou npm sem uma
+revisão explícita. A CI lê a versão diretamente de `.nvmrc` e executa o mesmo
+script de diagnóstico antes do build.
+
 # EyesProjectFront
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.3.
