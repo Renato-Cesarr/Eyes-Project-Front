@@ -1,28 +1,32 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MainLayoutComponent } from './main-layout.component';
-import { Router, provideRouter } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { signal } from '@angular/core';
+import { AuthFacade } from '../../features/auth/application/auth.facade';
+import { User } from '../../features/auth/domain/models/user.model';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
   let fixture: ComponentFixture<MainLayoutComponent>;
-  let router: Router;
+  const admin: User = { id: '1', name: 'Ana Silva', email: 'ana@eyes.dev', role: 'ADMIN' };
+  const logout = vi.fn();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MainLayoutComponent],
       providers: [
-        provideRouter([]) // Use modern router provisioning
-      ]
+        provideRouter([]),
+        {
+          provide: AuthFacade,
+          useValue: { user: signal<User | null>(admin).asReadonly(), logout },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainLayoutComponent);
     component = fixture.componentInstance;
-    router = TestBed.inject(Router);
-    
-    // Mock only the navigate method on the real router instance
-    vi.spyOn(router, 'navigate').mockImplementation(async () => true);
-    
+    logout.mockReset();
     fixture.detectChanges();
   });
 
@@ -36,13 +40,18 @@ describe('MainLayoutComponent', () => {
     expect(component.isSidebarCollapsed()).toBe(true);
   });
 
-  it('should logout and redirect to login', () => {
-    localStorage.setItem('auth_token', 'active-token');
-    
+  it('should delegate logout to the authentication facade', () => {
     component.logout();
 
-    expect(localStorage.getItem('auth_token')).toBeNull();
-    expect(router.navigate).toHaveBeenCalledWith(['/login']);
+    expect(logout).toHaveBeenCalledOnce();
+  });
+
+  it('should display the authenticated user returned by the API', () => {
+    const text = fixture.nativeElement.textContent as string;
+
+    expect(text).toContain('Ana Silva');
+    expect(text).toContain('Administrador');
+    expect(component.userInitial()).toBe('A');
   });
 
   it('should have current year defined', () => {

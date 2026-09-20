@@ -1,4 +1,5 @@
 # Eyes-Project-Front
+
 Aplicação front-end do Eyes Project, desenvolvida em Angular, responsável pelo painel administrativo do sistema. Permite gerenciamento de usuários, solicitação e aprovação de acessos, além de visualização de informações e integração com serviços de back-end e IA.
 
 ## Toolchain fixado
@@ -22,6 +23,34 @@ npm ci
 Não regenere o `package-lock.json` usando outra versão de Node ou npm sem uma
 revisão explícita. A CI lê a versão diretamente de `.nvmrc` e executa o mesmo
 script de diagnóstico antes do build.
+
+## Sessão e autorização do painel
+
+O painel web é exclusivo para usuários com papel `ADMIN`. A aplicação não
+confia apenas na existência de um token: ao abrir ou recarregar uma rota
+protegida, valida a identidade em `GET /api/v1/auth/me` e usa o papel devolvido
+pelo backend como fonte de verdade.
+
+- o JWT fica em `sessionStorage` e deixa de existir quando a aba é encerrada;
+- versões antigas armazenadas em `localStorage` são removidas, não migradas;
+- `401 Unauthorized` encerra a sessão e direciona ao login;
+- `403 Forbidden` preserva a identidade e apresenta uma tela de acesso negado;
+- o interceptor só envia o JWT para a origem configurada em `environment.apiUrl`;
+- nome e papel exibidos no layout vêm da sessão validada pela API.
+
+O armazenamento no navegador reduz persistência indevida, mas não elimina o
+risco de roubo do token por XSS. Por isso, o projeto aplica uma Content Security
+Policy inicial em `src/index.html`, evita HTML não sanitizado e exige revisão da
+CSP e do `apiUrl` em cada ambiente implantado. Em produção, a mesma política
+deve ser enviada também como cabeçalho HTTP pelo servidor que hospeda o Angular.
+
+## Validação local
+
+```powershell
+npm ci
+npm test -- --watch=false
+npm run build
+```
 
 # EyesProjectFront
 

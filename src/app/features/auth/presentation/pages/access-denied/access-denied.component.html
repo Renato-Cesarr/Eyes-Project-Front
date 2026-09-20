@@ -1,0 +1,19 @@
+<main class="access-denied" aria-labelledby="access-denied-title">
+  <section class="access-denied__card">
+    <div class="access-denied__icon" aria-hidden="true">!</div>
+    <p class="access-denied__eyebrow">Acesso restrito</p>
+    <h1 id="access-denied-title">Você não pode acessar o painel administrativo</h1>
+    <p>
+      Olá, {{ userName() }}. Este painel é exclusivo para pessoas com o perfil Administrador. Sua
+      sessão continua protegida e nenhum dado foi alterado.
+    </p>
+
+    @if (isAuthenticated()) {
+      <button type="button" class="access-denied__primary" (click)="logout()">
+        Sair desta conta
+      </button>
+    } @else {
+      <a class="access-denied__primary" routerLink="/login">Voltar para o login</a>
+    }
+  </section>
+</main>

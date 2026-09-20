@@ -1,0 +1,75 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.access-denied {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.access-denied__card {
+  width: min(100%, 34rem);
+  padding: clamp(2rem, 6vw, 3.5rem);
+  border: 1px solid #cbd5e1;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 1.5rem 4rem rgba(15, 23, 42, 0.1);
+  text-align: center;
+}
+
+.access-denied__icon {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.access-denied__eyebrow {
+  color: #991b1b;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+h1 {
+  margin: 0.5rem 0 1rem;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  line-height: 1.15;
+}
+
+p {
+  line-height: 1.65;
+}
+
+.access-denied__primary {
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+  padding: 0.875rem 1.25rem;
+  border: 0;
+  border-radius: 0.625rem;
+  background: #3730a3;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.access-denied__primary:hover,
+.access-denied__primary:focus-visible {
+  background: #312e81;
+  outline: 3px solid #a5b4fc;
+  outline-offset: 3px;
+}
