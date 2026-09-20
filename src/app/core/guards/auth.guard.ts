@@ -1,15 +1,25 @@
 import { inject } from '@angular/core';
 import { Router, type CanActivateFn } from '@angular/router';
+import { map } from 'rxjs';
+import { AuthFacade } from '../../features/auth/application/auth.facade';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = (_route, state) => {
   const router = inject(Router);
-  
-  const hasToken = !!localStorage.getItem('auth_token');
-  
-  if (hasToken) {
-    return true;
-  }
-  
-  router.navigate(['/login']);
-  return false;
+  const authFacade = inject(AuthFacade);
+
+  return authFacade.ensureSession().pipe(
+    map((user) => {
+      if (!user) {
+        return router.createUrlTree(['/login'], {
+          queryParams: { returnUrl: state.url },
+        });
+      }
+
+      if (user.role !== 'ADMIN') {
+        return router.createUrlTree(['/acesso-negado']);
+      }
+
+      return true;
+    }),
+  );
 };

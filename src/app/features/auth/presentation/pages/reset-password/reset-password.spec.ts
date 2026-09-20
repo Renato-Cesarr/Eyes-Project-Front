@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
 import { ResetPassword } from './reset-password';
+import { AuthFacade } from '../../../application/auth.facade';
+import { vi } from 'vitest';
 
 describe('ResetPassword', () => {
   let component: ResetPassword;
@@ -10,7 +12,10 @@ describe('ResetPassword', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ResetPassword],
-      providers: [provideRouter([{ path: 'login', component: class {} }])]
+      providers: [
+        provideRouter([{ path: 'login', component: class {} }]),
+        { provide: AuthFacade, useValue: { resetPassword: vi.fn() } },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ResetPassword);

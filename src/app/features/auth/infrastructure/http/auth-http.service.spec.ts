@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 import { AuthHttpService } from './auth-http.service';
 import { environment } from '../../../../../environments/environment';
 import { AuthCredentials, AuthResponse } from '../../domain/models/auth-credentials.model';
@@ -11,8 +12,7 @@ describe('AuthHttpService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [AuthHttpService]
+      providers: [AuthHttpService, provideHttpClient(), provideHttpClientTesting()],
     });
 
     service = TestBed.inject(AuthHttpService);
@@ -33,7 +33,7 @@ describe('AuthHttpService', () => {
       const credentials: AuthCredentials = { email: 'test@example.com', password: 'password123' };
       const mockResponse: AuthResponse = {
         token: 'fake-jwt-token',
-        user: { id: '1', name: 'Test User', email: 'test@example.com' }
+        user: { id: '1', name: 'Test User', email: 'test@example.com', role: 'ADMIN' },
       };
 
       // Act
@@ -50,19 +50,6 @@ describe('AuthHttpService', () => {
     });
   });
 
-  describe('#logout', () => {
-    it('should remove token from localStorage', () => {
-      // Arrange
-      localStorage.setItem('auth_token', 'active-token');
-
-      // Act
-      service.logout();
-
-      // Assert
-      expect(localStorage.getItem('auth_token')).toBeNull();
-    });
-  });
-
   describe('#me', () => {
     it('should call GET to /v1/auth/me', () => {
       // Act
@@ -71,7 +58,7 @@ describe('AuthHttpService', () => {
       // Assert
       const req = httpMock.expectOne(`${apiUrl}/v1/auth/me`);
       expect(req.request.method).toBe('GET');
-      req.flush({});
+      req.flush({ id: '1', name: 'Test User', email: 'test@example.com', role: 'ADMIN' });
     });
   });
 });

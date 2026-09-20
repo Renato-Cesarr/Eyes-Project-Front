@@ -1,56 +1,48 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, finalize, map, of, shareReplay, tap } from 'rxjs';
 import { AuthCredentials } from '../domain/models/auth-credentials.model';
-import { ForgotPasswordRequest, ResetPasswordRequest, SetupPasswordRequest, UserRegistrationRequest } from '../domain/models/auth-requests.model';
+import {
+  ForgotPasswordRequest,
+  ResetPasswordRequest,
+  SetupPasswordRequest,
+  UserRegistrationRequest,
+} from '../domain/models/auth-requests.model';
 import { User } from '../domain/models/user.model';
 import { AuthRepository } from '../domain/repositories/auth.repository';
-import { AuthHttpService } from '../infrastructure/http/auth-http.service';
 import { Router } from '@angular/router';
-
-export interface AuthState {
-  user: User | null;
-  status: 'idle' | 'loading' | 'error' | 'success';
-  errorMessage: string | null;
-}
+import { AuthSessionStore } from './auth-session.store';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthFacade {
-  // We explicitly bind the interface to our concrete implementation here via Inject.
-  private readonly authRepository: AuthRepository = inject(AuthHttpService);
+  private readonly authRepository = inject(AuthRepository);
+  private readonly session = inject(AuthSessionStore);
   private readonly router = inject(Router);
+  private restoreRequest: Observable<User | null> | null = null;
 
-  // State
-  private readonly state = signal<AuthState>({
-    user: null,
-    status: 'idle',
-    errorMessage: null
-  });
+  readonly user = this.session.user;
+  readonly status = this.session.status;
+  readonly isLoading = this.session.isLoading;
+  readonly error = this.session.error;
+  readonly isAuthenticated = this.session.isAuthenticated;
 
-  // Selectors
-  readonly user = computed(() => this.state().user);
-  readonly isLoading = computed(() => this.state().status === 'loading');
-  readonly error = computed(() => this.state().errorMessage);
-  readonly isAuthenticated = computed(() => this.state().user !== null);
-
-  // Actions
   login(credentials: AuthCredentials): void {
-    this.state.update(s => ({ ...s, status: 'loading', errorMessage: null }));
+    this.session.clear();
+    this.session.beginLoading();
 
     this.authRepository.login(credentials).subscribe({
       next: (response) => {
-        localStorage.setItem('auth_token', response.token);
-        
-        this.state.update(s => ({ 
-          ...s, 
-          user: response.user, 
-          status: 'success', 
-          errorMessage: null 
-        }));
-        
-        this.router.navigate(['/dashboard']);
+        this.session.authenticate(response.token, response.user);
+
+        if (response.user.role === 'ADMIN') {
+          void this.router.navigate(['/dashboard']);
+          return;
+        }
+
+        this.session.denyAccess();
+        void this.router.navigate(['/acesso-negado']);
       },
       error: (err: HttpErrorResponse) => {
         let msg = 'Erro inesperado na autenticação.';
@@ -60,14 +52,48 @@ export class AuthFacade {
           msg = err.error.message;
         }
 
-        this.state.update(s => ({
-          ...s,
-          user: null,
-          status: 'error',
-          errorMessage: msg
-        }));
-      }
+        this.session.fail(msg);
+      },
     });
+  }
+
+  ensureSession(): Observable<User | null> {
+    const currentUser = this.session.user();
+    if (currentUser) {
+      return of(currentUser);
+    }
+
+    if (!this.session.token()) {
+      this.session.clear();
+      return of(null);
+    }
+
+    if (this.restoreRequest) {
+      return this.restoreRequest;
+    }
+
+    this.session.beginLoading();
+    this.restoreRequest = this.authRepository.me().pipe(
+      tap((user) => this.session.restore(user)),
+      map((user) => user as User | null),
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401) {
+          this.session.clear();
+        } else if (error.status === 403) {
+          this.session.denyAccess();
+        } else {
+          this.session.fail('Não foi possível validar a sessão. Tente novamente.');
+        }
+
+        return of(null);
+      }),
+      finalize(() => {
+        this.restoreRequest = null;
+      }),
+      shareReplay({ bufferSize: 1, refCount: false }),
+    );
+
+    return this.restoreRequest;
   }
 
   register(data: UserRegistrationRequest): Observable<User> {
@@ -87,9 +113,7 @@ export class AuthFacade {
   }
 
   logout(): void {
-    this.authRepository.logout();
-    this.state.update(s => ({ ...s, user: null, status: 'idle', errorMessage: null }));
-    this.router.navigate(['/login']);
+    this.session.clear();
+    void this.router.navigate(['/login']);
   }
 }
-
