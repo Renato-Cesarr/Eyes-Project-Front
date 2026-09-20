@@ -5,10 +5,15 @@ import { environment } from '../../../../../environments/environment';
 import { AuthRepository } from '../../domain/repositories/auth.repository';
 import { AuthCredentials, AuthResponse } from '../../domain/models/auth-credentials.model';
 import { User } from '../../domain/models/user.model';
-import { ForgotPasswordRequest, ResetPasswordRequest, SetupPasswordRequest, UserRegistrationRequest } from '../../domain/models/auth-requests.model';
+import {
+  ForgotPasswordRequest,
+  ResetPasswordRequest,
+  SetupPasswordRequest,
+  UserRegistrationRequest,
+} from '../../domain/models/auth-requests.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthHttpService implements AuthRepository {
   private readonly http = inject(HttpClient);
@@ -34,12 +39,7 @@ export class AuthHttpService implements AuthRepository {
     return this.http.post<void>(`${this.apiUrl}/v1/auth/reset-password`, data);
   }
 
-  logout(): void {
-    localStorage.removeItem('auth_token');
-  }
-
   me(): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/v1/auth/me`);
   }
 }
-
