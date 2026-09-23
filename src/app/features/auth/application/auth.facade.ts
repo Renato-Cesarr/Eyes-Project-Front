@@ -3,10 +3,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, finalize, map, of, shareReplay, tap } from 'rxjs';
 import { AuthCredentials } from '../domain/models/auth-credentials.model';
 import {
+  AccessRequestCommand,
+  AccessRequestReceipt,
   ForgotPasswordRequest,
   ResetPasswordRequest,
   SetupPasswordRequest,
-  UserRegistrationRequest,
 } from '../domain/models/auth-requests.model';
 import { User } from '../domain/models/user.model';
 import { AuthRepository } from '../domain/repositories/auth.repository';
@@ -96,8 +97,8 @@ export class AuthFacade {
     return this.restoreRequest;
   }
 
-  register(data: UserRegistrationRequest): Observable<User> {
-    return this.authRepository.register(data);
+  requestAccess(data: AccessRequestCommand): Observable<AccessRequestReceipt> {
+    return this.authRepository.requestAccess(data);
   }
 
   setupPassword(data: SetupPasswordRequest): Observable<void> {

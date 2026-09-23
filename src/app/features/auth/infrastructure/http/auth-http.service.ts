@@ -6,10 +6,11 @@ import { AuthRepository } from '../../domain/repositories/auth.repository';
 import { AuthCredentials, AuthResponse } from '../../domain/models/auth-credentials.model';
 import { User } from '../../domain/models/user.model';
 import {
+  AccessRequestCommand,
+  AccessRequestReceipt,
   ForgotPasswordRequest,
   ResetPasswordRequest,
   SetupPasswordRequest,
-  UserRegistrationRequest,
 } from '../../domain/models/auth-requests.model';
 
 @Injectable({
@@ -23,8 +24,8 @@ export class AuthHttpService implements AuthRepository {
     return this.http.post<AuthResponse>(`${this.apiUrl}/v1/auth/login`, credentials);
   }
 
-  register(data: UserRegistrationRequest): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/v1/users`, data);
+  requestAccess(data: AccessRequestCommand): Observable<AccessRequestReceipt> {
+    return this.http.post<AccessRequestReceipt>(`${this.apiUrl}/v1/access-requests`, data);
   }
 
   setupPassword(data: SetupPasswordRequest): Observable<void> {

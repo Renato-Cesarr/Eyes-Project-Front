@@ -13,7 +13,7 @@ describe('AuthFacade', () => {
   const student: User = { id: '2', name: 'Bia', email: 'bia@eyes.dev', role: 'STUDENT' };
   const repository = {
     login: vi.fn(),
-    register: vi.fn(),
+    requestAccess: vi.fn(),
     setupPassword: vi.fn(),
     forgotPassword: vi.fn(),
     resetPassword: vi.fn(),
@@ -91,5 +91,18 @@ describe('AuthFacade', () => {
     expect(facade.error()).toBe('Credenciais inválidas.');
     expect(sessionStorage.getItem('auth_token')).toBeNull();
     expect(navigate).not.toHaveBeenCalled();
+  });
+
+  it('delegates a public access request without changing the session', async () => {
+    const command = { name: 'Maria', email: 'maria@example.com' };
+    const receipt = { message: 'Solicitação recebida para análise' };
+    repository.requestAccess.mockReturnValue(of(receipt));
+    const facade = TestBed.inject(AuthFacade);
+
+    const result = await firstValueFrom(facade.requestAccess(command));
+
+    expect(result).toEqual(receipt);
+    expect(repository.requestAccess).toHaveBeenCalledWith(command);
+    expect(facade.isAuthenticated()).toBe(false);
   });
 });

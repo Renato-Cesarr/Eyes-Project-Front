@@ -1,11 +1,16 @@
-export interface UserRegistrationRequest {
+export interface AccessRequestCommand {
   name: string;
   email: string;
+  reason?: string;
+}
+
+export interface AccessRequestReceipt {
+  message: string;
 }
 
 export interface SetupPasswordRequest {
   token: string;
-  password?: string;
+  password: string;
 }
 
 export interface ForgotPasswordRequest {
@@ -14,5 +19,5 @@ export interface ForgotPasswordRequest {
 
 export interface ResetPasswordRequest {
   token: string;
-  password?: string;
+  password: string;
 }

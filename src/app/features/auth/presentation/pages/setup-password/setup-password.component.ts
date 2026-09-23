@@ -1,11 +1,19 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { finalize, take } from 'rxjs';
 import { AuthFacade } from '../../../application/auth.facade';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { publicAuthErrorMessage } from '../../../application/public-auth-error.mapper';
 import { AuthLayout } from '../../../../../shared/ui/auth-layout/auth-layout';
-import { FormCard } from '../../../../../shared/ui/form-card/form-card';
 import { ButtonComponent } from '../../../../../shared/ui/button/button.component';
+import { FormCard } from '../../../../../shared/ui/form-card/form-card';
 import { ToastService } from '../../../../../shared/utils/toast.service';
 
 @Component({
@@ -13,83 +21,82 @@ import { ToastService } from '../../../../../shared/utils/toast.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink, AuthLayout, FormCard, ButtonComponent],
   templateUrl: './setup-password.component.html',
-  styleUrls: ['./setup-password.component.scss']
+  styleUrls: ['../public-auth-form.scss', './setup-password.component.scss'],
 })
 export class SetupPasswordComponent implements OnInit {
-  private fb = inject(FormBuilder);
-  public authFacade = inject(AuthFacade);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
-  private toastService = inject(ToastService);
+  private readonly fb = inject(FormBuilder);
+  private readonly authFacade = inject(AuthFacade);
+  private readonly route = inject(ActivatedRoute);
+  private readonly toastService = inject(ToastService);
 
-  public focusState = signal<string | null>(null);
-  public passwordVisible = signal(false);
-  public confirmPasswordVisible = signal(false);
-  public isLoading = signal(false);
-  
-  public token = signal<string | null>(null);
+  readonly passwordVisible = signal(false);
+  readonly confirmPasswordVisible = signal(false);
+  readonly isLoading = signal(false);
+  readonly token = signal<string | null>(null);
+  readonly tokenMissing = signal(false);
+  readonly isActivated = signal(false);
+  readonly errorMessage = signal<string | null>(null);
 
-  setupForm = this.fb.nonNullable.group({
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    confirmPassword: ['', [Validators.required]]
-  }, { validators: this.passwordMatchValidator });
+  readonly setupForm = this.fb.nonNullable.group(
+    {
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]],
+    },
+    { validators: passwordsMatchValidator },
+  );
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if (params['token']) {
-        this.token.set(params['token']);
-      } else {
-        this.toastService.error('Token não fornecido. Solicite um novo convite.');
+  ngOnInit(): void {
+    this.route.queryParams.pipe(take(1)).subscribe((params) => {
+      const invitationToken = typeof params['token'] === 'string' ? params['token'].trim() : '';
+      if (invitationToken) {
+        this.token.set(invitationToken);
+        this.tokenMissing.set(false);
+        return;
       }
+
+      this.tokenMissing.set(true);
+      this.errorMessage.set(
+        'Link de convite incompleto. Solicite um novo convite ao administrador.',
+      );
     });
   }
 
-
-
-  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ mismatch: true });
-      return { mismatch: true };
-    }
-    
-    if (confirmPassword?.hasError('mismatch')) {
-       confirmPassword.setErrors(null);
-    }
-    return null;
-  }
-
   onSubmit(): void {
-    if (!this.token()) {
-       this.toastService.error('Token de configuração não encontrado. Acesse via link do e-mail.');
-       return;
+    this.errorMessage.set(null);
+    const invitationToken = this.token();
+    if (!invitationToken) {
+      this.tokenMissing.set(true);
+      this.errorMessage.set(
+        'Link de convite incompleto. Solicite um novo convite ao administrador.',
+      );
+      return;
     }
 
-    if (this.setupForm.valid) {
-      this.isLoading.set(true);
-      const formValue = this.setupForm.getRawValue();
-      this.authFacade.setupPassword({
-         token: this.token() as string,
-         password: formValue.password
-      }).subscribe({
-        next: () => {
-          this.isLoading.set(false);
-          this.toastService.success('Senha configurada com sucesso. Redirecionando...');
-          setTimeout(() => {
-             this.router.navigate(['/login']);
-          }, 2500);
-        },
-        error: (err) => {
-          this.isLoading.set(false);
-          const msg = err.error?.message || 'Falha ao definir nova senha.';
-          this.toastService.error(msg);
-        }
-      });
-    } else {
+    if (this.setupForm.invalid) {
       this.setupForm.markAllAsTouched();
+      this.errorMessage.set('Revise os campos destacados antes de ativar sua conta.');
+      return;
     }
+
+    this.isLoading.set(true);
+    this.authFacade
+      .setupPassword({
+        token: invitationToken,
+        password: this.setupForm.getRawValue().password,
+      })
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: () => {
+          this.isActivated.set(true);
+          this.setupForm.reset();
+          this.toastService.success('Conta ativada com sucesso. Você já pode entrar.');
+        },
+        error: (error: unknown) => {
+          const message = publicAuthErrorMessage(error, 'setup-password');
+          this.errorMessage.set(message);
+          this.toastService.error(message);
+        },
+      });
   }
 
   isFieldInvalid(field: string): boolean {
@@ -98,12 +105,16 @@ export class SetupPasswordComponent implements OnInit {
   }
 
   togglePasswordVisibility(field: 'password' | 'confirmPassword'): void {
-    if (field === 'password') this.passwordVisible.update(v => !v);
-    else this.confirmPasswordVisible.update(v => !v);
-  }
-
-  setFocus(field: string | null): void {
-    this.focusState.set(field);
+    if (field === 'password') {
+      this.passwordVisible.update((visible) => !visible);
+      return;
+    }
+    this.confirmPasswordVisible.update((visible) => !visible);
   }
 }
 
+function passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
+  const password = control.get('password')?.value;
+  const confirmation = control.get('confirmPassword')?.value;
+  return password && confirmation && password !== confirmation ? { passwordMismatch: true } : null;
+}
