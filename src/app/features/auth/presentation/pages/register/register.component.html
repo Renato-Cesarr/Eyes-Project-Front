@@ -1,48 +1,91 @@
 <app-auth-layout>
-  <app-form-card title="Solicitar Acesso" subtitle="Preencha os dados abaixo para receber um convite por e-mail">
-    
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+  <app-form-card
+    title="Solicitar acesso"
+    subtitle="Envie seus dados para análise da equipe administradora"
+  >
+    <div
+      *ngIf="successMessage() as message"
+      class="form-feedback success"
+      role="status"
+      aria-live="polite"
+    >
+      {{ message }} Você receberá um convite por e-mail se a solicitação for aprovada.
+    </div>
+
+    <div *ngIf="errorMessage() as message" class="form-feedback error" role="alert">
+      {{ message }}
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="public-form" novalidate>
       <div class="form-group" [class.invalid]="isFieldInvalid('name')">
-        <label for="name">Nome Completo</label>
+        <label for="name">Nome completo</label>
         <div class="input-wrapper">
-          <input 
-            id="name" 
-            type="text" 
-            formControlName="name" 
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
             placeholder="Seu nome"
-            (focus)="setFocus('name')"
-            (blur)="setFocus(null)">
+            autocomplete="name"
+            [attr.aria-invalid]="isFieldInvalid('name')"
+            aria-describedby="name-error"
+          />
         </div>
-        <small class="error-msg" *ngIf="isFieldInvalid('name')">Nome deve ter pelo menos 3 caracteres</small>
+        <small id="name-error" class="error-msg" *ngIf="isFieldInvalid('name')">
+          Informe um nome entre 3 e 150 caracteres.
+        </small>
       </div>
 
       <div class="form-group" [class.invalid]="isFieldInvalid('email')">
-        <label for="email">E-mail Corporativo</label>
+        <label for="email">E-mail</label>
         <div class="input-wrapper">
-          <input 
-            id="email" 
-            type="email" 
-            formControlName="email" 
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
             placeholder="seu@email.com"
-            (focus)="setFocus('email')"
-            (blur)="setFocus(null)">
+            autocomplete="email"
+            inputmode="email"
+            [attr.aria-invalid]="isFieldInvalid('email')"
+            aria-describedby="email-error"
+          />
         </div>
-        <small class="error-msg" *ngIf="isFieldInvalid('email')">E-mail inválido ou obrigatório</small>
+        <small id="email-error" class="error-msg" *ngIf="isFieldInvalid('email')">
+          Informe um e-mail válido.
+        </small>
       </div>
 
-      <app-button 
-        variant="primary" 
-        label="Enviar Solicitação" 
+      <div class="form-group" [class.invalid]="isFieldInvalid('reason')">
+        <label for="reason">Motivo da solicitação <span class="optional">(opcional)</span></label>
+        <div class="input-wrapper">
+          <textarea
+            id="reason"
+            formControlName="reason"
+            rows="4"
+            maxlength="500"
+            placeholder="Conte brevemente como o Eyes pode ajudar"
+            [attr.aria-invalid]="isFieldInvalid('reason')"
+            aria-describedby="reason-help reason-error"
+          ></textarea>
+        </div>
+        <small id="reason-help" class="field-help">Máximo de 500 caracteres.</small>
+        <small id="reason-error" class="error-msg" *ngIf="isFieldInvalid('reason')">
+          O motivo deve ter no máximo 500 caracteres.
+        </small>
+      </div>
+
+      <app-button
+        variant="primary"
+        label="Enviar solicitação"
         type="submit"
         [loading]="isLoading()"
-        [disabled]="registerForm.invalid">
+        [disabled]="registerForm.invalid || isLoading()"
+      >
       </app-button>
 
       <div class="footer-links">
         <span>Já tem uma conta?</span>
-        <a routerLink="/login">Voltar para o Login</a>
+        <a routerLink="/login">Voltar para o login</a>
       </div>
     </form>
-
   </app-form-card>
 </app-auth-layout>

@@ -1,11 +1,13 @@
-import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthFacade } from '../../../application/auth.facade';
 import { RouterLink } from '@angular/router';
+import { finalize } from 'rxjs';
+import { AuthFacade } from '../../../application/auth.facade';
+import { publicAuthErrorMessage } from '../../../application/public-auth-error.mapper';
 import { AuthLayout } from '../../../../../shared/ui/auth-layout/auth-layout';
-import { FormCard } from '../../../../../shared/ui/form-card/form-card';
 import { ButtonComponent } from '../../../../../shared/ui/button/button.component';
+import { FormCard } from '../../../../../shared/ui/form-card/form-card';
 import { ToastService } from '../../../../../shared/utils/toast.service';
 
 @Component({
@@ -13,50 +15,68 @@ import { ToastService } from '../../../../../shared/utils/toast.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink, AuthLayout, FormCard, ButtonComponent],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['../public-auth-form.scss', './register.component.scss'],
 })
 export class RegisterComponent {
-  private fb = inject(FormBuilder);
-  public authFacade = inject(AuthFacade);
-  private toastService = inject(ToastService);
+  private readonly fb = inject(FormBuilder);
+  private readonly authFacade = inject(AuthFacade);
+  private readonly toastService = inject(ToastService);
 
-  public focusState = signal<string | null>(null);
-  public isLoading = signal(false);
+  readonly isLoading = signal(false);
+  readonly successMessage = signal<string | null>(null);
+  readonly errorMessage = signal<string | null>(null);
 
-  registerForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.email]]
+  readonly registerForm = this.fb.nonNullable.group({
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(150)]],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(150)]],
+    reason: ['', [Validators.maxLength(500)]],
   });
 
   onSubmit(): void {
-    if (this.registerForm.valid) {
-      this.isLoading.set(true);
-      this.authFacade.register(this.registerForm.getRawValue()).subscribe({
-        next: () => {
-          this.isLoading.set(false);
-          this.toastService.success('Convite enviado com sucesso para o e-mail informado.');
+    this.clearFeedback();
+    const rawValue = this.registerForm.getRawValue();
+    const normalizedValue = {
+      name: rawValue.name.trim(),
+      email: rawValue.email.trim(),
+      reason: rawValue.reason.trim(),
+    };
+    this.registerForm.setValue(normalizedValue, { emitEvent: false });
+
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      this.errorMessage.set('Revise os campos destacados antes de enviar.');
+      return;
+    }
+
+    this.isLoading.set(true);
+    this.authFacade
+      .requestAccess({
+        name: normalizedValue.name,
+        email: normalizedValue.email,
+        ...(normalizedValue.reason ? { reason: normalizedValue.reason } : {}),
+      })
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: (receipt) => {
+          this.successMessage.set(receipt.message);
+          this.toastService.success(receipt.message);
           this.registerForm.reset();
         },
-        error: (err) => {
-          this.isLoading.set(false);
-          const msg = err.error?.message || 'Erro inesperado ao cadastrar o usuário.';
-          this.toastService.error(msg);
-        }
+        error: (error: unknown) => {
+          const message = publicAuthErrorMessage(error, 'request-access');
+          this.errorMessage.set(message);
+          this.toastService.error(message);
+        },
       });
-    } else {
-      this.registerForm.markAllAsTouched();
-    }
   }
-
-
 
   isFieldInvalid(field: string): boolean {
     const control = this.registerForm.get(field);
     return !!(control && control.invalid && (control.dirty || control.touched));
   }
 
-  setFocus(field: string | null): void {
-    this.focusState.set(field);
+  private clearFeedback(): void {
+    this.successMessage.set(null);
+    this.errorMessage.set(null);
   }
 }
-
