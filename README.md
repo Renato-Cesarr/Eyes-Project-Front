@@ -44,6 +44,21 @@ Policy inicial em `src/index.html`, evita HTML não sanitizado e exige revisão 
 CSP e do `apiUrl` em cada ambiente implantado. Em produção, a mesma política
 deve ser enviada também como cabeçalho HTTP pelo servidor que hospeda o Angular.
 
+## Fluxos públicos de acesso
+
+Solicitação de acesso e ativação por convite são fluxos distintos e não exigem
+uma sessão autenticada:
+
+- `POST /api/v1/access-requests` recebe nome, e-mail e motivo opcional. A resposta
+  confirma somente o recebimento para análise; ela não cria conta nem garante
+  aprovação imediata;
+- após a aprovação administrativa, o convidado define a senha por meio de
+  `POST /api/v1/users/setup-password`, enviando o token recebido e a nova senha;
+- erros públicos são convertidos em mensagens seguras. A interface não revela
+  se um e-mail pertence a uma conta nem exibe detalhes internos de tokens;
+- os formulários apresentam sucesso e falha no próprio conteúdo, além do aviso
+  temporário, para preservar contexto e acessibilidade durante a navegação.
+
 ## Validação local
 
 ```powershell
