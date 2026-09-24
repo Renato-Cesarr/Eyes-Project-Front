@@ -1,0 +1,197 @@
+<section class="users-page" aria-labelledby="users-title">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Administração</p>
+      <h1 id="users-title">Usuários</h1>
+      <p class="page-description">
+        Convide estudantes e controle o acesso às contas sem excluir o histórico do sistema.
+      </p>
+    </div>
+    <div class="header-actions">
+      <span class="user-count" aria-live="polite">
+        {{ facade.totalElements() }} {{ facade.totalElements() === 1 ? 'usuário' : 'usuários' }}
+      </span>
+      <button
+        mat-flat-button
+        type="button"
+        (click)="openInvite()"
+        [disabled]="facade.isActionInProgress()"
+      >
+        Convidar usuário
+      </button>
+    </div>
+  </header>
+
+  <form class="filters" [formGroup]="filterForm" (ngSubmit)="applyFilters()" role="search">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Buscar por nome ou e-mail</mat-label>
+      <input matInput type="search" formControlName="search" maxlength="150" autocomplete="off" />
+      @if (filterForm.controls.search.hasError('maxlength')) {
+        <mat-error>Use no máximo 150 caracteres.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Perfil</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="">Todos</mat-option>
+        <mat-option value="ADMIN">Administradores</mat-option>
+        <mat-option value="STUDENT">Estudantes</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="">Todos</mat-option>
+        <mat-option value="active">Ativos</mat-option>
+        <mat-option value="inactive">Inativos e convites pendentes</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Ordenar por</mat-label>
+      <mat-select formControlName="sortBy">
+        <mat-option value="NAME">Nome</mat-option>
+        <mat-option value="EMAIL">E-mail</mat-option>
+        <mat-option value="CREATED_AT">Data de criação</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Ordem</mat-label>
+      <mat-select formControlName="direction">
+        <mat-option value="ASC">Crescente</mat-option>
+        <mat-option value="DESC">Decrescente</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="filter-actions">
+      <button mat-flat-button type="submit" [disabled]="facade.isLoading()">Filtrar</button>
+      <button mat-button type="button" (click)="clearFilters()" [disabled]="facade.isLoading()">
+        Limpar
+      </button>
+    </div>
+  </form>
+
+  @if (actionFeedback()) {
+    <div class="feedback success" role="status" aria-live="polite">{{ actionFeedback() }}</div>
+  }
+  @if (actionError()) {
+    <div class="feedback error" role="alert">{{ actionError() }}</div>
+  }
+
+  @if (facade.loadError()) {
+    <div class="state-panel error-state" role="alert">
+      <p>{{ facade.loadError() }}</p>
+      <button mat-stroked-button type="button" (click)="facade.reload()">Tentar novamente</button>
+    </div>
+  } @else if (facade.isLoading()) {
+    <div class="state-panel" role="status" aria-live="polite">
+      <mat-spinner diameter="40" aria-label="Carregando usuários"></mat-spinner>
+      <p>Carregando usuários…</p>
+    </div>
+  } @else if (facade.users().length === 0) {
+    <div class="state-panel empty-state" role="status">
+      <h2>Nenhum usuário encontrado</h2>
+      <p>Altere os filtros ou envie um novo convite.</p>
+    </div>
+  } @else {
+    <div class="table-region" role="region" tabindex="0" aria-label="Tabela de usuários">
+      <table mat-table [dataSource]="facade.users()">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef scope="col">Nome</th>
+          <td mat-cell *matCellDef="let user">
+            <strong>{{ user.name }}</strong>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef scope="col">E-mail</th>
+          <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef scope="col">Perfil</th>
+          <td mat-cell *matCellDef="let user">{{ roleLabel(user.role) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef scope="col">Estado</th>
+          <td mat-cell *matCellDef="let user">
+            <span [class]="'status-badge status-' + statusClass(user)">
+              {{ statusLabel(user) }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef scope="col">Criado em</th>
+          <td mat-cell *matCellDef="let user">{{ formatDate(user.createdAt) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef scope="col">Ações</th>
+          <td mat-cell *matCellDef="let user">
+            <div class="row-actions">
+              <button
+                mat-button
+                type="button"
+                (click)="openDetails(user)"
+                [disabled]="facade.isActionInProgress()"
+                [attr.aria-label]="'Ver detalhes de ' + user.name"
+              >
+                Detalhes
+              </button>
+              @if (user.invitationPending) {
+                <button
+                  mat-stroked-button
+                  type="button"
+                  (click)="resendInvitation(user)"
+                  [disabled]="facade.isActionInProgress()"
+                  [attr.aria-label]="'Reenviar convite para ' + user.name"
+                >
+                  Reenviar convite
+                </button>
+              } @else if (user.active) {
+                <button
+                  mat-stroked-button
+                  type="button"
+                  class="deactivate-button"
+                  (click)="deactivate(user)"
+                  [disabled]="facade.isActionInProgress()"
+                  [attr.aria-label]="'Desativar conta de ' + user.name"
+                >
+                  Desativar
+                </button>
+              } @else {
+                <button
+                  mat-flat-button
+                  type="button"
+                  (click)="activate(user)"
+                  [disabled]="facade.isActionInProgress()"
+                  [attr.aria-label]="'Ativar conta de ' + user.name"
+                >
+                  Ativar
+                </button>
+              }
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <mat-paginator
+      [length]="facade.totalElements()"
+      [pageIndex]="facade.page()"
+      [pageSize]="facade.pageSize()"
+      [pageSizeOptions]="pageSizeOptions"
+      [showFirstLastButtons]="true"
+      aria-label="Paginação de usuários"
+      (page)="changePage($event)"
+    ></mat-paginator>
+  }
+</section>
