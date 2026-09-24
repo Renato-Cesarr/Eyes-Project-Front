@@ -74,6 +74,23 @@ backend, evitando carregar a base inteira no navegador.
 - carregamento, lista vazia, falha, sucesso e paginação possuem mensagens
   acessíveis e operáveis por teclado.
 
+## Gestão administrativa de usuários
+
+A rota protegida `/users` oferece a visão operacional das contas sem permitir
+exclusão física de dados. Busca, perfil, estado, ordenação e paginação são
+processados pelo backend por meio de `GET /api/v1/users`.
+
+- um novo usuário é criado como `STUDENT`, inativo e com convite pendente; a
+  ativação ocorre exclusivamente pelo link seguro enviado ao e-mail informado;
+- convites pendentes podem ser reenviados, o que invalida o link anterior;
+- contas já ativadas podem ser desativadas e reativadas mediante confirmação;
+- a interface não oferece ativação manual para convites pendentes, e o backend
+  impede a desativação do último administrador ativo;
+- detalhes são consultados novamente na API antes de serem exibidos, evitando
+  apresentar uma versão desatualizada do cadastro;
+- conflitos, sessão expirada e falhas de rede são convertidos em mensagens
+  seguras, sem expor respostas internas do servidor.
+
 ## Validação local
 
 ```powershell

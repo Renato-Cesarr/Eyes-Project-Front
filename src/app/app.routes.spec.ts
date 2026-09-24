@@ -22,6 +22,13 @@ describe('App Routes', () => {
     expect(requestsRoute?.loadComponent).toBeDefined();
   });
 
+  it('should expose user management inside the protected layout', () => {
+    const protectedRoute = routes.find((route) => route.path === '');
+    const usersRoute = protectedRoute?.children?.find((route) => route.path === 'users');
+
+    expect(usersRoute?.loadComponent).toBeDefined();
+  });
+
   it('should have a public access denied route', () => {
     const route = routes.find((r) => r.path === 'acesso-negado');
 

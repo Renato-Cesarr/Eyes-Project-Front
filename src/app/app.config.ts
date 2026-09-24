@@ -9,6 +9,8 @@ import { AuthRepository } from './features/auth/domain/repositories/auth.reposit
 import { AuthHttpService } from './features/auth/infrastructure/http/auth-http.service';
 import { AccessRequestRepository } from './features/access-requests/domain/repositories/access-request.repository';
 import { AccessRequestHttpService } from './features/access-requests/infrastructure/http/access-request-http.service';
+import { UserManagementRepository } from './features/user-management/domain/repositories/user-management.repository';
+import { UserManagementHttpService } from './features/user-management/infrastructure/http/user-management-http.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     { provide: AuthRepository, useExisting: AuthHttpService },
     { provide: AccessRequestRepository, useExisting: AccessRequestHttpService },
+    { provide: UserManagementRepository, useExisting: UserManagementHttpService },
     provideHttpClient(withInterceptors([authInterceptor])),
   ],
 };

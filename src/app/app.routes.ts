@@ -65,6 +65,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'users',
+        loadComponent: () =>
+          import('./features/user-management/presentation/pages/user-list/user-list.component').then(
+            (m) => m.UserListComponent,
+          ),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',
