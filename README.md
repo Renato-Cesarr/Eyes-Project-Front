@@ -59,6 +59,21 @@ uma sessão autenticada:
 - os formulários apresentam sucesso e falha no próprio conteúdo, além do aviso
   temporário, para preservar contexto e acessibilidade durante a navegação.
 
+## Gestão administrativa de solicitações
+
+A rota protegida `/requests` permite que administradores consultem e decidam
+as solicitações recebidas. A tela usa paginação e filtros processados pelo
+backend, evitando carregar a base inteira no navegador.
+
+- a aprovação exige confirmação explícita, cria a conta de estudante e dispara
+  o convite por meio de `POST /api/v1/access-requests/{id}/approve`;
+- a rejeição exige uma justificativa de até 500 caracteres e usa
+  `POST /api/v1/access-requests/{id}/reject`;
+- a interface atualiza a decisão somente depois da confirmação da API e
+  reconcilia a listagem quando encontra conflitos ou solicitações já decididas;
+- carregamento, lista vazia, falha, sucesso e paginação possuem mensagens
+  acessíveis e operáveis por teclado.
+
 ## Validação local
 
 ```powershell
