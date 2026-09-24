@@ -58,6 +58,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'requests',
+        loadComponent: () =>
+          import('./features/access-requests/presentation/pages/access-request-list/access-request-list.component').then(
+            (m) => m.AccessRequestListComponent,
+          ),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',
