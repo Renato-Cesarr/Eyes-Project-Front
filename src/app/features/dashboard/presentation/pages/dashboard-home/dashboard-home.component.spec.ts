@@ -1,65 +1,48 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DashboardHomeComponent } from './dashboard-home.component';
+import { provideRouter } from '@angular/router';
+import { signal } from '@angular/core';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { AuthFacade } from '../../../../auth/application/auth.facade';
+import { DashboardSummaryFacade } from '../../../application/dashboard-summary.facade';
+import { DashboardHomeComponent } from './dashboard-home.component';
 
 describe('DashboardHomeComponent', () => {
-  let component: DashboardHomeComponent;
   let fixture: ComponentFixture<DashboardHomeComponent>;
+  const load = vi.fn();
+  const summary = {
+    load,
+    pendingRequests: signal(3).asReadonly(),
+    activeUsers: signal(12).asReadonly(),
+    recentActions: signal([]).asReadonly(),
+    recentActionCount: signal(0).asReadonly(),
+    isLoading: signal(false).asReadonly(),
+    loadError: signal<string | null>(null).asReadonly(),
+  };
 
   beforeEach(async () => {
+    load.mockReset();
     await TestBed.configureTestingModule({
-      imports: [DashboardHomeComponent]
+      imports: [DashboardHomeComponent],
+      providers: [
+        provideRouter([]),
+        { provide: AuthFacade, useValue: { user: signal({ name: 'Ana Silva' }).asReadonly() } },
+        { provide: DashboardSummaryFacade, useValue: summary },
+      ],
     }).compileComponents();
-
     fixture = TestBed.createComponent(DashboardHomeComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('loads and displays the API-backed operational summary', () => {
+    expect(load).toHaveBeenCalledOnce();
+    const text = fixture.nativeElement.textContent as string;
+    expect(text).toContain('Ana Silva');
+    expect(text).toContain('Solicitações pendentes');
+    expect(text).toContain('3');
+    expect(text).toContain('12');
   });
 
-  it('should set greeting based on time (morning)', () => {
-    vi.setSystemTime(new Date(2024, 0, 1, 10, 0)); // 10:00 AM
-    component.updateTime();
-    expect(component.greeting).toBe('Bom dia');
-  });
-
-  it('should set greeting based on time (afternoon)', () => {
-    vi.setSystemTime(new Date(2024, 0, 1, 15, 0)); // 3:00 PM
-    component.updateTime();
-    expect(component.greeting).toBe('Boa tarde');
-  });
-
-  it('should set greeting based on time (night)', () => {
-    vi.setSystemTime(new Date(2024, 0, 1, 20, 0)); // 8:00 PM
-    component.updateTime();
-    expect(component.greeting).toBe('Boa noite');
-  });
-
-  it('should format current date string correctly', () => {
-    const testDate = new Date(2024, 0, 1); // Monday, Jan 1st 2024
-    vi.setSystemTime(testDate);
-    component.updateTime();
-    
-    expect(component.currentDateStr).toBeTruthy();
-    expect(typeof component.currentDateStr).toBe('string');
-  });
-
-  it('should update time every minute', () => {
-    // Arrange
-    vi.useFakeTimers();
-    const updateSpy = vi.spyOn(component, 'updateTime');
-    
-    // Act
-    component.ngOnInit();
-    
-    // Assert
-    vi.advanceTimersByTime(60001); // 60 seconds
-    expect(updateSpy).toHaveBeenCalled();
-    
-    component.ngOnDestroy();
-    vi.useRealTimers();
+  it('does not display the former hardcoded action', () => {
+    expect(fixture.nativeElement.textContent).not.toContain('Nova Solicitação');
   });
 });

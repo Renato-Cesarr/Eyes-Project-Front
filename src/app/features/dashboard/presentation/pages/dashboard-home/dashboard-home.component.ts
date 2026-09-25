@@ -1,46 +1,31 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AuthFacade } from '../../../../auth/application/auth.facade';
+import {
+  auditActionLabel,
+  formatAuditDate,
+} from '../../../../audit/presentation/audit-log-presentation';
+import { DashboardSummaryFacade } from '../../../application/dashboard-summary.facade';
 
 @Component({
   selector: 'app-dashboard-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule, RouterLink],
   templateUrl: './dashboard-home.component.html',
-  styleUrls: ['./dashboard-home.component.scss']
+  styleUrls: ['./dashboard-home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardHomeComponent implements OnInit, OnDestroy {
-  adminName = 'Administrador Principal';
-  greeting = 'Bem-vindo(a) de volta';
-  currentDateStr = '';
-  private timer: any;
+export class DashboardHomeComponent implements OnInit {
+  private readonly auth = inject(AuthFacade);
+  readonly summary = inject(DashboardSummaryFacade);
+  readonly userName = computed(() => this.auth.user()?.name ?? 'Administrador');
+  readonly actionLabel = auditActionLabel;
+  readonly formatDate = formatAuditDate;
 
-  ngOnInit() {
-    this.updateTime();
-    this.timer = setInterval(() => {
-      this.updateTime();
-    }, 60000);
-  }
-
-  ngOnDestroy() {
-    if (this.timer) {
-      clearInterval(this.timer);
-    }
-  }
-
-  updateTime() {
-    const now = new Date();
-    const hour = now.getHours();
-    
-    if (hour < 12) this.greeting = 'Bom dia';
-    else if (hour < 18) this.greeting = 'Boa tarde';
-    else this.greeting = 'Boa noite';
-
-    const options: Intl.DateTimeFormatOptions = { 
-      weekday: 'long', 
-      day: 'numeric', 
-      month: 'long' 
-    };
-    let dateStr = now.toLocaleDateString('pt-BR', options);
-    this.currentDateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+  ngOnInit(): void {
+    this.summary.load();
   }
 }
