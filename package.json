@@ -8,6 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=chromium --coverage",
+    "e2e": "playwright test",
+    "e2e:report": "playwright show-report",
     "sonar": "sonar-scanner-npm"
   },
   "private": true,
@@ -34,6 +36,8 @@
     "@angular/build": "^21.2.21",
     "@angular/cli": "^21.2.21",
     "@angular/compiler-cli": "^21.2.20",
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
     "@sonar/scan": "5.0.0",
     "@vitest/browser-playwright": "^4.1.11",
     "@vitest/coverage-istanbul": "^4.1.11",

@@ -110,8 +110,31 @@ removidos porque esses módulos não pertencem ao MVP atual.
 
 ```powershell
 npm ci
+npx playwright install chromium
 npm test -- --watch=false
+npm run e2e
 npm run build
+```
+
+## Acessibilidade e testes de jornada
+
+O painel segue WCAG 2.2 nível AA como referência. A interface oferece foco
+visível, landmarks, mensagens de erro anunciadas, suporte a zoom de 200%,
+refluxo em telas estreitas e respeito a `prefers-reduced-motion`. Tabelas largas
+mantêm a rolagem dentro de uma região nomeada, sem provocar rolagem horizontal
+na página inteira.
+
+Os testes em `e2e/` executam no Chromium as jornadas críticas de solicitação de
+acesso, ativação de conta, login, aprovação administrativa e convite de usuário.
+Cada tela relevante também passa por auditoria automatizada com axe-core; a CI
+falha quando encontra violações de impacto crítico ou sério. As respostas da API
+são simuladas somente nessa suíte, de forma determinística e sem acesso a dados
+reais ou segredos.
+
+Para investigar uma falha visual localmente, abra o relatório gerado por:
+
+```powershell
+npm run e2e:report
 ```
 
 # EyesProjectFront
@@ -159,16 +182,6 @@ To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use th
 ```bash
 ng test
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
 ## Additional Resources
 
