@@ -1,4 +1,5 @@
 <div class="enterprise-layout" [class.sidebar-collapsed]="isSidebarCollapsed()">
+  <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
   <!-- Sidebar Panel -->
   <aside class="sidebar">
     <div class="sidebar-header">
@@ -56,10 +57,10 @@
     </div>
 
     <div class="sidebar-nav-container">
-      <nav class="nav-menu">
+      <nav class="nav-menu" aria-label="Navegação principal">
         <ul>
           <li>
-            <a routerLink="/dashboard" routerLinkActive="active">
+            <a routerLink="/dashboard" routerLinkActive="active" ariaCurrentWhenActive="page">
               <div class="nav-icon">
                 <svg
                   width="20"
@@ -79,7 +80,7 @@
             </a>
           </li>
           <li>
-            <a routerLink="/users" routerLinkActive="active">
+            <a routerLink="/users" routerLinkActive="active" ariaCurrentWhenActive="page">
               <div class="nav-icon">
                 <svg
                   width="20"
@@ -99,7 +100,7 @@
             </a>
           </li>
           <li>
-            <a routerLink="/requests" routerLinkActive="active">
+            <a routerLink="/requests" routerLinkActive="active" ariaCurrentWhenActive="page">
               <div class="nav-icon">
                 <svg
                   width="20"
@@ -120,7 +121,7 @@
             </a>
           </li>
           <li>
-            <a routerLink="/audit" routerLinkActive="active">
+            <a routerLink="/audit" routerLinkActive="active" ariaCurrentWhenActive="page">
               <div class="nav-icon">
                 <svg
                   width="20"
@@ -188,7 +189,7 @@
     </header>
 
     <!-- Scrollable Page Content -->
-    <main class="page-content">
+    <main id="main-content" class="page-content" tabindex="-1">
       <router-outlet></router-outlet>
     </main>
   </div>

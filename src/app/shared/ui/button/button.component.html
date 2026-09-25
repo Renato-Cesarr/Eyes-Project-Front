@@ -1,7 +1,13 @@
-<button [type]="type" class="btn" [ngClass]="'btn-' + variant" [disabled]="disabled || loading">
+<button
+  [type]="type"
+  class="btn"
+  [ngClass]="'btn-' + variant"
+  [disabled]="disabled || loading"
+  [attr.aria-busy]="loading"
+>
   <span *ngIf="!loading">{{ label }}</span>
 
   <span *ngIf="loading" class="spinner-border text-light" role="status">
-    <span class="visually-hidden">Carregando...</span>
+    <span class="visually-hidden">{{ label }}: carregando…</span>
   </span>
 </button>

@@ -2,9 +2,9 @@ name: CI Front-End
 
 on:
   pull_request:
-    branches: [ "dev" ]
+    branches: ['dev']
   push:
-    branches: [ "dev" ]
+    branches: ['dev']
 
 jobs:
   build:
@@ -36,6 +36,9 @@ jobs:
 
       - name: Rodar testes
         run: npm run test:ci
+
+      - name: Rodar fluxos E2E e auditoria de acessibilidade
+        run: npm run e2e
 
       - name: De-bug Coverage
         run: |

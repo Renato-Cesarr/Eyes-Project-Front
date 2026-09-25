@@ -12,19 +12,17 @@ import { ButtonComponent } from '../../../../../shared/ui/button/button.componen
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink, AuthLayout, FormCard, ButtonComponent],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);
   public authFacade = inject(AuthFacade);
 
-  // UX states
   public passwordVisible = signal(false);
-  public focusState = signal<string | null>(null);
 
   loginForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   onSubmit(): void {
@@ -41,10 +39,6 @@ export class LoginComponent {
   }
 
   togglePasswordVisibility(): void {
-    this.passwordVisible.update(v => !v);
-  }
-
-  setFocus(field: string | null): void {
-    this.focusState.set(field);
+    this.passwordVisible.update((v) => !v);
   }
 }

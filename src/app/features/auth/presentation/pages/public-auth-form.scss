@@ -14,7 +14,7 @@
   gap: 0.5rem;
 
   label {
-    color: #0f172a;
+    color: #f8fafc;
     font-size: 0.9375rem;
     font-weight: 700;
   }
@@ -79,7 +79,7 @@
 }
 
 .field-help {
-  color: #475569;
+  color: #cbd5e1;
 }
 
 .error-msg {
@@ -113,11 +113,11 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.375rem;
-  color: #475569;
+  color: #cbd5e1;
   font-size: 0.9rem;
 
   a {
-    color: #3730a3;
+    color: #bfdbfe;
     font-weight: 700;
   }
 }
@@ -146,16 +146,16 @@
 
 .completion-panel,
 .recovery-panel {
-  color: #334155;
+  color: #e2e8f0;
   line-height: 1.6;
 
   h2 {
     margin-top: 0;
-    color: #0f172a;
+    color: #f8fafc;
   }
 
   a {
-    color: #3730a3;
+    color: #bfdbfe;
     font-weight: 700;
   }
 }

@@ -17,15 +17,12 @@ describe('LoginComponent', () => {
     mockAuthFacade = {
       isLoading: signal(false),
       error: signal<string | null>(null),
-      login: vi.fn() // Usando vi.fn do Vitest para espionagem
+      login: vi.fn(), // Usando vi.fn do Vitest para espionagem
     };
 
     await TestBed.configureTestingModule({
       imports: [LoginComponent, ReactiveFormsModule],
-      providers: [
-        provideRouter([]),
-        { provide: AuthFacade, useValue: mockAuthFacade }
-      ]
+      providers: [provideRouter([]), { provide: AuthFacade, useValue: mockAuthFacade }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
@@ -115,7 +112,7 @@ describe('LoginComponent', () => {
       // Assert
       const compiled = fixture.nativeElement as HTMLElement;
       const errorElement = compiled.querySelector('.api-error');
-      
+
       expect(errorElement).toBeTruthy();
       expect(errorElement?.textContent).toContain(errorMsg);
     });
