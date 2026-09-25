@@ -1,0 +1,139 @@
+:host {
+  display: block;
+}
+.audit-page {
+  max-width: 90rem;
+  margin: 0 auto;
+  color: #0f172a;
+}
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+.eyebrow {
+  margin: 0 0 0.35rem;
+  color: #4f46e5;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+.page-description {
+  margin: 0.5rem 0 0;
+  color: #475569;
+}
+.event-count {
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.filters {
+  display: grid;
+  grid-template-columns: minmax(18rem, 2fr) repeat(4, minmax(10rem, 1fr));
+  gap: 1rem;
+  padding: 1.25rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  grid-column: 1 / -1;
+}
+.state-panel {
+  min-height: 16rem;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+}
+.state-panel p,
+.empty-state h2 {
+  margin: 0;
+}
+.error-state {
+  color: #991b1b;
+  background: #fff7f7;
+  border-color: #fecaca;
+}
+.table-region {
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem 1rem 0 0;
+  background: #fff;
+}
+table {
+  width: 100%;
+  min-width: 65rem;
+}
+.identifier {
+  display: block;
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #64748b;
+  font-family: ui-monospace, monospace;
+  font-size: 0.78rem;
+}
+.result-badge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+.result-success {
+  color: #166534;
+  background: #dcfce7;
+}
+.result-failure {
+  color: #991b1b;
+  background: #fee2e2;
+}
+@media (max-width: 75rem) {
+  .filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .actor-field {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 42rem) {
+  .page-header {
+    flex-direction: column;
+  }
+  .filters {
+    grid-template-columns: 1fr;
+  }
+  .actor-field {
+    grid-column: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -29,6 +29,13 @@ describe('App Routes', () => {
     expect(usersRoute?.loadComponent).toBeDefined();
   });
 
+  it('should expose audit inside the protected layout', () => {
+    const protectedRoute = routes.find((route) => route.path === '');
+    const auditRoute = protectedRoute?.children?.find((route) => route.path === 'audit');
+
+    expect(auditRoute?.loadComponent).toBeDefined();
+  });
+
   it('should have a public access denied route', () => {
     const route = routes.find((r) => r.path === 'acesso-negado');
 
