@@ -27,7 +27,7 @@
             placeholder="Seu nome"
             autocomplete="name"
             [attr.aria-invalid]="isFieldInvalid('name')"
-            aria-describedby="name-error"
+            [attr.aria-describedby]="isFieldInvalid('name') ? 'name-error' : null"
           />
         </div>
         <small id="name-error" class="error-msg" *ngIf="isFieldInvalid('name')">
@@ -46,7 +46,7 @@
             autocomplete="email"
             inputmode="email"
             [attr.aria-invalid]="isFieldInvalid('email')"
-            aria-describedby="email-error"
+            [attr.aria-describedby]="isFieldInvalid('email') ? 'email-error' : null"
           />
         </div>
         <small id="email-error" class="error-msg" *ngIf="isFieldInvalid('email')">
@@ -64,7 +64,9 @@
             maxlength="500"
             placeholder="Conte brevemente como o Eyes pode ajudar"
             [attr.aria-invalid]="isFieldInvalid('reason')"
-            aria-describedby="reason-help reason-error"
+            [attr.aria-describedby]="
+              isFieldInvalid('reason') ? 'reason-help reason-error' : 'reason-help'
+            "
           ></textarea>
         </div>
         <small id="reason-help" class="field-help">Máximo de 500 caracteres.</small>
