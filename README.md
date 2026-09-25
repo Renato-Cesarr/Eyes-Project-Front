@@ -91,6 +91,21 @@ processados pelo backend por meio de `GET /api/v1/users`.
 - conflitos, sessão expirada e falhas de rede são convertidos em mensagens
   seguras, sem expor respostas internas do servidor.
 
+## Dashboard e auditoria administrativa
+
+O dashboard apresenta apenas dados reais obtidos da API: total de solicitações
+pendentes, usuários ativos e as cinco ações administrativas mais recentes. Para
+preservar desempenho, as contagens reutilizam o `totalElements` das consultas
+paginadas com apenas um item; nenhuma coleção completa é carregada para contar
+registros no navegador.
+
+A rota protegida `/audit` consulta `GET /api/v1/audit` e oferece paginação e
+filtros por administrador, ação, resultado e período. A visualização é somente
+leitura e traduz os eventos técnicos para rótulos compreensíveis, sem exibir os
+metadados internos do registro. Estados de carregamento, falha e lista vazia são
+anunciados por tecnologias assistivas. Links de relatórios e configurações foram
+removidos porque esses módulos não pertencem ao MVP atual.
+
 ## Validação local
 
 ```powershell

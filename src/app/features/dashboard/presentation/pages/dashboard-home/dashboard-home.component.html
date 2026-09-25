@@ -1,51 +1,71 @@
-<div class="welcome-container">
-  <div class="background-effects">
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
-    <div class="glow-orb orb-3"></div>
-  </div>
-
-  <div class="glass-card fadeIn">
-    <div class="card-content">
-      <div class="header-section">
-        <div class="time-capsule slide-down">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
-          <span>{{ currentDateStr }}</span>
-        </div>
-        
-        <div class="greeting-wrapper slide-right">
-          <h1 class="gradient-text">{{ greeting }},</h1>
-          <h2 class="admin-name">{{ adminName }}</h2>
-        </div>
-        
-        <p class="subtitle slide-up">
-          Seu painel de controle está pronto. Acesse o menu lateral para gerenciar solicitações, usuários e configurações visuais do sistema.
-        </p>
-      </div>
-
-      <div class="actions slide-up-delayed">
-        <button class="btn-primary ripple">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 20h9"></path>
-            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-          </svg>
-          <span>Nova Solicitação</span>
-        </button>
-      </div>
+<section class="dashboard" aria-labelledby="dashboard-title">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Visão geral</p>
+      <h1 id="dashboard-title">Olá, {{ userName() }}</h1>
+      <p>Acompanhe as atividades essenciais do painel administrativo.</p>
     </div>
-    
-    <div class="illustration-section reveal">
-      <div class="abstract-ring"></div>
-      <div class="abstract-ring delayed"></div>
-      
-      <!-- Minimalist abstract eye logo for Eyes-project -->
-      <svg class="hero-icon floating" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-        <circle cx="12" cy="12" r="3"></circle>
-      </svg>
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="summary.load()"
+      [disabled]="summary.isLoading()"
+    >
+      Atualizar resumo
+    </button>
+  </header>
+
+  @if (summary.loadError()) {
+    <div class="state-panel error-state" role="alert">
+      <p>{{ summary.loadError() }}</p>
+      <button mat-stroked-button type="button" (click)="summary.load()">Tentar novamente</button>
     </div>
-  </div>
-</div>
+  } @else if (summary.isLoading()) {
+    <div class="state-panel" role="status" aria-live="polite">
+      <mat-spinner diameter="40" aria-label="Carregando resumo administrativo"></mat-spinner>
+      <p>Carregando resumo…</p>
+    </div>
+  } @else {
+    <div class="summary-grid" aria-label="Resumo administrativo">
+      <a class="summary-card" routerLink="/requests">
+        <span class="summary-label">Solicitações pendentes</span
+        ><strong>{{ summary.pendingRequests() }}</strong
+        ><span>Ver solicitações</span>
+      </a>
+      <a class="summary-card" routerLink="/users">
+        <span class="summary-label">Usuários ativos</span
+        ><strong>{{ summary.activeUsers() }}</strong
+        ><span>Gerenciar usuários</span>
+      </a>
+      <a class="summary-card" routerLink="/audit">
+        <span class="summary-label">Ações recentes</span
+        ><strong>{{ summary.recentActionCount() }}</strong
+        ><span>Consultar auditoria</span>
+      </a>
+    </div>
+    <section class="recent-activity" aria-labelledby="recent-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="recent-title">Atividade recente</h2>
+          <p>Últimas ações registradas pela API.</p>
+        </div>
+        <a routerLink="/audit">Ver auditoria completa</a>
+      </div>
+      @if (summary.recentActions().length === 0) {
+        <div class="empty-state" role="status">Nenhuma ação administrativa registrada.</div>
+      } @else {
+        <ul class="activity-list">
+          @for (event of summary.recentActions(); track event.id) {
+            <li>
+              <span class="activity-icon" aria-hidden="true"></span>
+              <div>
+                <strong>{{ actionLabel(event.action) }}</strong
+                ><span>{{ formatDate(event.occurredAt) }}</span>
+              </div>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+  }
+</section>

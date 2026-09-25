@@ -54,6 +54,13 @@ describe('MainLayoutComponent', () => {
     expect(component.userInitial()).toBe('A');
   });
 
+  it('should expose only implemented MVP navigation links', () => {
+    const text = fixture.nativeElement.textContent as string;
+    expect(text).toContain('Auditoria');
+    expect(text).not.toContain('Relatórios');
+    expect(text).not.toContain('Configurações');
+  });
+
   it('should have current year defined', () => {
     expect(component.currentYear).toBe(new Date().getFullYear());
   });

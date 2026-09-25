@@ -72,6 +72,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'audit',
+        loadComponent: () =>
+          import('./features/audit/presentation/pages/audit-log-list/audit-log-list.component').then(
+            (m) => m.AuditLogListComponent,
+          ),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',

@@ -11,6 +11,8 @@ import { AccessRequestRepository } from './features/access-requests/domain/repos
 import { AccessRequestHttpService } from './features/access-requests/infrastructure/http/access-request-http.service';
 import { UserManagementRepository } from './features/user-management/domain/repositories/user-management.repository';
 import { UserManagementHttpService } from './features/user-management/infrastructure/http/user-management-http.service';
+import { AuditLogRepository } from './features/audit/domain/repositories/audit-log.repository';
+import { AuditLogHttpService } from './features/audit/infrastructure/http/audit-log-http.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     { provide: AuthRepository, useExisting: AuthHttpService },
     { provide: AccessRequestRepository, useExisting: AccessRequestHttpService },
     { provide: UserManagementRepository, useExisting: UserManagementHttpService },
+    { provide: AuditLogRepository, useExisting: AuditLogHttpService },
     provideHttpClient(withInterceptors([authInterceptor])),
   ],
 };
