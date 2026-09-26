@@ -34,10 +34,20 @@ describe('MainLayoutComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should toggle sidebar status', () => {
-    expect(component.isSidebarCollapsed()).toBe(false);
-    component.toggleSidebar();
-    expect(component.isSidebarCollapsed()).toBe(true);
+  it('should expose accessible administrative navigation', () => {
+    const navigation = fixture.nativeElement.querySelector('nav[aria-label="Navegação principal"]');
+    const labels = Array.from(navigation.querySelectorAll('a')).map(
+      (link) => (link as HTMLElement).textContent,
+    );
+
+    expect(labels).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining('Resumo'),
+        expect.stringContaining('Solicitações'),
+        expect.stringContaining('Usuários'),
+        expect.stringContaining('Auditoria'),
+      ]),
+    );
   });
 
   it('should delegate logout to the authentication facade', () => {
@@ -61,7 +71,16 @@ describe('MainLayoutComponent', () => {
     expect(text).not.toContain('Configurações');
   });
 
-  it('should have current year defined', () => {
-    expect(component.currentYear).toBe(new Date().getFullYear());
+  it('should focus the main landmark after activating a route', async () => {
+    component.handleRouteActivation();
+    await Promise.resolve();
+
+    expect(document.activeElement).toBe(fixture.nativeElement.querySelector('#main-content'));
+  });
+
+  it('should expose a safe account menu trigger', () => {
+    const trigger = fixture.nativeElement.querySelector('.account-trigger') as HTMLButtonElement;
+
+    expect(trigger.getAttribute('aria-label')).toContain('Ana Silva');
   });
 });
