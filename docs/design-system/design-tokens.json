@@ -1,0 +1,327 @@
+{
+  "meta": {
+    "name": "Eyes Design System",
+    "version": "1.0.0",
+    "status": "approved",
+    "owner": "Eyes Project",
+    "sourceIssue": "REN-50",
+    "description": "Contrato visual canônico compartilhado pelo painel Angular e pelo aplicativo Flutter."
+  },
+  "primitive": {
+    "color": {
+      "white": "#FFFFFF",
+      "black": "#000000",
+      "slate950": "#0B121A",
+      "slate900": "#111923",
+      "slate800": "#26313D",
+      "slate700": "#3E4856",
+      "slate600": "#66717F",
+      "slate500": "#909BA8",
+      "slate300": "#C7D0DA",
+      "slate200": "#E4EAF1",
+      "slate150": "#E5EAF0",
+      "slate100": "#F3F7FC",
+      "slate50": "#F7F9FC",
+      "blue900": "#002D44",
+      "blue800": "#003B59",
+      "blue700": "#004C70",
+      "blue600": "#005A84",
+      "blue300": "#8DCDFF",
+      "blue200": "#B9E1FF",
+      "blue100": "#CBE8FF",
+      "teal900": "#00201C",
+      "teal800": "#003732",
+      "teal700": "#004F47",
+      "teal600": "#00695F",
+      "teal300": "#7AD8CB",
+      "teal200": "#9FF2E5",
+      "green900": "#003915",
+      "green700": "#126B38",
+      "green300": "#75DB96",
+      "amber900": "#3E2E00",
+      "amber700": "#7A5300",
+      "amber300": "#F3C65A",
+      "amber200": "#FFD54F",
+      "red900": "#690005",
+      "red700": "#B3261E",
+      "red300": "#FFB4AB"
+    },
+    "space": {
+      "0": "0",
+      "1": "0.25rem",
+      "2": "0.5rem",
+      "3": "0.75rem",
+      "4": "1rem",
+      "5": "1.25rem",
+      "6": "1.5rem",
+      "8": "2rem",
+      "10": "2.5rem",
+      "12": "3rem",
+      "16": "4rem"
+    },
+    "radius": {
+      "none": "0",
+      "small": "0.5rem",
+      "medium": "0.75rem",
+      "large": "1rem",
+      "pill": "9999px"
+    },
+    "duration": {
+      "instant": "0ms",
+      "fast": "120ms",
+      "standard": "200ms",
+      "emphasized": "300ms"
+    },
+    "easing": {
+      "standard": "cubic-bezier(0.2, 0, 0, 1)",
+      "enter": "cubic-bezier(0, 0, 0, 1)",
+      "exit": "cubic-bezier(0.3, 0, 1, 1)"
+    }
+  },
+  "semantic": {
+    "light": {
+      "background": "#F7F9FC",
+      "onBackground": "#131B2A",
+      "surface": "#FFFFFF",
+      "onSurface": "#131B2A",
+      "surfaceVariant": "#E5EAF0",
+      "onSurfaceVariant": "#3E4856",
+      "outline": "#66717F",
+      "primary": "#005A84",
+      "onPrimary": "#FFFFFF",
+      "primaryContainer": "#CBE8FF",
+      "onPrimaryContainer": "#002D44",
+      "secondary": "#00695F",
+      "onSecondary": "#FFFFFF",
+      "secondaryContainer": "#9FF2E5",
+      "onSecondaryContainer": "#00201C",
+      "success": "#126B38",
+      "onSuccess": "#FFFFFF",
+      "warning": "#7A5300",
+      "onWarning": "#FFFFFF",
+      "error": "#B3261E",
+      "onError": "#FFFFFF",
+      "focus": "#005A84",
+      "scrim": "#000000"
+    },
+    "dark": {
+      "background": "#0B121A",
+      "onBackground": "#E4EAF1",
+      "surface": "#111923",
+      "onSurface": "#E4EAF1",
+      "surfaceVariant": "#26313D",
+      "onSurfaceVariant": "#C7D0DA",
+      "outline": "#909BA8",
+      "primary": "#8DCDFF",
+      "onPrimary": "#00344D",
+      "primaryContainer": "#004C70",
+      "onPrimaryContainer": "#CBE8FF",
+      "secondary": "#7AD8CB",
+      "onSecondary": "#003732",
+      "secondaryContainer": "#004F47",
+      "onSecondaryContainer": "#9FF2E5",
+      "success": "#75DB96",
+      "onSuccess": "#003915",
+      "warning": "#F3C65A",
+      "onWarning": "#3E2E00",
+      "error": "#FFB4AB",
+      "onError": "#690005",
+      "focus": "#8DCDFF",
+      "scrim": "#000000"
+    },
+    "highContrastLight": {
+      "background": "#FFFFFF",
+      "onBackground": "#000000",
+      "surface": "#FFFFFF",
+      "onSurface": "#000000",
+      "surfaceVariant": "#FFFFFF",
+      "onSurfaceVariant": "#000000",
+      "outline": "#000000",
+      "primary": "#003B59",
+      "onPrimary": "#FFFFFF",
+      "primaryContainer": "#FFFFFF",
+      "onPrimaryContainer": "#000000",
+      "secondary": "#004F47",
+      "onSecondary": "#FFFFFF",
+      "secondaryContainer": "#FFFFFF",
+      "onSecondaryContainer": "#000000",
+      "success": "#003915",
+      "onSuccess": "#FFFFFF",
+      "warning": "#3E2E00",
+      "onWarning": "#FFFFFF",
+      "error": "#690005",
+      "onError": "#FFFFFF",
+      "focus": "#003B59",
+      "scrim": "#000000"
+    },
+    "highContrastDark": {
+      "background": "#000000",
+      "onBackground": "#FFFFFF",
+      "surface": "#000000",
+      "onSurface": "#FFFFFF",
+      "surfaceVariant": "#000000",
+      "onSurfaceVariant": "#FFFFFF",
+      "outline": "#FFFFFF",
+      "primary": "#B9E1FF",
+      "onPrimary": "#000000",
+      "primaryContainer": "#000000",
+      "onPrimaryContainer": "#FFFFFF",
+      "secondary": "#9FF2E5",
+      "onSecondary": "#000000",
+      "secondaryContainer": "#000000",
+      "onSecondaryContainer": "#FFFFFF",
+      "success": "#75DB96",
+      "onSuccess": "#000000",
+      "warning": "#FFD54F",
+      "onWarning": "#000000",
+      "error": "#FFB4AB",
+      "onError": "#000000",
+      "focus": "#FFD54F",
+      "scrim": "#000000"
+    }
+  },
+  "typography": {
+    "family": {
+      "heading": "Lexend, Arial, sans-serif",
+      "body": "Atkinson Hyperlegible, Arial, sans-serif",
+      "code": "ui-monospace, SFMono-Regular, Consolas, monospace"
+    },
+    "size": {
+      "caption": "0.875rem",
+      "body": "1rem",
+      "bodyLarge": "1.125rem",
+      "titleSmall": "1.25rem",
+      "title": "1.5rem",
+      "headline": "2rem",
+      "display": "2.5rem"
+    },
+    "lineHeight": {
+      "compact": 1.25,
+      "heading": 1.3,
+      "body": 1.6
+    },
+    "weight": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    }
+  },
+  "size": {
+    "touchTargetMinimum": "48px",
+    "focusRing": "3px",
+    "focusOffset": "3px",
+    "contentMaximum": "75rem",
+    "readingMaximum": "68ch",
+    "sidebarExpanded": "17rem"
+  },
+  "elevation": {
+    "none": "none",
+    "low": "0 1px 2px rgba(11, 18, 26, 0.10)",
+    "medium": "0 8px 24px rgba(11, 18, 26, 0.14)",
+    "overlay": "0 16px 48px rgba(11, 18, 26, 0.20)"
+  },
+  "motion": {
+    "rule": "Motion communicates state and is never required to understand or complete a task.",
+    "reducedMotionDuration": "0ms",
+    "maximumDecorativeDuration": "300ms"
+  },
+  "contrastPairs": [
+    {
+      "foreground": "semantic.light.onSurface",
+      "background": "semantic.light.surface",
+      "minimum": 7,
+      "usage": "Texto principal claro"
+    },
+    {
+      "foreground": "semantic.light.onSurfaceVariant",
+      "background": "semantic.light.surface",
+      "minimum": 7,
+      "usage": "Texto secundário claro"
+    },
+    {
+      "foreground": "semantic.light.onPrimary",
+      "background": "semantic.light.primary",
+      "minimum": 7,
+      "usage": "Ação primária clara"
+    },
+    {
+      "foreground": "semantic.light.onSecondary",
+      "background": "semantic.light.secondary",
+      "minimum": 4.5,
+      "usage": "Ação secundária clara"
+    },
+    {
+      "foreground": "semantic.light.onSuccess",
+      "background": "semantic.light.success",
+      "minimum": 4.5,
+      "usage": "Estado de sucesso claro"
+    },
+    {
+      "foreground": "semantic.light.onWarning",
+      "background": "semantic.light.warning",
+      "minimum": 4.5,
+      "usage": "Estado de atenção claro"
+    },
+    {
+      "foreground": "semantic.light.onError",
+      "background": "semantic.light.error",
+      "minimum": 4.5,
+      "usage": "Estado de erro claro"
+    },
+    {
+      "foreground": "semantic.dark.onSurface",
+      "background": "semantic.dark.surface",
+      "minimum": 7,
+      "usage": "Texto principal escuro"
+    },
+    {
+      "foreground": "semantic.dark.onSurfaceVariant",
+      "background": "semantic.dark.surfaceVariant",
+      "minimum": 7,
+      "usage": "Texto secundário escuro"
+    },
+    {
+      "foreground": "semantic.dark.onPrimary",
+      "background": "semantic.dark.primary",
+      "minimum": 7,
+      "usage": "Ação primária escura"
+    },
+    {
+      "foreground": "semantic.dark.onSecondary",
+      "background": "semantic.dark.secondary",
+      "minimum": 7,
+      "usage": "Ação secundária escura"
+    },
+    {
+      "foreground": "semantic.dark.onSuccess",
+      "background": "semantic.dark.success",
+      "minimum": 7,
+      "usage": "Estado de sucesso escuro"
+    },
+    {
+      "foreground": "semantic.dark.onWarning",
+      "background": "semantic.dark.warning",
+      "minimum": 7,
+      "usage": "Estado de atenção escuro"
+    },
+    {
+      "foreground": "semantic.dark.onError",
+      "background": "semantic.dark.error",
+      "minimum": 7,
+      "usage": "Estado de erro escuro"
+    },
+    {
+      "foreground": "semantic.highContrastLight.onPrimary",
+      "background": "semantic.highContrastLight.primary",
+      "minimum": 7,
+      "usage": "Ação primária em alto contraste claro"
+    },
+    {
+      "foreground": "semantic.highContrastDark.onPrimary",
+      "background": "semantic.highContrastDark.primary",
+      "minimum": 7,
+      "usage": "Ação primária em alto contraste escuro"
+    }
+  ]
+}

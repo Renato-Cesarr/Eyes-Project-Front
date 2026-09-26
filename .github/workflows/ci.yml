@@ -28,6 +28,9 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
+      - name: Validar Design System
+        run: npm run design-system:validate
+
       - name: Build Angular
         run: npm run build --if-present
 

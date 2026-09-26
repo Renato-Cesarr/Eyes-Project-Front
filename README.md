@@ -110,11 +110,30 @@ removidos porque esses módulos não pertencem ao MVP atual.
 
 ```powershell
 npm ci
+npm run design-system:validate
 npx playwright install chromium
 npm test -- --watch=false
 npm run e2e
 npm run build
 ```
+
+## Design System
+
+O contrato visual compartilhado pelo painel Angular e pelo aplicativo Flutter
+está documentado em [`docs/design-system`](docs/design-system/README.md). A
+fonte canônica dos tokens é
+[`design-tokens.json`](docs/design-system/design-tokens.json); cores, tipografia,
+espaçamento e estados não devem ser redefinidos diretamente nas features.
+
+Antes de alterar tokens ou aprovar uma migração visual, execute:
+
+```powershell
+npm run design-system:validate
+```
+
+O validador confere a estrutura dos quatro temas, o alvo mínimo de interação e
+os pares críticos de contraste. O processo de revisão também exige o
+[`checklist de acessibilidade`](docs/design-system/accessibility-checklist.md).
 
 ## Acessibilidade e testes de jornada
 
