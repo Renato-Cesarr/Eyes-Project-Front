@@ -71,3 +71,10 @@ A migração da REN-53 está detalhada em `public-authentication.md`. Login,
 solicitação de acesso, ativação, recuperação, redefinição e acesso negado usam a
 mesma composição acessível, mantendo regras de negócio e contratos HTTP fora dos
 componentes compartilhados.
+
+## Painel autenticado
+
+A migração da REN-54 está detalhada em `admin-shell-dashboard.md`. O shell usa
+`MatSidenav` para alternar entre navegação persistente e drawer acessível, mantém
+skip link, landmarks e foco após troca de rota. O dashboard consome três projeções
+independentes para preservar informações válidas durante falhas parciais.
