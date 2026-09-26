@@ -64,3 +64,10 @@ Google Fonts no documento HTML.
 
 Com o servidor local em execução, o catálogo fica disponível em
 `/design-system` após autenticação administrativa.
+
+## Fluxos públicos
+
+A migração da REN-53 está detalhada em `public-authentication.md`. Login,
+solicitação de acesso, ativação, recuperação, redefinição e acesso negado usam a
+mesma composição acessível, mantendo regras de negócio e contratos HTTP fora dos
+componentes compartilhados.
