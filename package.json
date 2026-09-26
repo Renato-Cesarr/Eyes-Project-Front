@@ -10,6 +10,7 @@
     "test:ci": "ng test --watch=false --browsers=chromium --coverage",
     "e2e": "playwright test",
     "e2e:report": "playwright show-report",
+    "design-system:validate": "node scripts/validate-design-system.mjs",
     "sonar": "sonar-scanner-npm"
   },
   "private": true,

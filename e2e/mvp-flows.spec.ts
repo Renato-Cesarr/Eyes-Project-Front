@@ -39,6 +39,9 @@ test('faz login e preserva navegação acessível do painel', async ({ page }) =
   await page.keyboard.type('admin@eyes.test');
   await page.getByRole('textbox', { name: 'Senha', exact: true }).focus();
   await page.keyboard.type('SenhaSegura123!');
+  const submitButton = page.getByRole('button', { name: 'Entrar na conta' });
+  await expect(submitButton).toBeEnabled();
+  await submitButton.focus();
   await page.keyboard.press('Enter');
 
   await expect(page).toHaveURL(/\/dashboard$/);
