@@ -2,6 +2,7 @@
   mat-flat-button
   [type]="type"
   class="eyes-button"
+  [class.eyes-button--full-width]="fullWidth"
   [ngClass]="'eyes-button--' + variant"
   [disabled]="disabled || loading"
   [attr.aria-busy]="loading"

@@ -1,6 +1,14 @@
 <app-auth-layout>
-  <app-form-card title="Acesse sua conta" subtitle="Seja bem-vindo de volta ao Eyes Project">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form" novalidate>
+  <app-form-card title="Entrar no painel" subtitle="Use sua conta administrativa para continuar">
+    @if (sessionNotice(); as message) {
+      <eyes-feedback-banner tone="info" title="Entre novamente" [message]="message" />
+    }
+
+    @if (authFacade.error(); as message) {
+      <eyes-feedback-banner tone="error" title="Não foi possível entrar" [message]="message" />
+    }
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="public-form" novalidate>
       <div class="form-group" [class.invalid]="isFieldInvalid('email')">
         <label for="email">E-mail</label>
         <div class="input-wrapper">
@@ -15,9 +23,9 @@
             [attr.aria-describedby]="isFieldInvalid('email') ? 'login-email-error' : null"
           />
         </div>
-        <small id="login-email-error" class="error-msg" *ngIf="isFieldInvalid('email')"
-          >E-mail inválido ou obrigatório</small
-        >
+        <small id="login-email-error" class="error-msg" *ngIf="isFieldInvalid('email')">
+          Informe um e-mail válido.
+        </small>
       </div>
 
       <div class="form-group" [class.invalid]="isFieldInvalid('password')">
@@ -46,27 +54,32 @@
             {{ passwordVisible() ? 'Ocultar' : 'Ver' }}
           </button>
         </div>
-        <small id="login-password-error" class="error-msg" *ngIf="isFieldInvalid('password')"
-          >Senha obrigatória (mín. 6 caracteres)</small
-        >
+        <small id="login-password-error" class="error-msg" *ngIf="isFieldInvalid('password')">
+          Informe uma senha com pelo menos 6 caracteres.
+        </small>
       </div>
 
-      <div *ngIf="authFacade.error()" class="api-error" role="alert">
-        {{ authFacade.error() }}
+      <div class="auth-context">
+        <p>
+          O painel é exclusivo para administradores. Seus dados de acesso permanecem somente nesta
+          aba.
+        </p>
       </div>
 
-      <app-button
-        variant="primary"
-        label="Entrar na conta"
-        type="submit"
-        [loading]="authFacade.isLoading()"
-        [disabled]="loginForm.invalid"
-      >
-      </app-button>
+      <div class="form-actions">
+        <app-button
+          variant="primary"
+          label="Entrar na conta"
+          type="submit"
+          [fullWidth]="true"
+          [loading]="authFacade.isLoading()"
+          [disabled]="loginForm.invalid"
+        />
+      </div>
 
       <div class="footer-links">
         <span>Não tem uma conta?</span>
-        <a routerLink="/solicitar-acesso">Solicitar Acesso</a>
+        <a routerLink="/solicitar-acesso">Solicitar acesso</a>
       </div>
     </form>
   </app-form-card>

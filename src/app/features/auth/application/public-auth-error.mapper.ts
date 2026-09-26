@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
-export type PublicAuthOperation = 'request-access' | 'setup-password';
+export type PublicAuthOperation =
+  'request-access' | 'setup-password' | 'forgot-password' | 'reset-password';
 
 export interface ApiProblem {
   type?: string;
@@ -26,6 +27,14 @@ export function publicAuthErrorMessage(error: unknown, operation: PublicAuthOper
 
   if (operation === 'request-access') {
     return accessRequestMessage(error);
+  }
+
+  if (operation === 'forgot-password') {
+    return forgotPasswordMessage(error);
+  }
+
+  if (operation === 'reset-password') {
+    return resetPasswordMessage(error);
   }
 
   return setupPasswordMessage(error);
@@ -59,6 +68,29 @@ function setupPasswordMessage(error: HttpErrorResponse): string {
   }
 }
 
+function forgotPasswordMessage(error: HttpErrorResponse): string {
+  if (error.status === 429) {
+    return (
+      problemDetail(error) ??
+      'Muitas solicitações foram enviadas. Aguarde alguns minutos e tente novamente.'
+    );
+  }
+
+  return fallbackFor('forgot-password');
+}
+
+function resetPasswordMessage(error: HttpErrorResponse): string {
+  switch (error.status) {
+    case 400:
+    case 404:
+      return 'Este link de recuperação é inválido, expirou ou já foi utilizado. Solicite um novo link.';
+    case 422:
+      return 'A nova senha está fora do formato esperado. Revise os campos e tente novamente.';
+    default:
+      return fallbackFor('reset-password');
+  }
+}
+
 function problemDetail(error: HttpErrorResponse): string | null {
   if (!isApiProblem(error.error)) {
     return null;
@@ -72,7 +104,14 @@ function isApiProblem(value: unknown): value is ApiProblem {
 }
 
 function fallbackFor(operation: PublicAuthOperation): string {
-  return operation === 'request-access'
-    ? 'Não foi possível enviar sua solicitação agora. Tente novamente mais tarde.'
-    : 'Não foi possível ativar sua conta agora. Tente novamente mais tarde.';
+  switch (operation) {
+    case 'request-access':
+      return 'Não foi possível enviar sua solicitação agora. Tente novamente mais tarde.';
+    case 'setup-password':
+      return 'Não foi possível ativar sua conta agora. Tente novamente mais tarde.';
+    case 'forgot-password':
+      return 'Não foi possível solicitar a recuperação agora. Tente novamente mais tarde.';
+    case 'reset-password':
+      return 'Não foi possível redefinir sua senha agora. Tente novamente mais tarde.';
+  }
 }

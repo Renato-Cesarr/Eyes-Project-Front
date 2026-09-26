@@ -1,6 +1,6 @@
 <section class="form-card" [attr.aria-labelledby]="titleId">
   <header class="card-header">
-    <h1 [id]="titleId" class="card-title">{{ title() }}</h1>
+    <h1 #titleElement [id]="titleId" class="card-title" tabindex="-1">{{ title() }}</h1>
     <p class="card-subtitle" *ngIf="subtitle()">{{ subtitle() }}</p>
   </header>
 

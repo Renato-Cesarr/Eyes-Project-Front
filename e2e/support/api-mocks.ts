@@ -43,6 +43,12 @@ export async function mockApi(page: Page): Promise<void> {
     if (path.endsWith('/v1/auth/me') && method === 'GET') {
       return json(route, admin);
     }
+    if (path.endsWith('/v1/auth/forgot-password') && method === 'POST') {
+      return route.fulfill({ status: 204 });
+    }
+    if (path.endsWith('/v1/auth/reset-password') && method === 'POST') {
+      return route.fulfill({ status: 204 });
+    }
     if (path.endsWith('/v1/users/setup-password') && method === 'POST') {
       return route.fulfill({ status: 204 });
     }

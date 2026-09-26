@@ -29,7 +29,7 @@ export class AuthFacade {
   readonly error = this.session.error;
   readonly isAuthenticated = this.session.isAuthenticated;
 
-  login(credentials: AuthCredentials): void {
+  login(credentials: AuthCredentials, returnUrl?: string | null): void {
     this.session.clear();
     this.session.beginLoading();
 
@@ -38,7 +38,7 @@ export class AuthFacade {
         this.session.authenticate(response.token, response.user);
 
         if (response.user.role === 'ADMIN') {
-          void this.router.navigate(['/dashboard']);
+          void this.router.navigateByUrl(this.safeAdministrativeReturnUrl(returnUrl));
           return;
         }
 
@@ -46,11 +46,11 @@ export class AuthFacade {
         void this.router.navigate(['/acesso-negado']);
       },
       error: (err: HttpErrorResponse) => {
-        let msg = 'Erro inesperado na autenticação.';
+        let msg = 'Não foi possível entrar agora. Tente novamente em alguns instantes.';
         if (err.status === 401 || err.status === 403) {
           msg = 'Credenciais inválidas.';
-        } else if (err.error && err.error.message) {
-          msg = err.error.message;
+        } else if (err.status === 0) {
+          msg = 'Não foi possível conectar ao servidor. Verifique sua internet e tente novamente.';
         }
 
         this.session.fail(msg);
@@ -116,5 +116,14 @@ export class AuthFacade {
   logout(): void {
     this.session.clear();
     void this.router.navigate(['/login']);
+  }
+
+  private safeAdministrativeReturnUrl(returnUrl?: string | null): string {
+    if (!returnUrl) {
+      return '/dashboard';
+    }
+
+    const supportedDestination = /^\/(dashboard|requests|users|audit|design-system)(?:[/?#].*)?$/;
+    return supportedDestination.test(returnUrl) ? returnUrl : '/dashboard';
   }
 }

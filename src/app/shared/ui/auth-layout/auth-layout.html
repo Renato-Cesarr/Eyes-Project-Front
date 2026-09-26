@@ -1,5 +1,49 @@
-<div class="auth-layout">
-  <main class="auth-content">
-    <ng-content></ng-content>
-  </main>
+<a class="skip-link" href="#auth-main">Pular para o conteúdo principal</a>
+
+<div class="auth-shell">
+  <header class="auth-toolbar">
+    <a class="brand" routerLink="/login" aria-label="Eyes Project — ir para o login">
+      <span class="brand__mark" aria-hidden="true">
+        <eyes-icon name="visibility" />
+      </span>
+      <span>
+        <strong>Eyes</strong>
+        <small>Assistência com autonomia</small>
+      </span>
+    </a>
+
+    <eyes-theme-switcher class="auth-theme" [showStatus]="false" />
+  </header>
+
+  <div class="auth-layout">
+    <aside class="auth-intro" aria-labelledby="auth-intro-title">
+      <p class="auth-intro__eyebrow">Tecnologia assistiva</p>
+      <h2 id="auth-intro-title">Um ambiente digital pensado para incluir.</h2>
+      <p>
+        Acesse os recursos administrativos do Eyes com uma experiência clara, segura e adaptável às
+        suas necessidades visuais.
+      </p>
+
+      <ul class="auth-benefits" aria-label="Recursos de acessibilidade disponíveis">
+        <li><eyes-icon name="contrast" /> Quatro opções de contraste</li>
+        <li><eyes-icon name="keyboard" /> Navegação completa por teclado</li>
+        <li><eyes-icon name="visibility" /> Texto legível e compatível com zoom</li>
+      </ul>
+
+      <p class="auth-intro__note">
+        O Eyes complementa recursos de mobilidade e orientação. Ele não substitui bengala, cão-guia
+        ou acompanhamento profissional.
+      </p>
+    </aside>
+
+    <main id="auth-main" class="auth-content" tabindex="-1">
+      <ng-content></ng-content>
+    </main>
+  </div>
+
+  <footer class="auth-footer">
+    <span>Eyes Project</span>
+    <span aria-hidden="true">•</span>
+    <span>Privacidade e acessibilidade desde a concepção</span>
+  </footer>
 </div>

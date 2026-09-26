@@ -1,4 +1,4 @@
-.optional {
-  color: var(--eyes-color-on-surface-variant);
-  font-weight: 500;
+eyes-feedback-banner + eyes-feedback-banner,
+eyes-feedback-banner + .public-form {
+  margin-top: var(--eyes-space-3);
 }
