@@ -1,0 +1,8 @@
+<section class="banner" [attr.data-tone]="tone()" [attr.role]="role()" aria-atomic="true">
+  <span class="banner__mark" aria-hidden="true">{{ tone() === 'error' ? '!' : 'i' }}</span>
+  <div>
+    <h2>{{ title() }}</h2>
+    <p>{{ message() }}</p>
+    <div class="banner__actions"><ng-content /></div>
+  </div>
+</section>

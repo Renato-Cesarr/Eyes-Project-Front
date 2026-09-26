@@ -1,90 +1,52 @@
-.btn {
+:host {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.625rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.5;
-  border-radius: 6px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-
-  &:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-  }
+  min-width: 0;
 }
 
-.btn:focus-visible {
-  outline: 3px solid #1d4ed8;
-  outline-offset: 3px;
+.eyes-button {
+  min-width: min(100%, 8rem);
+  min-height: var(--eyes-size-touch-target);
+  border-radius: var(--eyes-radius-small);
+  font-family: var(--eyes-font-body);
+  font-weight: var(--eyes-font-weight-bold);
+  white-space: normal;
 }
 
-.btn-primary {
-  background-color: #2563eb;
-  color: white;
-
-  &:hover:not(:disabled) {
-    background-color: #1d4ed8;
-  }
+.eyes-button--primary {
+  --mdc-filled-button-container-color: var(--eyes-color-primary);
+  --mdc-filled-button-label-text-color: var(--eyes-color-on-primary);
 }
 
-.btn-secondary {
-  background-color: #fff;
-  border-color: #d1d5db;
-  color: #374151;
-
-  &:hover:not(:disabled) {
-    background-color: #f3f4f6;
-  }
+.eyes-button--secondary {
+  --mdc-filled-button-container-color: var(--eyes-color-surface);
+  --mdc-filled-button-label-text-color: var(--eyes-color-primary);
+  border: 2px solid var(--eyes-color-primary);
 }
 
-.btn-danger {
-  background-color: #ef4444;
-  color: white;
-
-  &:hover:not(:disabled) {
-    background-color: #dc2626;
-  }
+.eyes-button--danger {
+  --mdc-filled-button-container-color: var(--eyes-color-error);
+  --mdc-filled-button-label-text-color: var(--eyes-color-on-error);
 }
 
-.spinner-border {
+.spinner {
   display: inline-block;
   width: 1rem;
   height: 1rem;
-  vertical-align: text-bottom;
   border: 0.2em solid currentColor;
   border-right-color: transparent;
-  border-radius: 50%;
-  animation: spinner-border 0.75s linear infinite;
+  border-radius: var(--eyes-radius-pill);
+  animation: eyes-button-spin 0.75s linear infinite;
 }
 
-@keyframes spinner-border {
+@keyframes eyes-button-spin {
   to {
     transform: rotate(360deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn {
-    transition: none;
+  .spinner {
+    animation: none;
+    border-right-color: currentColor;
   }
-
-  .spinner-border {
-    animation-duration: 1.5s !important;
-  }
-}
-
-.visually-hidden {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
 }

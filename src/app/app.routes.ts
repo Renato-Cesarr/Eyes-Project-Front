@@ -79,6 +79,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'design-system',
+        loadComponent: () =>
+          import('./features/design-system/presentation/design-system-catalog.component').then(
+            (m) => m.DesignSystemCatalogComponent,
+          ),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',

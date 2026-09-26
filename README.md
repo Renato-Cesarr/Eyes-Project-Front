@@ -131,6 +131,11 @@ Antes de alterar tokens ou aprovar uma migração visual, execute:
 npm run design-system:validate
 ```
 
+A implementação Angular usa tokens semânticos, quatro temas, fontes e ícones
+empacotados no build. O catálogo interno fica em `/design-system`, dentro da área
+autenticada. Consulte [`docs/design-system/angular-implementation.md`](docs/design-system/angular-implementation.md)
+para composição de componentes e regras de consumo.
+
 O validador confere a estrutura dos quatro temas, o alvo mínimo de interação e
 os pares críticos de contraste. O processo de revisão também exige o
 [`checklist de acessibilidade`](docs/design-system/accessibility-checklist.md).

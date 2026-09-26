@@ -1,0 +1,59 @@
+<eyes-page-shell
+  eyebrow="Catálogo interno"
+  title="Eyes Design System"
+  description="Primitivas acessíveis e estados visuais compartilhados pelo painel administrativo."
+>
+  <eyes-theme-switcher eyes-page-actions />
+
+  <eyes-surface-card
+    heading="Ações e estados"
+    supportingText="A cor sempre aparece acompanhada de texto e forma."
+  >
+    <div class="catalog-row">
+      <button mat-flat-button><eyes-icon name="add" /> Ação principal</button>
+      <button mat-stroked-button><eyes-icon name="tune" /> Ação secundária</button>
+      <button mat-button>Baixa ênfase</button>
+    </div>
+    <div class="catalog-row" aria-label="Exemplos de status">
+      <eyes-status-badge label="Pendente" />
+      <eyes-status-badge label="Em análise" tone="info" />
+      <eyes-status-badge label="Aprovado" tone="success" />
+      <eyes-status-badge label="Atenção" tone="warning" />
+      <eyes-status-badge label="Falhou" tone="error" />
+    </div>
+  </eyes-surface-card>
+
+  <eyes-surface-card heading="Feedback" appearance="subtle">
+    <div class="catalog-stack">
+      <eyes-feedback-banner
+        title="Alterações salvas"
+        message="A operação foi concluída e já está disponível para o time."
+        tone="success"
+      />
+      <eyes-feedback-banner
+        title="Não foi possível carregar os dados"
+        message="Verifique sua conexão e tente novamente. Nenhuma alteração foi perdida."
+        tone="error"
+      />
+    </div>
+  </eyes-surface-card>
+
+  <div class="catalog-grid">
+    <eyes-state-view
+      kind="empty"
+      title="Nenhuma solicitação ainda"
+      message="Novas solicitações de acesso aparecerão aqui."
+    />
+    <eyes-state-view
+      kind="error"
+      title="Falha ao atualizar"
+      message="Tente novamente. Se o problema continuar, procure o responsável pelo sistema."
+    >
+      <button mat-flat-button>Tentar novamente</button>
+    </eyes-state-view>
+  </div>
+
+  <eyes-surface-card heading="Carregamento acessível">
+    <eyes-skeleton label="Carregando resumo administrativo" [lines]="4" />
+  </eyes-surface-card>
+</eyes-page-shell>

@@ -1,28 +1,26 @@
 .form-card {
-  background: rgba(30, 41, 59, 0.7); // Transparent slate
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 2.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  color: white;
+  border: 1px solid var(--eyes-color-outline);
+  border-radius: var(--eyes-radius-large);
+  background: var(--eyes-color-surface);
+  color: var(--eyes-color-on-surface);
+  box-shadow: var(--eyes-elevation-medium);
+  padding: clamp(var(--eyes-space-5), 5vw, var(--eyes-space-10));
 }
 
 .card-header {
-  margin-bottom: 2rem;
+  margin-bottom: var(--eyes-space-8);
   text-align: center;
 }
 
 .card-title {
-  font-size: 1.875rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(to right, #fff, #94a3b8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin: 0;
+  color: var(--eyes-color-on-surface);
+  font-size: var(--eyes-font-size-headline);
+  font-weight: var(--eyes-font-weight-bold);
 }
 
 .card-subtitle {
-  color: #94a3b8;
-  font-size: 1rem;
+  margin: var(--eyes-space-2) 0 0;
+  color: var(--eyes-color-on-surface-variant);
+  font-size: var(--eyes-font-size-body);
 }
