@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
@@ -47,11 +46,14 @@ export const routes: Routes = [
   },
   {
     path: '',
-    component: MainLayoutComponent,
+    loadComponent: () =>
+      import('./layouts/main-layout/main-layout.component').then((m) => m.MainLayoutComponent),
     canActivate: [authGuard],
     children: [
       {
         path: 'dashboard',
+        title: 'Resumo administrativo | Eyes Project',
+        data: { navigationLabel: 'Resumo' },
         loadComponent: () =>
           import('./features/dashboard/presentation/pages/dashboard-home/dashboard-home.component').then(
             (m) => m.DashboardHomeComponent,
@@ -59,6 +61,8 @@ export const routes: Routes = [
       },
       {
         path: 'requests',
+        title: 'Solicitações de acesso | Eyes Project',
+        data: { navigationLabel: 'Solicitações' },
         loadComponent: () =>
           import('./features/access-requests/presentation/pages/access-request-list/access-request-list.component').then(
             (m) => m.AccessRequestListComponent,
@@ -66,6 +70,8 @@ export const routes: Routes = [
       },
       {
         path: 'users',
+        title: 'Gestão de usuários | Eyes Project',
+        data: { navigationLabel: 'Usuários' },
         loadComponent: () =>
           import('./features/user-management/presentation/pages/user-list/user-list.component').then(
             (m) => m.UserListComponent,
@@ -73,6 +79,8 @@ export const routes: Routes = [
       },
       {
         path: 'audit',
+        title: 'Auditoria | Eyes Project',
+        data: { navigationLabel: 'Auditoria' },
         loadComponent: () =>
           import('./features/audit/presentation/pages/audit-log-list/audit-log-list.component').then(
             (m) => m.AuditLogListComponent,
@@ -80,6 +88,8 @@ export const routes: Routes = [
       },
       {
         path: 'design-system',
+        title: 'Design System | Eyes Project',
+        data: { navigationLabel: 'Design System' },
         loadComponent: () =>
           import('./features/design-system/presentation/design-system-catalog.component').then(
             (m) => m.DesignSystemCatalogComponent,

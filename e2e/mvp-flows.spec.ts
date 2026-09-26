@@ -105,6 +105,57 @@ test('faz login e preserva navegação acessível do painel', async ({ page }) =
   await expectNoSeriousAccessibilityViolations(page);
 });
 
+test('apresenta o resumo operacional com navegação e conta acessíveis', async ({ page }) => {
+  await authenticateAsAdmin(page);
+  await page.goto('/dashboard');
+
+  await expect(
+    page.getByRole('heading', { name: 'Olá, Administradora Eyes', level: 1 }),
+  ).toBeVisible();
+  await expect(page.getByRole('link', { name: /Resumo Visão geral do painel/ })).toHaveAttribute(
+    'aria-current',
+    'page',
+  );
+  await expect(page.getByText('Solicitações pendentes', { exact: true })).toBeVisible();
+  await expect(page.getByText('Usuários ativos', { exact: true })).toBeVisible();
+  await expect(page.getByText('Usuário convidado', { exact: true })).toBeVisible();
+
+  const themes = [
+    ['Claro', 'light'],
+    ['Escuro', 'dark'],
+    ['Alto contraste claro', 'high-contrast-light'],
+    ['Alto contraste escuro', 'high-contrast-dark'],
+  ] as const;
+  for (const [label, value] of themes) {
+    await page.getByRole('button', { name: 'Abrir menu da conta de Administradora Eyes' }).click();
+    await page.getByRole('menuitem', { name: 'Tema da interface' }).hover();
+    await page.getByRole('menuitem', { name: new RegExp(`^${label}`) }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-eyes-theme', value);
+  }
+
+  await expectNoSeriousAccessibilityViolations(page);
+});
+
+test('usa drawer acessível e mantém o painel sem rolagem horizontal', async ({ page }) => {
+  await authenticateAsAdmin(page);
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto('/dashboard');
+
+  await page.getByRole('button', { name: 'Abrir menu de navegação' }).click();
+  await expect(page.getByRole('navigation', { name: 'Navegação principal' })).toBeVisible();
+  await page.getByRole('link', { name: /Usuários Gerenciar contas/ }).click();
+
+  await expect(page).toHaveURL(/\/users$/);
+  await expect(page.getByRole('heading', { name: 'Usuários', level: 1 })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Abrir menu de navegação' })).toBeVisible();
+  const documentWidth = await page.evaluate(() => ({
+    client: document.documentElement.clientWidth,
+    scroll: document.documentElement.scrollWidth,
+  }));
+  expect(documentWidth.scroll).toBeLessThanOrEqual(documentWidth.client);
+  await expectNoSeriousAccessibilityViolations(page);
+});
+
 test('aplica os quatro temas no catálogo acessível sem rolagem horizontal', async ({ page }) => {
   await authenticateAsAdmin(page);
   await page.setViewportSize({ width: 320, height: 800 });

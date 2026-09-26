@@ -48,6 +48,30 @@ describe('DashboardSummaryFacade', () => {
     facade.load();
 
     expect(facade.isLoading()).toBe(false);
+    expect(facade.requestsUnavailable()).toBe(true);
+    expect(facade.hasPartialFailure()).toBe(true);
+    expect(facade.activeUsers()).toBe(0);
+    expect(facade.loadError()).toBeNull();
+  });
+
+  it('only blocks the summary when every projection fails', () => {
+    accessRequests.search.mockReturnValue(throwError(() => new Error('requests')));
+    users.search.mockReturnValue(throwError(() => new Error('users')));
+    audit.search.mockReturnValue(throwError(() => new Error('audit')));
+    const facade = TestBed.inject(DashboardSummaryFacade);
+    facade.load();
+
+    expect(facade.hasPartialFailure()).toBe(false);
     expect(facade.loadError()).toContain('Tente novamente');
+  });
+
+  it('identifies a successful summary without operational records', () => {
+    accessRequests.search.mockReturnValue(of({ content: [], totalElements: 0 }));
+    users.search.mockReturnValue(of({ content: [], totalElements: 0 }));
+    audit.search.mockReturnValue(of({ content: [] }));
+    const facade = TestBed.inject(DashboardSummaryFacade);
+    facade.load();
+
+    expect(facade.isOperationallyEmpty()).toBe(true);
   });
 });

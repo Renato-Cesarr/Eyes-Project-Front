@@ -1,71 +1,211 @@
-<section class="dashboard" aria-labelledby="dashboard-title">
-  <header class="page-header">
-    <div>
-      <p class="eyebrow">Visão geral</p>
-      <h1 id="dashboard-title">Olá, {{ userName() }}</h1>
-      <p>Acompanhe as atividades essenciais do painel administrativo.</p>
-    </div>
-    <button
-      mat-stroked-button
-      type="button"
-      (click)="summary.load()"
-      [disabled]="summary.isLoading()"
-    >
-      Atualizar resumo
-    </button>
-  </header>
+<eyes-page-shell
+  eyebrow="Operação"
+  [title]="'Olá, ' + userName()"
+  description="Acompanhe o que precisa de atenção e acesse rapidamente as tarefas administrativas do dia."
+>
+  <button
+    eyes-page-actions
+    mat-stroked-button
+    type="button"
+    (click)="summary.load()"
+    [disabled]="summary.isLoading()"
+    [attr.aria-busy]="summary.isRefreshing()"
+  >
+    <eyes-icon name="refresh" />
+    {{ summary.isRefreshing() ? 'Atualizando…' : 'Atualizar resumo' }}
+  </button>
 
-  @if (summary.loadError()) {
-    <div class="state-panel error-state" role="alert">
-      <p>{{ summary.loadError() }}</p>
-      <button mat-stroked-button type="button" (click)="summary.load()">Tentar novamente</button>
-    </div>
-  } @else if (summary.isLoading()) {
-    <div class="state-panel" role="status" aria-live="polite">
-      <mat-spinner diameter="40" aria-label="Carregando resumo administrativo"></mat-spinner>
-      <p>Carregando resumo…</p>
-    </div>
-  } @else {
-    <div class="summary-grid" aria-label="Resumo administrativo">
-      <a class="summary-card" routerLink="/requests">
-        <span class="summary-label">Solicitações pendentes</span
-        ><strong>{{ summary.pendingRequests() }}</strong
-        ><span>Ver solicitações</span>
-      </a>
-      <a class="summary-card" routerLink="/users">
-        <span class="summary-label">Usuários ativos</span
-        ><strong>{{ summary.activeUsers() }}</strong
-        ><span>Gerenciar usuários</span>
-      </a>
-      <a class="summary-card" routerLink="/audit">
-        <span class="summary-label">Ações recentes</span
-        ><strong>{{ summary.recentActionCount() }}</strong
-        ><span>Consultar auditoria</span>
-      </a>
-    </div>
-    <section class="recent-activity" aria-labelledby="recent-title">
-      <div class="section-heading">
-        <div>
-          <h2 id="recent-title">Atividade recente</h2>
-          <p>Últimas ações registradas pela API.</p>
-        </div>
-        <a routerLink="/audit">Ver auditoria completa</a>
+  @if (summary.isInitialLoading()) {
+    <section class="dashboard-loading" aria-label="Carregando resumo administrativo">
+      <div class="metrics-grid" aria-hidden="true">
+        @for (item of [1, 2, 3]; track item) {
+          <div class="metric-skeleton"><eyes-skeleton label="" [lines]="3" /></div>
+        }
       </div>
-      @if (summary.recentActions().length === 0) {
-        <div class="empty-state" role="status">Nenhuma ação administrativa registrada.</div>
-      } @else {
-        <ul class="activity-list">
-          @for (event of summary.recentActions(); track event.id) {
-            <li>
-              <span class="activity-icon" aria-hidden="true"></span>
-              <div>
-                <strong>{{ actionLabel(event.action) }}</strong
-                ><span>{{ formatDate(event.occurredAt) }}</span>
-              </div>
-            </li>
-          }
-        </ul>
-      }
+      <div class="content-grid" aria-hidden="true">
+        <div class="panel-skeleton"><eyes-skeleton label="" [lines]="5" /></div>
+        <div class="panel-skeleton"><eyes-skeleton label="" [lines]="5" /></div>
+      </div>
+      <p class="eyes-visually-hidden" role="status">Carregando resumo administrativo.</p>
     </section>
+  } @else if (summary.loadError()) {
+    <eyes-state-view
+      kind="error"
+      title="Resumo temporariamente indisponível"
+      [message]="summary.loadError() ?? ''"
+    >
+      <button mat-flat-button type="button" (click)="summary.load()">Tentar novamente</button>
+    </eyes-state-view>
+  } @else {
+    @if (summary.hasPartialFailure()) {
+      <eyes-feedback-banner
+        tone="warning"
+        title="Parte do resumo não pôde ser atualizada"
+        message="As informações disponíveis continuam abaixo. Tente atualizar novamente para recuperar os demais dados."
+      >
+        <button mat-stroked-button type="button" (click)="summary.load()">
+          Atualizar novamente
+        </button>
+      </eyes-feedback-banner>
+    }
+
+    @if (summary.isRefreshing()) {
+      <p class="eyes-visually-hidden" role="status">Atualizando o resumo administrativo.</p>
+    }
+
+    <section class="metrics" aria-labelledby="metrics-title">
+      <div class="section-introduction">
+        <div>
+          <p class="section-kicker">Situação atual</p>
+          <h2 id="metrics-title">Resumo do sistema</h2>
+        </div>
+        <p>Indicadores textuais das áreas essenciais do painel.</p>
+      </div>
+
+      <div class="metrics-grid">
+        <a class="metric" routerLink="/requests">
+          <span class="metric-icon" aria-hidden="true"><eyes-icon name="assignment_ind" /></span>
+          <span class="metric-copy">
+            <span>Solicitações pendentes</span>
+            @if (summary.requestsUnavailable()) {
+              <strong class="metric-unavailable">Indisponível</strong>
+              <small>Atualize para tentar novamente</small>
+            } @else {
+              <strong>{{ summary.pendingRequests() }}</strong>
+              <small>
+                {{
+                  summary.pendingRequests() === 1
+                    ? 'pedido aguardando análise'
+                    : 'pedidos aguardando análise'
+                }}
+              </small>
+            }
+          </span>
+          <eyes-icon name="arrow_forward" />
+        </a>
+
+        <a class="metric" routerLink="/users">
+          <span class="metric-icon" aria-hidden="true"><eyes-icon name="group" /></span>
+          <span class="metric-copy">
+            <span>Usuários ativos</span>
+            @if (summary.usersUnavailable()) {
+              <strong class="metric-unavailable">Indisponível</strong>
+              <small>Atualize para tentar novamente</small>
+            } @else {
+              <strong>{{ summary.activeUsers() }}</strong>
+              <small>contas com acesso ao sistema</small>
+            }
+          </span>
+          <eyes-icon name="arrow_forward" />
+        </a>
+
+        <a class="metric" routerLink="/audit">
+          <span class="metric-icon" aria-hidden="true"><eyes-icon name="fact_check" /></span>
+          <span class="metric-copy">
+            <span>Ações recentes</span>
+            @if (summary.auditUnavailable()) {
+              <strong class="metric-unavailable">Indisponível</strong>
+              <small>Atualize para tentar novamente</small>
+            } @else {
+              <strong>{{ summary.recentActionCount() }}</strong>
+              <small>registros exibidos neste resumo</small>
+            }
+          </span>
+          <eyes-icon name="arrow_forward" />
+        </a>
+      </div>
+    </section>
+
+    <div class="content-grid">
+      <eyes-surface-card heading="Prioridades" supportingText="Ações que merecem atenção primeiro.">
+        @if (summary.requestsUnavailable()) {
+          <div class="inline-state inline-state--warning">
+            <eyes-icon name="sync_problem" />
+            <div>
+              <strong>Solicitações não atualizadas</strong>
+              <p>Consulte a lista completa ou tente atualizar o resumo.</p>
+            </div>
+          </div>
+        } @else if ((summary.pendingRequests() ?? 0) > 0) {
+          <div class="priority-item">
+            <span class="priority-icon" aria-hidden="true"
+              ><eyes-icon name="pending_actions"
+            /></span>
+            <div>
+              <strong>
+                {{ summary.pendingRequests() }}
+                {{
+                  summary.pendingRequests() === 1 ? 'solicitação aguarda' : 'solicitações aguardam'
+                }}
+                análise
+              </strong>
+              <p>Revise os dados antes de aprovar ou rejeitar cada pedido.</p>
+              <a mat-flat-button routerLink="/requests">Analisar solicitações</a>
+            </div>
+          </div>
+        } @else {
+          <div class="inline-state inline-state--success">
+            <eyes-icon name="task_alt" />
+            <div>
+              <strong>Nenhuma solicitação pendente</strong>
+              <p>A fila de análise está em dia.</p>
+            </div>
+          </div>
+        }
+
+        <div class="quick-links" aria-label="Outras ações administrativas">
+          <a routerLink="/users"><eyes-icon name="person_add" />Gerenciar usuários</a>
+          <a routerLink="/audit"><eyes-icon name="history" />Consultar auditoria</a>
+        </div>
+      </eyes-surface-card>
+
+      <eyes-surface-card
+        heading="Atividade recente"
+        supportingText="Últimas ações administrativas registradas."
+      >
+        @if (summary.auditUnavailable()) {
+          <div class="inline-state inline-state--warning">
+            <eyes-icon name="sync_problem" />
+            <div>
+              <strong>Atividade não atualizada</strong>
+              <p>A auditoria completa continua disponível para consulta.</p>
+            </div>
+          </div>
+        } @else if (summary.recentActions().length === 0) {
+          <div class="inline-state">
+            <eyes-icon name="history_toggle_off" />
+            <div>
+              <strong>Nenhuma atividade recente</strong>
+              <p>As próximas ações administrativas aparecerão aqui.</p>
+            </div>
+          </div>
+        } @else {
+          <ol class="activity-list">
+            @for (event of summary.recentActions(); track event.id) {
+              <li>
+                <span class="activity-marker" aria-hidden="true"></span>
+                <div>
+                  <strong>{{ actionLabel(event.action) }}</strong>
+                  <time [attr.datetime]="event.occurredAt">{{ formatDate(event.occurredAt) }}</time>
+                </div>
+              </li>
+            }
+          </ol>
+        }
+        <a class="section-link" routerLink="/audit">
+          Ver auditoria completa <eyes-icon name="arrow_forward" />
+        </a>
+      </eyes-surface-card>
+    </div>
+
+    @if (summary.isOperationallyEmpty()) {
+      <eyes-feedback-banner
+        tone="info"
+        title="O ambiente está pronto para começar"
+        message="Ainda não existem usuários ativos, solicitações pendentes ou ações registradas. Convide o primeiro usuário quando for necessário."
+      >
+        <a mat-stroked-button routerLink="/users">Ir para usuários</a>
+      </eyes-feedback-banner>
+    }
   }
-</section>
+</eyes-page-shell>

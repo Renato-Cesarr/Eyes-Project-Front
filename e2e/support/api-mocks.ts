@@ -31,6 +31,18 @@ const managedUser = {
   updatedAt: '2026-09-19T12:00:00Z',
 };
 
+const auditLog = {
+  id: 'audit-1',
+  action: 'USER_INVITED',
+  actorUserId: admin.id,
+  targetType: 'USER',
+  targetId: managedUser.id,
+  result: 'SUCCESS',
+  correlationId: 'e2e-correlation-1',
+  metadata: {},
+  occurredAt: '2026-09-26T18:30:00Z',
+};
+
 export async function mockApi(page: Page): Promise<void> {
   await page.route('http://localhost:8080/api/**', async (route) => {
     const request = route.request();
@@ -72,7 +84,7 @@ export async function mockApi(page: Page): Promise<void> {
       return json(route, pageResult([managedUser]));
     }
     if (path.endsWith('/v1/audit') && method === 'GET') {
-      return json(route, pageResult([]));
+      return json(route, pageResult([auditLog]));
     }
 
     return json(route, { message: `Rota E2E não simulada: ${method} ${path}` }, 501);
