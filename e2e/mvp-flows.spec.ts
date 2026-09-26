@@ -36,6 +36,53 @@ test('ativa a conta por teclado', async ({ page }) => {
   await expect(page.getByRole('status')).toContainText('Conta ativada');
 });
 
+test('solicita recuperação sem revelar se a conta existe', async ({ page }) => {
+  await page.goto('/forgot-password');
+  await expectNoSeriousAccessibilityViolations(page);
+
+  await page.getByLabel('E-mail').fill('pessoa@eyes.test');
+  await page.getByRole('button', { name: 'Enviar instruções' }).focus();
+  await page.keyboard.press('Enter');
+
+  const confirmation = page.getByRole('status');
+  await expect(confirmation).toContainText('Se existir uma conta ativa');
+  await expect(confirmation).not.toContainText('pessoa@eyes.test');
+});
+
+test('redefine a senha e mantém recuperação para link incompleto', async ({ page }) => {
+  await page.goto('/reset-password');
+  await expect(page.getByRole('heading', { name: 'Solicite um novo link' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Solicitar novo link' })).toBeVisible();
+  await expectNoSeriousAccessibilityViolations(page);
+
+  await page.goto('/reset-password?token=reset-token');
+  await page.getByRole('textbox', { name: 'Nova senha', exact: true }).fill('SenhaSegura123!');
+  await page
+    .getByRole('textbox', { name: 'Confirmar nova senha', exact: true })
+    .fill('SenhaSegura123!');
+  await page.getByRole('button', { name: 'Redefinir senha' }).click();
+
+  await expect(page.getByRole('status')).toContainText('Senha atualizada');
+});
+
+test('mantém autenticação acessível nos quatro temas e em viewport estreito', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto('/login');
+
+  const theme = page.getByLabel('Tema da interface');
+  for (const value of ['light', 'dark', 'high-contrast-light', 'high-contrast-dark']) {
+    await theme.selectOption(value);
+    await expect(page.locator('html')).toHaveAttribute('data-eyes-theme', value);
+    await expectNoSeriousAccessibilityViolations(page);
+  }
+
+  const documentWidth = await page.evaluate(() => ({
+    client: document.documentElement.clientWidth,
+    scroll: document.documentElement.scrollWidth,
+  }));
+  expect(documentWidth.scroll).toBeLessThanOrEqual(documentWidth.client);
+});
+
 test('faz login e preserva navegação acessível do painel', async ({ page }) => {
   await page.goto('/login');
   await expectNoSeriousAccessibilityViolations(page);
@@ -74,8 +121,11 @@ test('aplica os quatro temas no catálogo acessível sem rolagem horizontal', as
 
   await page.getByRole('button', { name: 'Ação principal' }).focus();
   await expect(page.getByRole('button', { name: 'Ação principal' })).toBeFocused();
-  const documentWidth = await page.evaluate(() => document.documentElement.scrollWidth);
-  expect(documentWidth).toBeLessThanOrEqual(320);
+  const documentWidth = await page.evaluate(() => ({
+    client: document.documentElement.clientWidth,
+    scroll: document.documentElement.scrollWidth,
+  }));
+  expect(documentWidth.scroll).toBeLessThanOrEqual(documentWidth.client);
 });
 
 test('aprova solicitação com confirmação explícita', async ({ page }) => {
@@ -106,6 +156,9 @@ test('convida usuário e mantém a tabela responsiva', async ({ page }) => {
   await page.keyboard.press('Enter');
 
   await expect(page.locator('#main-content .feedback.success')).toContainText(/convite/i);
-  const documentWidth = await page.evaluate(() => document.documentElement.scrollWidth);
-  expect(documentWidth).toBeLessThanOrEqual(320);
+  const documentWidth = await page.evaluate(() => ({
+    client: document.documentElement.clientWidth,
+    scroll: document.documentElement.scrollWidth,
+  }));
+  expect(documentWidth.scroll).toBeLessThanOrEqual(documentWidth.client);
 });

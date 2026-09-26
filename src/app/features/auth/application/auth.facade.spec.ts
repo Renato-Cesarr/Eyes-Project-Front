@@ -20,6 +20,7 @@ describe('AuthFacade', () => {
     me: vi.fn(),
   };
   const navigate = vi.fn();
+  const navigateByUrl = vi.fn();
 
   beforeEach(() => {
     sessionStorage.clear();
@@ -31,7 +32,7 @@ describe('AuthFacade', () => {
         AuthFacade,
         AuthSessionStore,
         { provide: AuthRepository, useValue: repository },
-        { provide: Router, useValue: { navigate } },
+        { provide: Router, useValue: { navigate, navigateByUrl } },
       ],
     });
   });
@@ -45,7 +46,25 @@ describe('AuthFacade', () => {
     expect(facade.user()).toEqual(admin);
     expect(facade.isAuthenticated()).toBe(true);
     expect(sessionStorage.getItem('auth_token')).toBe('jwt-token');
-    expect(navigate).toHaveBeenCalledWith(['/dashboard']);
+    expect(navigateByUrl).toHaveBeenCalledWith('/dashboard');
+  });
+
+  it('restores a supported internal destination after ADMIN login', () => {
+    repository.login.mockReturnValue(of({ token: 'jwt-token', user: admin }));
+    const facade = TestBed.inject(AuthFacade);
+
+    facade.login({ email: admin.email, password: 'password123' }, '/users?page=2');
+
+    expect(navigateByUrl).toHaveBeenCalledWith('/users?page=2');
+  });
+
+  it('rejects an unsafe return URL and opens the dashboard', () => {
+    repository.login.mockReturnValue(of({ token: 'jwt-token', user: admin }));
+    const facade = TestBed.inject(AuthFacade);
+
+    facade.login({ email: admin.email, password: 'password123' }, '//external.example');
+
+    expect(navigateByUrl).toHaveBeenCalledWith('/dashboard');
   });
 
   it('keeps a STUDENT outside the administrative panel', () => {

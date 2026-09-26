@@ -38,6 +38,29 @@ describe('publicAuthErrorMessage', () => {
     expect(message).not.toContain('Internal token detail');
   });
 
+  it('should keep password recovery neutral when the backend fails', () => {
+    const message = publicAuthErrorMessage(
+      new HttpErrorResponse({
+        status: 500,
+        error: { message: 'No account exists for pessoa@example.com' },
+      }),
+      'forgot-password',
+    );
+
+    expect(message).toContain('Não foi possível solicitar a recuperação');
+    expect(message).not.toContain('pessoa@example.com');
+  });
+
+  it('should replace reset-token details with a recovery instruction', () => {
+    const message = publicAuthErrorMessage(
+      new HttpErrorResponse({ status: 404, error: { message: 'Token secret-123 not found' } }),
+      'reset-password',
+    );
+
+    expect(message).toContain('inválido, expirou ou já foi utilizado');
+    expect(message).not.toContain('secret-123');
+  });
+
   it('should explain a network failure without exposing technical data', () => {
     const message = publicAuthErrorMessage(
       new HttpErrorResponse({ status: 0, statusText: 'Unknown Error' }),

@@ -68,7 +68,7 @@ describe('LoginComponent', () => {
       component.onSubmit();
 
       // Assert
-      expect(mockAuthFacade.login).toHaveBeenCalledWith(credentials);
+      expect(mockAuthFacade.login).toHaveBeenCalledWith(credentials, null);
     });
 
     it('should NOT call authFacade.login when form is invalid', () => {
@@ -111,7 +111,7 @@ describe('LoginComponent', () => {
 
       // Assert
       const compiled = fixture.nativeElement as HTMLElement;
-      const errorElement = compiled.querySelector('.api-error');
+      const errorElement = compiled.querySelector('eyes-feedback-banner');
 
       expect(errorElement).toBeTruthy();
       expect(errorElement?.textContent).toContain(errorMsg);

@@ -111,6 +111,7 @@ describe('SetupPasswordComponent', () => {
 
     expect(component.errorMessage()).toContain('inválido, expirou ou já foi utilizado');
     expect(component.errorMessage()).not.toContain('7fa2');
+    expect(component.tokenMissing()).toBe(true);
     expect(toastError).toHaveBeenCalledWith(component.errorMessage());
     expect(component.isLoading()).toBe(false);
   });
