@@ -5,12 +5,15 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { signal } from '@angular/core';
 import { AuthFacade } from '../../features/auth/application/auth.facade';
 import { User } from '../../features/auth/domain/models/user.model';
+import { EyesThemePreference, ThemeService } from '../../core/theme/theme.service';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
   let fixture: ComponentFixture<MainLayoutComponent>;
   const admin: User = { id: '1', name: 'Ana Silva', email: 'ana@eyes.dev', role: 'ADMIN' };
   const logout = vi.fn();
+  const themePreference = signal<EyesThemePreference>('light');
+  const setPreference = vi.fn((value: EyesThemePreference) => themePreference.set(value));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -21,12 +24,18 @@ describe('MainLayoutComponent', () => {
           provide: AuthFacade,
           useValue: { user: signal<User | null>(admin).asReadonly(), logout },
         },
+        {
+          provide: ThemeService,
+          useValue: { preference: themePreference.asReadonly(), setPreference },
+        },
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainLayoutComponent);
     component = fixture.componentInstance;
     logout.mockReset();
+    setPreference.mockClear();
+    themePreference.set('light');
     fixture.detectChanges();
   });
 
@@ -54,6 +63,20 @@ describe('MainLayoutComponent', () => {
     component.logout();
 
     expect(logout).toHaveBeenCalledOnce();
+  });
+
+  it('should manage the compact navigation state', () => {
+    component.openNavigation();
+    expect(component.mobileNavigationOpen()).toBe(true);
+
+    component.closeNavigation();
+    expect(component.mobileNavigationOpen()).toBe(false);
+  });
+
+  it('should delegate theme changes to the theme service', () => {
+    component.selectTheme('high-contrast-dark');
+
+    expect(setPreference).toHaveBeenCalledWith('high-contrast-dark');
   });
 
   it('should display the authenticated user returned by the API', () => {

@@ -14,16 +14,24 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { ActivatedRoute, NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { AuthFacade } from '../../features/auth/application/auth.facade';
-import { IconComponent, ThemeSwitcherComponent } from '../../shared/ui';
+import { EyesThemePreference, ThemeService } from '../../core/theme/theme.service';
+import { IconComponent } from '../../shared/ui';
+
+const COMPACT_BREAKPOINT = '(max-width: 63.99rem)';
 
 interface AdministrativeNavigationItem {
   readonly path: string;
   readonly label: string;
   readonly description: string;
   readonly icon: string;
+}
+
+interface ThemeOption {
+  readonly value: EyesThemePreference;
+  readonly label: string;
 }
 
 @Component({
@@ -38,7 +46,6 @@ interface AdministrativeNavigationItem {
     MatMenuModule,
     MatSidenavModule,
     IconComponent,
-    ThemeSwitcherComponent,
   ],
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss'],
@@ -47,8 +54,8 @@ interface AdministrativeNavigationItem {
 export class MainLayoutComponent {
   private readonly authFacade = inject(AuthFacade);
   private readonly router = inject(Router);
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly breakpointObserver = inject(BreakpointObserver);
+  readonly theme = inject(ThemeService);
   private readonly mainContent = viewChild<ElementRef<HTMLElement>>('mainContent');
   private readonly menuTrigger = viewChild<ElementRef<HTMLButtonElement>>('menuTrigger');
 
@@ -78,9 +85,16 @@ export class MainLayoutComponent {
       icon: 'fact_check',
     },
   ];
+  readonly themeOptions: ReadonlyArray<ThemeOption> = [
+    { value: 'system', label: 'Preferência do sistema' },
+    { value: 'light', label: 'Claro' },
+    { value: 'dark', label: 'Escuro' },
+    { value: 'high-contrast-light', label: 'Alto contraste claro' },
+    { value: 'high-contrast-dark', label: 'Alto contraste escuro' },
+  ];
   readonly isCompact = toSignal(
-    this.breakpointObserver.observe('(max-width: 63.99rem)').pipe(map((result) => result.matches)),
-    { initialValue: false },
+    this.breakpointObserver.observe(COMPACT_BREAKPOINT).pipe(map((result) => result.matches)),
+    { initialValue: this.breakpointObserver.isMatched(COMPACT_BREAKPOINT) },
   );
   readonly mobileNavigationOpen = signal(false);
   readonly currentSection = signal('Resumo');
@@ -118,19 +132,23 @@ export class MainLayoutComponent {
   }
 
   handleRouteActivation(): void {
-    queueMicrotask(() => this.mainContent()?.nativeElement.focus());
+    queueMicrotask(() => this.mainContent()?.nativeElement.focus({ preventScroll: true }));
   }
 
   logout(): void {
     this.authFacade.logout();
   }
 
+  selectTheme(value: EyesThemePreference): void {
+    this.theme.setPreference(value);
+  }
+
   private resolveCurrentSection(): string {
-    let route = this.activatedRoute;
+    let route = this.router.routerState.snapshot.root;
     while (route.firstChild) {
       route = route.firstChild;
     }
 
-    return (route.snapshot.data['navigationLabel'] as string | undefined) ?? 'Painel';
+    return (route.data['navigationLabel'] as string | undefined) ?? 'Painel';
   }
 }

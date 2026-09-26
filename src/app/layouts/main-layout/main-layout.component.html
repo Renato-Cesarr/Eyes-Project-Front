@@ -56,8 +56,10 @@
     </nav>
 
     <footer class="navigation-footer">
-      <eyes-icon name="verified_user" />
-      <p><strong>Acesso restrito</strong><span>Ambiente exclusivo para administradores.</span></p>
+      <div class="navigation-security">
+        <eyes-icon name="verified_user" />
+        <p><strong>Acesso restrito</strong><span>Ambiente exclusivo para administradores.</span></p>
+      </div>
     </footer>
   </mat-sidenav>
 
@@ -112,12 +114,24 @@
     <span>{{ currentUser()?.email }}</span>
   </div>
   <mat-divider />
-  <div class="account-menu__theme" (click)="$event.stopPropagation()">
-    <eyes-theme-switcher [showStatus]="false" />
-  </div>
-  <mat-divider />
+  <button mat-menu-item type="button" [matMenuTriggerFor]="themeMenu">
+    <eyes-icon name="contrast" />
+    <span>Tema da interface</span>
+  </button>
   <button mat-menu-item type="button" (click)="logout()">
     <eyes-icon name="logout" />
     <span>Sair com segurança</span>
   </button>
+</mat-menu>
+
+<mat-menu #themeMenu="matMenu">
+  @for (option of themeOptions; track option.value) {
+    <button mat-menu-item type="button" (click)="selectTheme(option.value)">
+      <eyes-icon [name]="theme.preference() === option.value ? 'check' : 'circle'" />
+      <span>{{ option.label }}</span>
+      @if (theme.preference() === option.value) {
+        <span class="eyes-visually-hidden">(selecionado)</span>
+      }
+    </button>
+  }
 </mat-menu>
