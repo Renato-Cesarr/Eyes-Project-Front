@@ -2,7 +2,12 @@ import { expect, test } from '@playwright/test';
 import { expectNoSeriousAccessibilityViolations } from './support/accessibility';
 import { authenticateAsAdmin, mockApi } from './support/api-mocks';
 
-test.beforeEach(async ({ page }) => mockApi(page));
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    window.localStorage.setItem('eyes-theme-preference', 'light');
+  });
+  await mockApi(page);
+});
 
 test('solicita acesso com feedback acessível', async ({ page }) => {
   await page.goto('/solicitar-acesso');

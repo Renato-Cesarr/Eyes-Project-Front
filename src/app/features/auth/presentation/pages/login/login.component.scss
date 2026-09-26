@@ -14,7 +14,7 @@
 
 label,
 .label-wrapper {
-  color: #f8fafc;
+  color: var(--eyes-color-on-surface);
   font-weight: 700;
 }
 
@@ -31,18 +31,19 @@ label,
   min-height: 3rem;
   align-items: center;
   overflow: hidden;
-  border: 1px solid #94a3b8;
+  border: 2px solid var(--eyes-color-outline);
   border-radius: 0.625rem;
-  background: #fff;
+  background: var(--eyes-color-surface);
 }
 
 .input-wrapper:focus-within {
-  border-color: #1d4ed8;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+  border-color: var(--eyes-color-focus);
+  box-shadow: 0 0 0 var(--eyes-size-focus-ring)
+    color-mix(in srgb, var(--eyes-color-focus) 24%, transparent);
 }
 
 .form-group.invalid .input-wrapper {
-  border-color: #b91c1c;
+  border-color: var(--eyes-color-error);
 }
 
 input {
@@ -51,7 +52,7 @@ input {
   border: 0;
   background: transparent;
   padding: 0.875rem 1rem;
-  color: #0f172a;
+  color: var(--eyes-color-on-surface);
   font: inherit;
 }
 
@@ -63,34 +64,34 @@ input:focus-visible {
   min-width: 3.5rem;
   align-self: stretch;
   border: 0;
-  border-left: 1px solid #cbd5e1;
-  background: #f8fafc;
-  color: #3730a3;
+  border-left: 1px solid var(--eyes-color-outline);
+  background: var(--eyes-color-surface-variant);
+  color: var(--eyes-color-primary);
   cursor: pointer;
   font: inherit;
   font-weight: 700;
 }
 
 .toggle-btn:hover {
-  background: #eef2ff;
+  background: var(--eyes-color-primary-container);
 }
 
 .forgot-link,
 .footer-links a {
-  color: #bfdbfe;
+  color: var(--eyes-color-primary);
   font-weight: 700;
 }
 
 .error-msg {
-  color: #991b1b;
+  color: var(--eyes-color-error);
   font-weight: 600;
 }
 
 .api-error {
-  border: 1px solid #fca5a5;
+  border: 2px solid var(--eyes-color-error);
   border-radius: 0.625rem;
-  background: #fef2f2;
-  color: #7f1d1d;
+  background: var(--eyes-color-surface);
+  color: var(--eyes-color-error);
   padding: 0.75rem 1rem;
   font-weight: 600;
 }
@@ -100,7 +101,7 @@ input:focus-visible {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.35rem;
-  color: #cbd5e1;
+  color: var(--eyes-color-on-surface-variant);
   text-align: center;
 }
 
