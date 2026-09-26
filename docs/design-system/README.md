@@ -1,8 +1,11 @@
 # Eyes Design System
 
-**Versão:** 1.0.0  
-**Status:** aprovado para implementação  
-**Fonte da verdade:** `docs/design-system/design-tokens.json`  
+**Versão:** 1.0.0
+
+**Status:** aprovado para implementação
+
+**Fonte da verdade:** `docs/design-system/design-tokens.json`
+
 **Issue:** REN-50
 
 O Eyes Design System define a linguagem visual e os contratos de experiência do painel administrativo Angular e do aplicativo assistivo Flutter. Ele existe para que os dois produtos pareçam parte do mesmo ecossistema sem forçar o compartilhamento de componentes entre tecnologias diferentes.

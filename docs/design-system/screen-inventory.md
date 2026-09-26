@@ -1,6 +1,7 @@
 # Inventário de telas e matriz de migração
 
-**Data da leitura do código:** 2026-09-25  
+**Data da leitura do código:** 2026-09-25
+
 **Regra:** este inventário descreve rotas e componentes existentes. Itens apenas propostos em documentos acadêmicos não entram como tela implementada.
 
 ## Painel Web — Angular
