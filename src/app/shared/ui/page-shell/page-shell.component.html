@@ -1,0 +1,20 @@
+<section class="page-shell" [attr.aria-labelledby]="titleId()">
+  <header class="page-header">
+    <div class="page-heading">
+      @if (eyebrow()) {
+        <p class="eyebrow">{{ eyebrow() }}</p>
+      }
+      <h1 [id]="titleId()">{{ title() }}</h1>
+      @if (description()) {
+        <p class="description">{{ description() }}</p>
+      }
+    </div>
+    <div class="page-actions">
+      <ng-content select="[eyes-page-actions]" />
+    </div>
+  </header>
+
+  <div class="page-body">
+    <ng-content />
+  </div>
+</section>

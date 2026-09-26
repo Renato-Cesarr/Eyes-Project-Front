@@ -36,6 +36,14 @@ describe('App Routes', () => {
     expect(auditRoute?.loadComponent).toBeDefined();
   });
 
+  it('should expose the design system catalog only inside the protected layout', () => {
+    const protectedRoute = routes.find((route) => route.path === '');
+    const catalogRoute = protectedRoute?.children?.find((route) => route.path === 'design-system');
+
+    expect(catalogRoute?.loadComponent).toBeDefined();
+    expect(routes.find((route) => route.path === 'design-system')).toBeUndefined();
+  });
+
   it('should have a public access denied route', () => {
     const route = routes.find((r) => r.path === 'acesso-negado');
 

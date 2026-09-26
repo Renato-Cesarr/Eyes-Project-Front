@@ -1,13 +1,13 @@
 <button
+  mat-flat-button
   [type]="type"
-  class="btn"
-  [ngClass]="'btn-' + variant"
+  class="eyes-button"
+  [ngClass]="'eyes-button--' + variant"
   [disabled]="disabled || loading"
   [attr.aria-busy]="loading"
 >
   <span *ngIf="!loading">{{ label }}</span>
 
-  <span *ngIf="loading" class="spinner-border text-light" role="status">
-    <span class="visually-hidden">{{ label }}: carregando…</span>
-  </span>
+  <span *ngIf="loading" class="spinner" aria-hidden="true"></span>
+  <span *ngIf="loading" class="eyes-visually-hidden" role="status"> {{ label }}: carregando… </span>
 </button>

@@ -1,0 +1,24 @@
+.theme-switcher {
+  display: grid;
+  max-width: 28rem;
+  gap: var(--eyes-space-2);
+}
+
+label {
+  font-weight: var(--eyes-font-weight-bold);
+}
+
+select {
+  min-height: var(--eyes-size-touch-target);
+  border: 2px solid var(--eyes-color-outline);
+  border-radius: var(--eyes-radius-small);
+  background: var(--eyes-color-surface);
+  color: var(--eyes-color-on-surface);
+  padding: var(--eyes-space-2) var(--eyes-space-3);
+}
+
+p {
+  margin: 0;
+  color: var(--eyes-color-on-surface-variant);
+  font-size: var(--eyes-font-size-caption);
+}

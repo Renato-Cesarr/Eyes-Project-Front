@@ -1,0 +1,19 @@
+<section
+  class="state-view"
+  [attr.data-kind]="kind()"
+  [attr.role]="role()"
+  [attr.aria-busy]="busy()"
+  aria-atomic="true"
+>
+  <div class="state-view__symbol" aria-hidden="true">
+    @switch (kind()) {
+      @case ('loading') { <span class="spinner"></span> }
+      @case ('error') { <span>!</span> }
+      @case ('no-results') { <span>?</span> }
+      @default { <span>—</span> }
+    }
+  </div>
+  <h2>{{ title() }}</h2>
+  <p>{{ message() }}</p>
+  <div class="state-view__actions"><ng-content /></div>
+</section>

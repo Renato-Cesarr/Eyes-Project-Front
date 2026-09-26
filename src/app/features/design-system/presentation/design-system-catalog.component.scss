@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+.catalog-row,
+.catalog-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eyes-space-3);
+}
+
+.catalog-row + .catalog-row {
+  margin-top: var(--eyes-space-5);
+}
+
+.catalog-stack {
+  flex-direction: column;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: var(--eyes-space-5);
+}
+
+button {
+  min-height: var(--eyes-size-touch-target);
+}

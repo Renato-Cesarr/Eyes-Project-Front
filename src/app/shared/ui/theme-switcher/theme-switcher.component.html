@@ -1,0 +1,15 @@
+<div class="theme-switcher">
+  <label for="eyes-theme">Tema da interface</label>
+  <select
+    id="eyes-theme"
+    [ngModel]="theme.preference()"
+    (ngModelChange)="selectTheme($event)"
+  >
+    <option value="system">Usar preferência do sistema</option>
+    <option value="light">Claro</option>
+    <option value="dark">Escuro</option>
+    <option value="high-contrast-light">Alto contraste claro</option>
+    <option value="high-contrast-dark">Alto contraste escuro</option>
+  </select>
+  <p>Tema ativo: {{ theme.resolvedTheme() }}</p>
+</div>

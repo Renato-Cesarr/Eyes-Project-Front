@@ -1,0 +1,36 @@
+:host {
+  display: block;
+}
+
+.surface-card {
+  border: 1px solid var(--eyes-color-outline);
+  border-radius: var(--eyes-radius-large);
+  background: var(--eyes-color-surface);
+  color: var(--eyes-color-on-surface);
+  box-shadow: var(--eyes-elevation-low);
+  padding: clamp(var(--eyes-space-4), 3vw, var(--eyes-space-6));
+}
+
+.surface-card--subtle {
+  background: var(--eyes-color-surface-variant);
+  box-shadow: none;
+}
+
+.surface-card__header {
+  margin-bottom: var(--eyes-space-5);
+}
+
+h2 {
+  margin: 0;
+  font-size: var(--eyes-font-size-title-small);
+}
+
+p {
+  max-width: var(--eyes-size-reading-maximum);
+  margin: var(--eyes-space-2) 0 0;
+  color: var(--eyes-color-on-surface-variant);
+}
+
+.surface-card__content {
+  min-width: 0;
+}

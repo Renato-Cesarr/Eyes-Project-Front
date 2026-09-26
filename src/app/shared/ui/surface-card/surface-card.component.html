@@ -1,0 +1,17 @@
+<section
+  class="surface-card"
+  [class.surface-card--subtle]="appearance() === 'subtle'"
+  [attr.aria-labelledby]="heading() ? headingId : null"
+>
+  @if (heading()) {
+    <header class="surface-card__header">
+      <h2 [id]="headingId">{{ heading() }}</h2>
+      @if (supportingText()) {
+        <p>{{ supportingText() }}</p>
+      }
+    </header>
+  }
+  <div class="surface-card__content">
+    <ng-content />
+  </div>
+</section>

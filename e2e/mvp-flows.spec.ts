@@ -53,6 +53,26 @@ test('faz login e preserva navegação acessível do painel', async ({ page }) =
   await expectNoSeriousAccessibilityViolations(page);
 });
 
+test('aplica os quatro temas no catálogo acessível sem rolagem horizontal', async ({ page }) => {
+  await authenticateAsAdmin(page);
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto('/design-system');
+
+  await expect(page.getByRole('heading', { name: 'Eyes Design System', level: 1 })).toBeVisible();
+  await expectNoSeriousAccessibilityViolations(page);
+
+  const theme = page.getByLabel('Tema da interface');
+  for (const value of ['light', 'dark', 'high-contrast-light', 'high-contrast-dark']) {
+    await theme.selectOption(value);
+    await expect(page.locator('html')).toHaveAttribute('data-eyes-theme', value);
+  }
+
+  await page.getByRole('button', { name: 'Ação principal' }).focus();
+  await expect(page.getByRole('button', { name: 'Ação principal' })).toBeFocused();
+  const documentWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+  expect(documentWidth).toBeLessThanOrEqual(320);
+});
+
 test('aprova solicitação com confirmação explícita', async ({ page }) => {
   await authenticateAsAdmin(page);
   await page.goto('/requests');
