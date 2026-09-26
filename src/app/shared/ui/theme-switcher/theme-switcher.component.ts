@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EyesThemePreference, ThemeService } from '../../../core/theme/theme.service';
 
@@ -11,6 +11,7 @@ import { EyesThemePreference, ThemeService } from '../../../core/theme/theme.ser
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeSwitcherComponent {
+  readonly showStatus = input(true);
   protected readonly theme = inject(ThemeService);
 
   protected selectTheme(value: string): void {

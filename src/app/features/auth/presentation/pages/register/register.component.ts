@@ -9,11 +9,20 @@ import { AuthLayout } from '../../../../../shared/ui/auth-layout/auth-layout';
 import { ButtonComponent } from '../../../../../shared/ui/button/button.component';
 import { FormCard } from '../../../../../shared/ui/form-card/form-card';
 import { ToastService } from '../../../../../shared/utils/toast.service';
+import { FeedbackBannerComponent } from '../../../../../shared/ui/feedback-banner/feedback-banner.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, AuthLayout, FormCard, ButtonComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterLink,
+    AuthLayout,
+    FormCard,
+    ButtonComponent,
+    FeedbackBannerComponent,
+  ],
   templateUrl: './register.component.html',
   styleUrls: ['../public-auth-form.scss', './register.component.scss'],
 })

@@ -3,18 +3,19 @@
     title="Solicitar acesso"
     subtitle="Envie seus dados para análise da equipe administradora"
   >
-    <div
+    <eyes-feedback-banner
       *ngIf="successMessage() as message"
-      class="form-feedback success"
-      role="status"
-      aria-live="polite"
-    >
-      {{ message }} Você receberá um convite por e-mail se a solicitação for aprovada.
-    </div>
+      tone="success"
+      title="Solicitação recebida"
+      [message]="message + ' A equipe enviará as próximas instruções por e-mail.'"
+    />
 
-    <div *ngIf="errorMessage() as message" class="form-feedback error" role="alert">
-      {{ message }}
-    </div>
+    <eyes-feedback-banner
+      *ngIf="errorMessage() as message"
+      tone="error"
+      title="Não foi possível enviar"
+      [message]="message"
+    />
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="public-form" novalidate>
       <div class="form-group" [class.invalid]="isFieldInvalid('name')">
@@ -75,14 +76,16 @@
         </small>
       </div>
 
-      <app-button
-        variant="primary"
-        label="Enviar solicitação"
-        type="submit"
-        [loading]="isLoading()"
-        [disabled]="registerForm.invalid || isLoading()"
-      >
-      </app-button>
+      <div class="form-actions">
+        <app-button
+          variant="primary"
+          label="Enviar solicitação"
+          type="submit"
+          [fullWidth]="true"
+          [loading]="isLoading()"
+          [disabled]="registerForm.invalid || isLoading()"
+        />
+      </div>
 
       <div class="footer-links">
         <span>Já tem uma conta?</span>

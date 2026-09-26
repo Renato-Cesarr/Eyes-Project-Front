@@ -1,12 +1,7 @@
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { finalize, take } from 'rxjs';
 import { AuthFacade } from '../../../application/auth.facade';
@@ -15,11 +10,21 @@ import { AuthLayout } from '../../../../../shared/ui/auth-layout/auth-layout';
 import { ButtonComponent } from '../../../../../shared/ui/button/button.component';
 import { FormCard } from '../../../../../shared/ui/form-card/form-card';
 import { ToastService } from '../../../../../shared/utils/toast.service';
+import { FeedbackBannerComponent } from '../../../../../shared/ui/feedback-banner/feedback-banner.component';
+import { passwordsMatchValidator } from '../../validators/passwords-match.validator';
 
 @Component({
   selector: 'app-setup-password',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, AuthLayout, FormCard, ButtonComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterLink,
+    AuthLayout,
+    FormCard,
+    ButtonComponent,
+    FeedbackBannerComponent,
+  ],
   templateUrl: './setup-password.component.html',
   styleUrls: ['../public-auth-form.scss', './setup-password.component.scss'],
 })
@@ -42,7 +47,7 @@ export class SetupPasswordComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
     },
-    { validators: passwordsMatchValidator },
+    { validators: passwordsMatchValidator() },
   );
 
   ngOnInit(): void {
@@ -93,6 +98,9 @@ export class SetupPasswordComponent implements OnInit {
         },
         error: (error: unknown) => {
           const message = publicAuthErrorMessage(error, 'setup-password');
+          if (error instanceof HttpErrorResponse && [400, 404].includes(error.status)) {
+            this.tokenMissing.set(true);
+          }
           this.errorMessage.set(message);
           this.toastService.error(message);
         },
@@ -111,10 +119,4 @@ export class SetupPasswordComponent implements OnInit {
     }
     this.confirmPasswordVisible.update((visible) => !visible);
   }
-}
-
-function passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
-  const password = control.get('password')?.value;
-  const confirmation = control.get('confirmPassword')?.value;
-  return password && confirmation && password !== confirmation ? { passwordMismatch: true } : null;
 }

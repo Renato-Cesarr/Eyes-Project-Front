@@ -9,7 +9,7 @@
 @import 'material-symbols/rounded.css';
 
 html {
-  min-width: 20rem;
+  min-width: 0;
   min-height: 100%;
   @include mat.theme(
     (

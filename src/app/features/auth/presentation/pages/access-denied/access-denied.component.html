@@ -1,19 +1,24 @@
-<main class="access-denied" aria-labelledby="access-denied-title">
-  <section class="access-denied__card">
-    <div class="access-denied__icon" aria-hidden="true">!</div>
-    <p class="access-denied__eyebrow">Acesso restrito</p>
-    <h1 id="access-denied-title">Você não pode acessar o painel administrativo</h1>
-    <p>
-      Olá, {{ userName() }}. Este painel é exclusivo para pessoas com o perfil Administrador. Sua
-      sessão continua protegida e nenhum dado foi alterado.
-    </p>
+<app-auth-layout>
+  <app-form-card
+    title="Acesso ao painel restrito"
+    subtitle="Sua conta está segura, mas não possui permissão administrativa"
+  >
+    <eyes-feedback-banner
+      tone="warning"
+      title="Perfil sem permissão"
+      [message]="
+        'Olá, ' +
+        userName() +
+        '. Este painel é exclusivo para pessoas com o perfil Administrador. Nenhum dado foi alterado.'
+      "
+    />
 
-    @if (isAuthenticated()) {
-      <button type="button" class="access-denied__primary" (click)="logout()">
-        Sair desta conta
-      </button>
-    } @else {
-      <a class="access-denied__primary" routerLink="/login">Voltar para o login</a>
-    }
-  </section>
-</main>
+    <div class="access-denied__actions">
+      @if (isAuthenticated()) {
+        <button type="button" class="auth-link-button" (click)="logout()">Sair desta conta</button>
+      } @else {
+        <a class="auth-link-button" routerLink="/login">Voltar para o login</a>
+      }
+    </div>
+  </app-form-card>
+</app-auth-layout>

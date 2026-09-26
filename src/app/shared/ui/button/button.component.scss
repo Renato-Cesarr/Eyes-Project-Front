@@ -3,6 +3,11 @@
   min-width: 0;
 }
 
+:host(.eyes-button-host--full-width) {
+  display: flex;
+  width: 100%;
+}
+
 .eyes-button {
   min-width: min(100%, 8rem);
   min-height: var(--eyes-size-touch-target);
@@ -10,6 +15,10 @@
   font-family: var(--eyes-font-body);
   font-weight: var(--eyes-font-weight-bold);
   white-space: normal;
+}
+
+.eyes-button--full-width {
+  width: 100%;
 }
 
 .eyes-button--primary {

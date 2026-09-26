@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -15,4 +15,10 @@ export class ButtonComponent {
   @Input() variant: 'primary' | 'secondary' | 'danger' = 'primary';
   @Input() disabled: boolean = false;
   @Input() loading: boolean = false;
+  @Input() fullWidth: boolean = false;
+
+  @HostBinding('class.eyes-button-host--full-width')
+  get hasFullWidth(): boolean {
+    return this.fullWidth;
+  }
 }
