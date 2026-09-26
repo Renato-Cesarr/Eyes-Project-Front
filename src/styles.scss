@@ -1,42 +1,39 @@
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+@use './styles/tokens';
+
+@import '@fontsource/lexend/500.css';
+@import '@fontsource/lexend/600.css';
+@import '@fontsource/lexend/700.css';
+@import '@fontsource/atkinson-hyperlegible/400.css';
+@import '@fontsource/atkinson-hyperlegible/700.css';
+@import 'material-symbols/rounded.css';
 
 html {
-  height: 100%;
+  min-width: 20rem;
+  min-height: 100%;
   @include mat.theme(
     (
       color: (
         primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
+        tertiary: mat.$cyan-palette,
       ),
-      typography: Roboto,
+      typography: 'Atkinson Hyperlegible',
       density: 0,
     )
   );
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
+  min-height: 100%;
   margin: 0;
-  height: 100%;
-  min-width: 20rem;
-  line-height: 1.5;
+  background: var(--eyes-color-background);
+  color: var(--eyes-color-on-background);
+  font-family: var(--eyes-font-body);
+  font-size: var(--eyes-font-size-body);
+  line-height: var(--eyes-line-height-body);
+  transition:
+    background-color var(--eyes-duration-standard) var(--eyes-easing-standard),
+    color var(--eyes-duration-standard) var(--eyes-easing-standard);
 }
 
 *,
@@ -45,9 +42,46 @@ body {
   box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--eyes-font-heading);
+  line-height: var(--eyes-line-height-heading);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-  outline: 3px solid #1d4ed8;
-  outline-offset: 3px;
+  outline: var(--eyes-size-focus-ring) solid var(--eyes-color-focus);
+  outline-offset: var(--eyes-size-focus-offset);
+}
+
+.eyes-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.eyes-reading-width {
+  max-width: var(--eyes-size-reading-maximum);
+}
+
+.eyes-code {
+  font-family: var(--eyes-font-code);
 }
 
 @media (prefers-reduced-motion: reduce) {
