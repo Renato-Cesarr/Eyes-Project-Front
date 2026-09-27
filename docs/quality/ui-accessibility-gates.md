@@ -29,6 +29,11 @@ Referências nunca devem ser atualizadas apenas para fazer a pipeline passar. O 
 deve explicar a alteração visual, incluir revisão das imagens e confirmar que os
 testes de comportamento e acessibilidade continuam válidos.
 
+As referências ficam separadas por plataforma (`win32` e `linux`) porque o
+Chromium usa rasterização nativa do sistema. A referência Linux deve ser gerada
+com a mesma imagem Playwright usada pelo CI; não se deve aumentar a tolerância
+para esconder diferenças entre sistemas.
+
 ## Checklist manual do PR
 
 - [ ] Navegação completa somente por teclado, incluindo foco após diálogos.

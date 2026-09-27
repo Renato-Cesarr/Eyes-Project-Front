@@ -16,3 +16,5 @@ System impede cores SCSS fora dos tokens canônicos.
 O CI bloqueia regressões críticas de contraste, foco, refluxo e aparência. Uma
 mudança visual legítima exige atualização explícita e revisão das imagens. Testes
 manuais com teclado e leitor de tela continuam obrigatórios antes da homologação.
+Referências Windows e Linux são versionadas separadamente para preservar um gate
+estrito mesmo quando a rasterização do Chromium varia entre sistemas.
