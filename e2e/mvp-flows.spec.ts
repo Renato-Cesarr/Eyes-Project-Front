@@ -133,6 +133,7 @@ test('apresenta o resumo operacional com navegação e conta acessíveis', async
     await expect(page.locator('html')).toHaveAttribute('data-eyes-theme', value);
   }
 
+  await page.keyboard.press('Escape');
   await expectNoSeriousAccessibilityViolations(page);
 });
 
@@ -190,14 +191,16 @@ test('aprova solicitação com confirmação explícita', async ({ page }) => {
   await page.getByRole('button', { name: 'Aprovar e convidar' }).focus();
   await page.keyboard.press('Enter');
 
-  await expect(page.locator('#main-content .feedback.success')).toContainText('aprovada');
+  await expect(page.locator('#main-content eyes-feedback-banner')).toContainText('aprovada');
 });
 
-test('convida usuário e mantém a tabela responsiva', async ({ page }) => {
+test('convida usuário e mantém a lista compacta responsiva', async ({ page }) => {
   await authenticateAsAdmin(page);
   await page.setViewportSize({ width: 320, height: 800 });
   await page.goto('/users');
-  await expect(page.getByRole('heading', { name: 'Usuários' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Usuários', exact: true, level: 1 }),
+  ).toBeVisible();
   await expectNoSeriousAccessibilityViolations(page);
 
   await page.getByRole('button', { name: 'Convidar usuário' }).click();
@@ -206,7 +209,31 @@ test('convida usuário e mantém a tabela responsiva', async ({ page }) => {
   await page.getByRole('button', { name: 'Criar e enviar convite' }).focus();
   await page.keyboard.press('Enter');
 
-  await expect(page.locator('#main-content .feedback.success')).toContainText(/convite/i);
+  await expect(page.locator('#main-content eyes-feedback-banner')).toContainText(/convite/i);
+  await expect(page.locator('.eyes-compact-list')).toBeVisible();
+  const documentWidth = await page.evaluate(() => ({
+    client: document.documentElement.clientWidth,
+    scroll: document.documentElement.scrollWidth,
+  }));
+  expect(documentWidth.scroll).toBeLessThanOrEqual(documentWidth.client);
+});
+
+test('apresenta solicitações e auditoria em cartões acessíveis no celular', async ({ page }) => {
+  await authenticateAsAdmin(page);
+  await page.setViewportSize({ width: 320, height: 800 });
+
+  await page.goto('/requests');
+  await expect(page.locator('.eyes-compact-list')).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: 'Aprovar solicitação de Ana Estudante' }),
+  ).toBeVisible();
+  await expectNoSeriousAccessibilityViolations(page);
+
+  await page.goto('/audit');
+  await expect(page.locator('.eyes-compact-list')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Usuário convidado', level: 3 })).toBeVisible();
+  await expectNoSeriousAccessibilityViolations(page);
+
   const documentWidth = await page.evaluate(() => ({
     client: document.documentElement.clientWidth,
     scroll: document.documentElement.scrollWidth,

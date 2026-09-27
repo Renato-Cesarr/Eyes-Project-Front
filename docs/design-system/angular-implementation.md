@@ -78,3 +78,10 @@ A migração da REN-54 está detalhada em `admin-shell-dashboard.md`. O shell us
 `MatSidenav` para alternar entre navegação persistente e drawer acessível, mantém
 skip link, landmarks e foco após troca de rota. O dashboard consome três projeções
 independentes para preservar informações válidas durante falhas parciais.
+
+## Dados administrativos
+
+A migração da REN-55 está detalhada em `administrative-data-workflows.md`. Usuários,
+solicitações e auditoria compartilham tokens e padrões de filtro, feedback e estado.
+Tabelas semânticas são usadas em telas amplas; em telas compactas, listas de cartões
+preservam os mesmos dados e ações sem provocar rolagem horizontal da página.

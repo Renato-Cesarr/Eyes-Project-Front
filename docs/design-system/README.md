@@ -211,6 +211,7 @@ Nenhuma tela é considerada pronta somente por parecer correta. A revisão obrig
 
 ## 15. Documentos relacionados
 
+- [`administrative-data-workflows.md`](./administrative-data-workflows.md)
 - [`platform-mapping.md`](./platform-mapping.md)
 - [`component-contracts.md`](./component-contracts.md)
 - [`accessibility-checklist.md`](./accessibility-checklist.md)
