@@ -40,7 +40,7 @@ jobs:
       - name: Rodar testes
         run: npm run test:ci
 
-      - name: Rodar fluxos E2E e auditoria de acessibilidade
+      - name: Rodar fluxos E2E, regressão visual e acessibilidade
         run: npm run e2e
 
       - name: De-bug Coverage

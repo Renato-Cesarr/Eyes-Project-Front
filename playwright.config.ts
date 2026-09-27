@@ -2,11 +2,19 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './e2e',
+  snapshotPathTemplate: '{testDir}/snapshots/{testFileName}/{platform}/{arg}{ext}',
   fullyParallel: false,
   forbidOnly: Boolean(process.env['CI']),
   retries: process.env['CI'] ? 2 : 0,
   workers: process.env['CI'] ? 1 : undefined,
   reporter: process.env['CI'] ? [['list'], ['html', { open: 'never' }]] : 'html',
+  expect: {
+    toHaveScreenshot: {
+      animations: 'disabled',
+      caret: 'hide',
+      maxDiffPixelRatio: 0.01,
+    },
+  },
   use: {
     baseURL: 'http://127.0.0.1:4200',
     trace: 'on-first-retry',

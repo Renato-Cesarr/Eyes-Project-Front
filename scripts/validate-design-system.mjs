@@ -1,4 +1,5 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
+import { extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const tokensPath = fileURLToPath(
@@ -11,6 +12,7 @@ const packagePath = fileURLToPath(new URL('../package.json', import.meta.url));
 const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'));
 const indexPath = fileURLToPath(new URL('../src/index.html', import.meta.url));
 const indexHtml = readFileSync(indexPath, 'utf8');
+const sourceRoot = fileURLToPath(new URL('../src', import.meta.url));
 
 const failures = [];
 const requiredThemes = ['light', 'dark', 'highContrastLight', 'highContrastDark'];
@@ -97,6 +99,17 @@ if (/fonts\.(googleapis|gstatic)\.com/.test(indexHtml)) {
   failures.push('O documento HTML não pode depender de fontes remotas.');
 }
 
+for (const filePath of walk(sourceRoot)) {
+  if (extname(filePath) !== '.scss' || filePath === stylesPath) continue;
+  const source = readFileSync(filePath, 'utf8');
+  const hardcodedColors = source.match(/#[0-9a-fA-F]{3,8}\b|\b(?:rgb|hsl)a?\s*\(/g) ?? [];
+  if (hardcodedColors.length > 0) {
+    failures.push(
+      `${relative(sourceRoot, filePath)} possui cores hardcoded (${[...new Set(hardcodedColors)].join(', ')}). Use tokens --eyes-color-*.`,
+    );
+  }
+}
+
 for (const pair of tokens.contrastPairs ?? []) {
   const foreground = resolvePath(tokens, pair.foreground);
   const background = resolvePath(tokens, pair.background);
@@ -147,4 +160,12 @@ function relativeLuminance(hex) {
     .map((channel) => Number.parseInt(channel, 16) / 255)
     .map((channel) => (channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4));
   return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+}
+
+function* walk(directory) {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) yield* walk(path);
+    else yield path;
+  }
 }
