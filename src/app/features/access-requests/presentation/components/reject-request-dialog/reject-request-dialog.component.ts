@@ -24,6 +24,9 @@ import { AccessRequest } from '../../../domain/models/access-request.model';
         Informe uma justificativa para a solicitação de <strong>{{ data.name }}</strong
         >.
       </p>
+      <p class="dialog-warning">
+        A rejeição ficará registrada na auditoria e não criará uma conta.
+      </p>
       <form [formGroup]="form" id="reject-request-form" (ngSubmit)="submit()" novalidate>
         <mat-form-field appearance="outline" class="reason-field">
           <mat-label>Justificativa</mat-label>
@@ -55,7 +58,13 @@ import { AccessRequest } from '../../../domain/models/access-request.model';
     .reason-field {
       width: 100%;
       min-width: min(30rem, 70vw);
-      margin-top: 0.75rem;
+      margin-top: var(--eyes-space-3);
+    }
+    .dialog-warning {
+      border-left: 0.25rem solid var(--eyes-color-error);
+      background: var(--eyes-color-surface-variant);
+      color: var(--eyes-color-on-surface);
+      padding: var(--eyes-space-3) var(--eyes-space-4);
     }
   `,
 })

@@ -1,4 +1,5 @@
 import { AccessRequestStatus } from '../domain/models/access-request.model';
+import { StatusBadgeTone } from '../../../shared/ui/status-badge/status-badge.component';
 
 const DATE_TIME_FORMAT = new Intl.DateTimeFormat('pt-BR', {
   dateStyle: 'short',
@@ -13,6 +14,17 @@ export function accessRequestStatusLabel(status: AccessRequestStatus): string {
       return 'Aprovada';
     case 'REJECTED':
       return 'Rejeitada';
+  }
+}
+
+export function accessRequestStatusTone(status: AccessRequestStatus): StatusBadgeTone {
+  switch (status) {
+    case 'PENDING':
+      return 'warning';
+    case 'APPROVED':
+      return 'success';
+    case 'REJECTED':
+      return 'error';
   }
 }
 

@@ -1,0 +1,285 @@
+.eyes-admin-data {
+  display: block;
+
+  eyes-surface-card,
+  eyes-feedback-banner,
+  eyes-state-view {
+    display: block;
+    margin-block-end: var(--eyes-space-5);
+  }
+
+  .eyes-record-count {
+    display: inline-flex;
+    min-height: var(--eyes-size-touch-target);
+    align-items: center;
+    gap: var(--eyes-space-2);
+    border: 1px solid var(--eyes-color-outline);
+    border-radius: var(--eyes-radius-pill);
+    background: var(--eyes-color-primary-container);
+    color: var(--eyes-color-on-primary-container);
+    padding-inline: var(--eyes-space-4);
+    font-weight: var(--eyes-font-weight-bold);
+    white-space: nowrap;
+  }
+
+  .eyes-admin-filters {
+    display: grid;
+    grid-template-columns: minmax(16rem, 2fr) repeat(4, minmax(9rem, 1fr));
+    align-items: start;
+    gap: var(--eyes-space-3);
+  }
+
+  .eyes-admin-filters--compact {
+    grid-template-columns: minmax(16rem, 2fr) minmax(11rem, 1fr) auto;
+  }
+
+  .eyes-filter-actions,
+  .eyes-row-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--eyes-space-2);
+  }
+
+  .eyes-filter-actions {
+    min-height: 3.5rem;
+  }
+
+  .eyes-active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--eyes-space-2);
+    border-top: 1px solid var(--eyes-color-outline);
+    margin-block-start: var(--eyes-space-2);
+    padding-block-start: var(--eyes-space-3);
+    color: var(--eyes-color-on-surface-variant);
+
+    span {
+      border: 1px solid var(--eyes-color-outline);
+      border-radius: var(--eyes-radius-pill);
+      background: var(--eyes-color-surface);
+      padding: var(--eyes-space-1) var(--eyes-space-3);
+    }
+  }
+
+  .eyes-data-region {
+    overflow: hidden;
+    border: 1px solid var(--eyes-color-outline);
+    border-radius: var(--eyes-radius-large);
+    background: var(--eyes-color-surface);
+    box-shadow: var(--eyes-elevation-low);
+    color: var(--eyes-color-on-surface);
+  }
+
+  .eyes-section-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--eyes-space-4);
+    padding: var(--eyes-space-5) var(--eyes-space-6);
+    border-bottom: 1px solid var(--eyes-color-outline);
+
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h2 {
+      font-size: var(--eyes-font-size-title);
+    }
+
+    p {
+      margin-block-start: var(--eyes-space-1);
+      color: var(--eyes-color-on-surface-variant);
+    }
+  }
+
+  .eyes-desktop-table {
+    overflow-x: auto;
+
+    &:focus-visible {
+      outline: var(--eyes-size-focus-ring) solid var(--eyes-color-focus);
+      outline-offset: calc(-1 * var(--eyes-size-focus-ring));
+    }
+
+    table {
+      width: 100%;
+    }
+
+    th {
+      color: var(--eyes-color-on-surface-variant);
+      font-weight: var(--eyes-font-weight-bold);
+    }
+
+    td,
+    th {
+      padding-inline: var(--eyes-space-4);
+    }
+
+    tr:hover td {
+      background: color-mix(in srgb, var(--eyes-color-primary-container) 35%, transparent);
+    }
+  }
+
+  .eyes-cell-secondary {
+    display: block;
+    margin-block-start: var(--eyes-space-1);
+    color: var(--eyes-color-on-surface-variant);
+    font-size: var(--eyes-font-size-caption);
+  }
+
+  .eyes-truncate {
+    max-width: 20rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .eyes-identifier {
+    display: block;
+    max-width: 15rem;
+    overflow: hidden;
+    color: var(--eyes-color-on-surface-variant);
+    font-family: var(--eyes-font-code);
+    font-size: var(--eyes-font-size-caption);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .eyes-row-actions {
+    flex-wrap: wrap;
+  }
+
+  .eyes-danger-action {
+    color: var(--eyes-color-error);
+  }
+
+  .eyes-compact-list {
+    display: none;
+    margin: 0;
+    padding: var(--eyes-space-4);
+    list-style: none;
+  }
+
+  .eyes-data-card {
+    display: grid;
+    gap: var(--eyes-space-4);
+    border: 1px solid var(--eyes-color-outline);
+    border-radius: var(--eyes-radius-medium);
+    background: var(--eyes-color-surface);
+    padding: var(--eyes-space-4);
+
+    > header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--eyes-space-3);
+    }
+
+    h3,
+    p,
+    dl,
+    dd {
+      margin: 0;
+    }
+
+    h3 {
+      overflow-wrap: anywhere;
+      font-size: var(--eyes-font-size-title-small);
+    }
+
+    dl {
+      display: grid;
+      gap: var(--eyes-space-3);
+    }
+
+    dl div {
+      display: grid;
+      gap: var(--eyes-space-1);
+    }
+
+    dt,
+    .eyes-card-kicker {
+      color: var(--eyes-color-on-surface-variant);
+      font-size: var(--eyes-font-size-caption);
+      font-weight: var(--eyes-font-weight-bold);
+    }
+
+    dd {
+      overflow-wrap: anywhere;
+    }
+  }
+
+  .eyes-compact-list li + li {
+    margin-block-start: var(--eyes-space-3);
+  }
+
+  mat-paginator {
+    border-top: 1px solid var(--eyes-color-outline);
+    background: var(--eyes-color-surface);
+    color: var(--eyes-color-on-surface);
+  }
+}
+
+@media (max-width: 75rem) {
+  .eyes-admin-data .eyes-admin-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .eyes-filter-wide,
+    .eyes-filter-actions {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+@media (max-width: 52rem) {
+  .eyes-admin-data {
+    .eyes-desktop-table {
+      display: none;
+    }
+
+    .eyes-compact-list {
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 40rem) {
+  .eyes-admin-data {
+    .eyes-admin-filters,
+    .eyes-admin-filters--compact {
+      grid-template-columns: minmax(0, 1fr);
+
+      .eyes-filter-wide,
+      .eyes-filter-actions {
+        grid-column: auto;
+      }
+    }
+
+    .eyes-filter-actions,
+    .eyes-row-actions {
+      align-items: stretch;
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
+    }
+
+    .eyes-section-heading {
+      padding: var(--eyes-space-4);
+    }
+
+    .eyes-data-card > header {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+}
+
+@media (forced-colors: active) {
+  .eyes-admin-data .eyes-data-region,
+  .eyes-admin-data .eyes-data-card,
+  .eyes-admin-data .eyes-record-count {
+    border-color: CanvasText;
+  }
+}

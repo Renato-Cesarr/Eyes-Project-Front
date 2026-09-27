@@ -7,7 +7,7 @@ import { of, throwError } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ToastService } from '../../../../../shared/utils/toast.service';
 import { AccessRequestsFacade } from '../../../application/access-requests.facade';
-import { AccessRequest } from '../../../domain/models/access-request.model';
+import { AccessRequest, AccessRequestQuery } from '../../../domain/models/access-request.model';
 import { AccessRequestListComponent } from './access-request-list.component';
 
 describe('AccessRequestListComponent', () => {
@@ -19,7 +19,7 @@ describe('AccessRequestListComponent', () => {
   const pageSize = signal(20);
   const totalElements = signal(1);
   const totalPages = signal(1);
-  const query = signal({ page: 0, size: 20 });
+  const query = signal<AccessRequestQuery>({ page: 0, size: 20 });
   const isLoading = signal(false);
   const loadError = signal<string | null>(null);
   const activeAction = signal(null);
@@ -132,6 +132,24 @@ describe('AccessRequestListComponent', () => {
 
     expect(toastError).toHaveBeenCalled();
     expect(reload).toHaveBeenCalledOnce();
+  });
+
+  it('should expose the same request and actions in table and compact views', () => {
+    const table = fixture.nativeElement.querySelector('.eyes-desktop-table');
+    const compactList = fixture.nativeElement.querySelector('.eyes-compact-list');
+
+    expect(table.textContent).toContain(request.name);
+    expect(compactList.textContent).toContain(request.name);
+    expect(compactList.textContent).toContain('Aprovar');
+    expect(compactList.textContent).toContain('Rejeitar');
+  });
+
+  it('should distinguish filtered no-results from an empty inbox', () => {
+    requests.set([]);
+    query.set({ page: 0, size: 20, search: 'inexistente' });
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).toContain('Nenhum pedido corresponde aos filtros');
   });
 });
 

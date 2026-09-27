@@ -16,8 +16,9 @@ import { AccessRequest } from '../../../domain/models/access-request.model';
         >?
       </p>
       <p class="dialog-hint">
-        Uma conta de estudante será criada e o convite será enviado uma única vez para
-        {{ data.email }}.
+        Consequência: uma conta de estudante será criada e o convite será enviado uma única vez para
+        <strong>{{ data.email }}</strong
+        >.
       </p>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
@@ -28,8 +29,11 @@ import { AccessRequest } from '../../../domain/models/access-request.model';
   styles: `
     .dialog-hint {
       max-width: 32rem;
-      color: #475569;
-      line-height: 1.5;
+      border-left: 0.25rem solid var(--eyes-color-primary);
+      background: var(--eyes-color-primary-container);
+      color: var(--eyes-color-on-primary-container);
+      padding: var(--eyes-space-3) var(--eyes-space-4);
+      line-height: var(--eyes-line-height-body);
     }
   `,
 })
