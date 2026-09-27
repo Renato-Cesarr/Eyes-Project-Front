@@ -1,126 +1,220 @@
-<section class="audit-page" aria-labelledby="audit-title">
-  <header class="page-header">
-    <div>
-      <p class="eyebrow">Administração</p>
-      <h1 id="audit-title">Auditoria</h1>
-      <p class="page-description">Consulte o histórico imutável das ações administrativas.</p>
-    </div>
-    <span class="event-count" aria-live="polite">
-      {{ facade.totalElements() }} {{ facade.totalElements() === 1 ? 'evento' : 'eventos' }}
-    </span>
-  </header>
+<eyes-page-shell
+  class="eyes-admin-data"
+  eyebrow="Administração"
+  title="Auditoria"
+  description="Consulte o histórico imutável das ações administrativas e identifique quem realizou cada operação."
+>
+  <span eyes-page-actions class="eyes-record-count" aria-live="polite"
+    ><eyes-icon name="history" /> {{ facade.totalElements() }}
+    {{ facade.totalElements() === 1 ? 'evento' : 'eventos' }}</span
+  >
 
-  <form class="filters" [formGroup]="filterForm" (ngSubmit)="applyFilters()" role="search">
-    <mat-form-field appearance="outline" class="actor-field">
-      <mat-label>ID do administrador</mat-label>
-      <input matInput formControlName="actorUserId" autocomplete="off" />
-      <mat-hint>UUID do responsável pela ação</mat-hint>
-      @if (filterForm.controls.actorUserId.hasError('pattern')) {
-        <mat-error>Informe um UUID válido.</mat-error>
-      }
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Ação</mat-label>
-      <mat-select formControlName="action">
-        <mat-option value="">Todas</mat-option>
-        @for (action of actions; track action) {
-          <mat-option [value]="action">{{ actionLabel(action) }}</mat-option>
+  <eyes-surface-card
+    heading="Filtrar eventos"
+    supportingText="Restrinja o histórico por responsável, ação, resultado ou período."
+    appearance="subtle"
+  >
+    <form
+      class="eyes-admin-filters"
+      [formGroup]="filterForm"
+      (ngSubmit)="applyFilters()"
+      role="search"
+    >
+      <mat-form-field appearance="outline" class="eyes-filter-wide"
+        ><mat-label>ID do administrador</mat-label><eyes-icon matPrefix name="badge" /><input
+          matInput
+          formControlName="actorUserId"
+          autocomplete="off"
+        /><mat-hint>UUID do responsável pela ação</mat-hint>
+        @if (filterForm.controls.actorUserId.hasError('pattern')) {
+          <mat-error>Informe um UUID válido.</mat-error>
         }
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Resultado</mat-label>
-      <mat-select formControlName="result">
-        <mat-option value="">Todos</mat-option>
-        <mat-option value="SUCCESS">Sucesso</mat-option>
-        <mat-option value="FAILURE">Falha</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Data inicial</mat-label>
-      <input matInput type="date" formControlName="occurredFrom" />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Data final</mat-label>
-      <input matInput type="date" formControlName="occurredTo" />
-      @if (hasInvalidPeriod()) {
-        <mat-error>A data final deve ser igual ou posterior à inicial.</mat-error>
-      }
-    </mat-form-field>
-
-    <div class="filter-actions">
-      <button mat-flat-button type="submit" [disabled]="facade.isLoading()">Filtrar</button>
-      <button mat-button type="button" (click)="clearFilters()" [disabled]="facade.isLoading()">
-        Limpar
-      </button>
-    </div>
-  </form>
+      </mat-form-field>
+      <mat-form-field appearance="outline"
+        ><mat-label>Ação</mat-label
+        ><mat-select formControlName="action"
+          ><mat-option value="">Todas</mat-option>
+          @for (action of actions; track action) {
+            <mat-option [value]="action">{{ actionLabel(action) }}</mat-option>
+          }
+        </mat-select></mat-form-field
+      >
+      <mat-form-field appearance="outline"
+        ><mat-label>Resultado</mat-label
+        ><mat-select formControlName="result"
+          ><mat-option value="">Todos</mat-option><mat-option value="SUCCESS">Sucesso</mat-option
+          ><mat-option value="FAILURE">Falha</mat-option></mat-select
+        ></mat-form-field
+      >
+      <mat-form-field appearance="outline"
+        ><mat-label>Data inicial</mat-label
+        ><input matInput type="date" formControlName="occurredFrom"
+      /></mat-form-field>
+      <mat-form-field appearance="outline"
+        ><mat-label>Data final</mat-label
+        ><input matInput type="date" formControlName="occurredTo" />
+        @if (hasInvalidPeriod()) {
+          <mat-error>A data final deve ser igual ou posterior à inicial.</mat-error>
+        }
+      </mat-form-field>
+      <div class="eyes-filter-actions">
+        <button mat-flat-button type="submit" [disabled]="facade.isLoading()">
+          <eyes-icon name="filter_alt" /> Aplicar filtros</button
+        ><button
+          mat-button
+          type="button"
+          (click)="clearFilters()"
+          [disabled]="facade.isLoading() || !hasActiveFilters()"
+        >
+          Limpar
+        </button>
+      </div>
+    </form>
+    @if (hasActiveFilters()) {
+      <div class="eyes-active-filters" aria-label="Filtros ativos">
+        <strong>Filtros ativos:</strong>
+        @if (facade.query().actorUserId) {
+          <span>Administrador: {{ facade.query().actorUserId }}</span>
+        }
+        @if (facade.query().action) {
+          <span>Ação: {{ actionLabel(facade.query().action!) }}</span>
+        }
+        @if (facade.query().result) {
+          <span>Resultado: {{ resultLabel(facade.query().result!) }}</span>
+        }
+        @if (facade.query().occurredFrom || facade.query().occurredTo) {
+          <span>Período personalizado</span>
+        }
+        <button mat-button type="button" (click)="clearFilters()">Remover todos</button>
+      </div>
+    }
+  </eyes-surface-card>
 
   @if (facade.loadError()) {
-    <div class="state-panel error-state" role="alert">
-      <p>{{ facade.loadError() }}</p>
-      <button mat-stroked-button type="button" (click)="facade.reload()">Tentar novamente</button>
-    </div>
+    <eyes-state-view
+      kind="error"
+      title="Não foi possível carregar a auditoria"
+      [message]="facade.loadError()!"
+      ><button mat-stroked-button type="button" (click)="facade.reload()">
+        Tentar novamente
+      </button></eyes-state-view
+    >
   } @else if (facade.isLoading()) {
-    <div class="state-panel" role="status" aria-live="polite">
-      <mat-spinner diameter="40" aria-label="Carregando auditoria"></mat-spinner>
-      <p>Carregando auditoria…</p>
-    </div>
+    <eyes-surface-card
+      ><eyes-skeleton label="Carregando eventos de auditoria" [lines]="6"
+    /></eyes-surface-card>
+  } @else if (facade.logs().length === 0 && hasActiveFilters()) {
+    <eyes-state-view
+      kind="no-results"
+      title="Nenhum evento corresponde aos filtros"
+      message="Remova ou altere os filtros para consultar um período maior."
+      ><button mat-stroked-button type="button" (click)="clearFilters()">
+        Limpar filtros
+      </button></eyes-state-view
+    >
   } @else if (facade.logs().length === 0) {
-    <div class="state-panel empty-state" role="status">
-      <h2>Nenhum evento encontrado</h2>
-      <p>Altere os filtros ou aguarde novas ações administrativas.</p>
-    </div>
+    <eyes-state-view
+      kind="empty"
+      title="Ainda não há eventos de auditoria"
+      message="As próximas ações administrativas serão registradas aqui automaticamente."
+    />
   } @else {
-    <div class="table-region" role="region" tabindex="0" aria-label="Tabela de auditoria">
-      <table mat-table [dataSource]="facade.logs()">
-        <ng-container matColumnDef="occurredAt">
-          <th mat-header-cell *matHeaderCellDef scope="col">Data e hora</th>
-          <td mat-cell *matCellDef="let log">{{ formatDate(log.occurredAt) }}</td>
-        </ng-container>
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef scope="col">Ação</th>
-          <td mat-cell *matCellDef="let log">
-            <strong>{{ actionLabel(log.action) }}</strong>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="target">
-          <th mat-header-cell *matHeaderCellDef scope="col">Alvo</th>
-          <td mat-cell *matCellDef="let log">
-            {{ targetLabel(log.targetType) }}
-            <span class="identifier" [title]="log.targetId">{{ log.targetId }}</span>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="actor">
-          <th mat-header-cell *matHeaderCellDef scope="col">Administrador</th>
-          <td mat-cell *matCellDef="let log">
-            <span class="identifier" [title]="log.actorUserId">{{ log.actorUserId }}</span>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="result">
-          <th mat-header-cell *matHeaderCellDef scope="col">Resultado</th>
-          <td mat-cell *matCellDef="let log">
-            <span [class]="'result-badge result-' + log.result.toLowerCase()">{{
-              resultLabel(log.result)
-            }}</span>
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-    </div>
-    <mat-paginator
-      [length]="facade.totalElements()"
-      [pageIndex]="facade.page()"
-      [pageSize]="facade.pageSize()"
-      [pageSizeOptions]="pageSizeOptions"
-      [showFirstLastButtons]="true"
-      aria-label="Paginação da auditoria"
-      (page)="changePage($event)"
-    ></mat-paginator>
+    <section class="eyes-data-region" aria-labelledby="audit-result-title">
+      <div class="eyes-section-heading">
+        <div>
+          <h2 id="audit-result-title">Histórico administrativo</h2>
+          <p>Os registros são somente para consulta e não podem ser alterados pelo painel.</p>
+        </div>
+      </div>
+      <div class="eyes-desktop-table" role="region" tabindex="0" aria-label="Tabela de auditoria">
+        <table mat-table [dataSource]="facade.logs()">
+          <ng-container matColumnDef="occurredAt"
+            ><th mat-header-cell *matHeaderCellDef scope="col">Data e hora</th>
+            <td mat-cell *matCellDef="let log">{{ formatDate(log.occurredAt) }}</td></ng-container
+          >
+          <ng-container matColumnDef="action"
+            ><th mat-header-cell *matHeaderCellDef scope="col">Ação</th>
+            <td mat-cell *matCellDef="let log">
+              <strong>{{ actionLabel(log.action) }}</strong>
+            </td></ng-container
+          >
+          <ng-container matColumnDef="target"
+            ><th mat-header-cell *matHeaderCellDef scope="col">Alvo</th>
+            <td mat-cell *matCellDef="let log">
+              {{ targetLabel(log.targetType)
+              }}<span class="eyes-identifier" [title]="log.targetId">{{ log.targetId }}</span>
+            </td></ng-container
+          >
+          <ng-container matColumnDef="actor"
+            ><th mat-header-cell *matHeaderCellDef scope="col">Administrador</th>
+            <td mat-cell *matCellDef="let log">
+              <span class="eyes-identifier" [title]="log.actorUserId">{{ log.actorUserId }}</span>
+            </td></ng-container
+          >
+          <ng-container matColumnDef="result"
+            ><th mat-header-cell *matHeaderCellDef scope="col">Resultado</th>
+            <td mat-cell *matCellDef="let log">
+              <eyes-status-badge
+                [label]="resultLabel(log.result)"
+                [tone]="resultTone(log.result)"
+              /></td
+          ></ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+      <ul class="eyes-compact-list" aria-label="Eventos de auditoria">
+        @for (log of facade.logs(); track log.id) {
+          <li>
+            <article class="eyes-data-card">
+              <header>
+                <div>
+                  <p class="eyes-card-kicker">{{ formatDate(log.occurredAt) }}</p>
+                  <h3>{{ actionLabel(log.action) }}</h3>
+                </div>
+                <eyes-status-badge
+                  [label]="resultLabel(log.result)"
+                  [tone]="resultTone(log.result)"
+                />
+              </header>
+              <dl>
+                <div>
+                  <dt>Alvo</dt>
+                  <dd>
+                    {{ targetLabel(log.targetType) }}
+                    <span class="eyes-identifier" [title]="log.targetId">{{ log.targetId }}</span>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Administrador</dt>
+                  <dd>
+                    <span class="eyes-identifier" [title]="log.actorUserId">{{
+                      log.actorUserId
+                    }}</span>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Correlação</dt>
+                  <dd>
+                    <span class="eyes-identifier" [title]="log.correlationId">{{
+                      log.correlationId
+                    }}</span>
+                  </dd>
+                </div>
+              </dl>
+            </article>
+          </li>
+        }
+      </ul>
+      <mat-paginator
+        [length]="facade.totalElements()"
+        [pageIndex]="facade.page()"
+        [pageSize]="facade.pageSize()"
+        [pageSizeOptions]="pageSizeOptions"
+        [showFirstLastButtons]="true"
+        aria-label="Paginação da auditoria"
+        (page)="changePage($event)"
+      />
+    </section>
   }
-</section>
+</eyes-page-shell>

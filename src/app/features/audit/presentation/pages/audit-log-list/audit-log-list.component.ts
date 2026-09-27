@@ -5,15 +5,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { createPtBrPaginatorIntl } from '../../../../../shared/i18n/pt-br-paginator-intl';
+import { IconComponent } from '../../../../../shared/ui/icon/icon.component';
+import { PageShellComponent } from '../../../../../shared/ui/page-shell/page-shell.component';
+import { SkeletonComponent } from '../../../../../shared/ui/skeleton/skeleton.component';
+import { StateViewComponent } from '../../../../../shared/ui/state-view/state-view.component';
+import { StatusBadgeComponent } from '../../../../../shared/ui/status-badge/status-badge.component';
+import { SurfaceCardComponent } from '../../../../../shared/ui/surface-card/surface-card.component';
 import { AuditLogFacade } from '../../../application/audit-log.facade';
 import { AUDIT_ACTIONS, AuditAction, AuditResult } from '../../../domain/models/audit-log.model';
 import {
   auditActionLabel,
   auditResultLabel,
+  auditResultTone,
   auditTargetLabel,
   formatAuditDate,
 } from '../../audit-log-presentation';
@@ -29,10 +35,15 @@ const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule,
     MatSelectModule,
     MatTableModule,
     ReactiveFormsModule,
+    IconComponent,
+    PageShellComponent,
+    SkeletonComponent,
+    StateViewComponent,
+    StatusBadgeComponent,
+    SurfaceCardComponent,
   ],
   templateUrl: './audit-log-list.component.html',
   styleUrls: ['./audit-log-list.component.scss'],
@@ -47,6 +58,7 @@ export class AuditLogListComponent implements OnInit {
   readonly pageSizeOptions = [10, 20, 50];
   readonly actionLabel = auditActionLabel;
   readonly resultLabel = auditResultLabel;
+  readonly resultTone = auditResultTone;
   readonly targetLabel = auditTargetLabel;
   readonly formatDate = formatAuditDate;
 
@@ -98,6 +110,13 @@ export class AuditLogListComponent implements OnInit {
   hasInvalidPeriod(): boolean {
     const { occurredFrom, occurredTo } = this.filterForm.getRawValue();
     return !this.isPeriodValid(occurredFrom, occurredTo);
+  }
+
+  hasActiveFilters(): boolean {
+    const query = this.facade.query();
+    return Boolean(
+      query.actorUserId || query.action || query.result || query.occurredFrom || query.occurredTo,
+    );
   }
 
   private isPeriodValid(from: string, to: string): boolean {

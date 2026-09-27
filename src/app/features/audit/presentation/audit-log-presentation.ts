@@ -1,4 +1,5 @@
 import { AuditAction, AuditResult } from '../domain/models/audit-log.model';
+import { StatusBadgeTone } from '../../../shared/ui/status-badge/status-badge.component';
 
 const ACTION_LABELS: Record<AuditAction, string> = {
   ACCESS_REQUEST_APPROVED: 'Solicitação aprovada',
@@ -15,6 +16,10 @@ export function auditActionLabel(action: AuditAction): string {
 
 export function auditResultLabel(result: AuditResult): string {
   return result === 'SUCCESS' ? 'Sucesso' : 'Falha';
+}
+
+export function auditResultTone(result: AuditResult): StatusBadgeTone {
+  return result === 'SUCCESS' ? 'success' : 'error';
 }
 
 export function auditTargetLabel(type: string): string {
