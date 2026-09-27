@@ -134,6 +134,8 @@ test('apresenta o resumo operacional com navegação e conta acessíveis', async
   }
 
   await page.keyboard.press('Escape');
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.mat-mdc-menu-panel:visible')).toHaveCount(0);
   await expectNoSeriousAccessibilityViolations(page);
 });
 
