@@ -7,17 +7,24 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { filter, switchMap, take } from 'rxjs';
-import { ToastService } from '../../../../../shared/utils/toast.service';
 import { createPtBrPaginatorIntl } from '../../../../../shared/i18n/pt-br-paginator-intl';
+import { FeedbackBannerComponent } from '../../../../../shared/ui/feedback-banner/feedback-banner.component';
+import { IconComponent } from '../../../../../shared/ui/icon/icon.component';
+import { PageShellComponent } from '../../../../../shared/ui/page-shell/page-shell.component';
+import { SkeletonComponent } from '../../../../../shared/ui/skeleton/skeleton.component';
+import { StateViewComponent } from '../../../../../shared/ui/state-view/state-view.component';
+import { StatusBadgeComponent } from '../../../../../shared/ui/status-badge/status-badge.component';
+import { SurfaceCardComponent } from '../../../../../shared/ui/surface-card/surface-card.component';
+import { ToastService } from '../../../../../shared/utils/toast.service';
 import { accessRequestErrorMessage } from '../../../application/access-request-error.mapper';
 import { AccessRequestsFacade } from '../../../application/access-requests.facade';
 import { AccessRequest, AccessRequestStatus } from '../../../domain/models/access-request.model';
 import {
   accessRequestStatusLabel,
+  accessRequestStatusTone,
   formatAccessRequestDate,
 } from '../../access-request-presentation';
 import { ApproveRequestDialogComponent } from '../../components/approve-request-dialog/approve-request-dialog.component';
@@ -33,10 +40,16 @@ import { RequestDetailsDialogComponent } from '../../components/request-details-
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule,
     MatSelectModule,
     MatTableModule,
     ReactiveFormsModule,
+    FeedbackBannerComponent,
+    IconComponent,
+    PageShellComponent,
+    SkeletonComponent,
+    StateViewComponent,
+    StatusBadgeComponent,
+    SurfaceCardComponent,
   ],
   templateUrl: './access-request-list.component.html',
   styleUrls: ['./access-request-list.component.scss'],
@@ -54,6 +67,7 @@ export class AccessRequestListComponent implements OnInit {
   readonly actionFeedback = signal<string | null>(null);
   readonly actionError = signal<string | null>(null);
   readonly statusLabel = accessRequestStatusLabel;
+  readonly statusTone = accessRequestStatusTone;
   readonly formatDate = formatAccessRequestDate;
 
   readonly filterForm = this.fb.nonNullable.group({
@@ -94,6 +108,11 @@ export class AccessRequestListComponent implements OnInit {
       page: event.pageIndex,
       size: event.pageSize,
     });
+  }
+
+  hasActiveFilters(): boolean {
+    const query = this.facade.query();
+    return Boolean(query.search || query.status);
   }
 
   openDetails(request: AccessRequest): void {

@@ -1,10 +1,17 @@
-import { accessRequestStatusLabel, formatAccessRequestDate } from './access-request-presentation';
+import {
+  accessRequestStatusLabel,
+  accessRequestStatusTone,
+  formatAccessRequestDate,
+} from './access-request-presentation';
 
 describe('access request presentation helpers', () => {
   it('should translate every API status', () => {
     expect(accessRequestStatusLabel('PENDING')).toBe('Pendente');
     expect(accessRequestStatusLabel('APPROVED')).toBe('Aprovada');
     expect(accessRequestStatusLabel('REJECTED')).toBe('Rejeitada');
+    expect(accessRequestStatusTone('PENDING')).toBe('warning');
+    expect(accessRequestStatusTone('APPROVED')).toBe('success');
+    expect(accessRequestStatusTone('REJECTED')).toBe('error');
   });
 
   it('should format dates safely in pt-BR', () => {

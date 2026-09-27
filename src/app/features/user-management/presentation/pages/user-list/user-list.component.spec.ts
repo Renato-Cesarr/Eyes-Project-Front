@@ -7,7 +7,7 @@ import { of, throwError } from 'rxjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ToastService } from '../../../../../shared/utils/toast.service';
 import { UserManagementFacade } from '../../../application/user-management.facade';
-import { ManagedUser } from '../../../domain/models/managed-user.model';
+import { ManagedUser, ManagedUserQuery } from '../../../domain/models/managed-user.model';
 import { UserListComponent } from './user-list.component';
 
 describe('UserListComponent', () => {
@@ -18,7 +18,12 @@ describe('UserListComponent', () => {
   const page = signal(0);
   const pageSize = signal(20);
   const totalElements = signal(1);
-  const query = signal({ page: 0, size: 20, sortBy: 'NAME' as const, direction: 'ASC' as const });
+  const query = signal<ManagedUserQuery>({
+    page: 0,
+    size: 20,
+    sortBy: 'NAME',
+    direction: 'ASC',
+  });
   const isLoading = signal(false);
   const loadError = signal<string | null>(null);
   const activeAction = signal(null);
@@ -144,6 +149,30 @@ describe('UserListComponent', () => {
     expect(updateStatus).toHaveBeenCalledWith(user, false);
     expect(toastError).toHaveBeenCalled();
     expect(reload).toHaveBeenCalledOnce();
+  });
+
+  it('should expose equivalent identity and account actions in both responsive views', () => {
+    const table = fixture.nativeElement.querySelector('.eyes-desktop-table');
+    const compactList = fixture.nativeElement.querySelector('.eyes-compact-list');
+
+    expect(table.textContent).toContain(user.email);
+    expect(compactList.textContent).toContain(user.email);
+    expect(compactList.textContent).toContain('Detalhes');
+    expect(compactList.textContent).toContain('Desativar');
+  });
+
+  it('should present a no-results recovery when filters remove every user', () => {
+    users.set([]);
+    query.set({
+      page: 0,
+      size: 20,
+      sortBy: 'NAME',
+      direction: 'ASC',
+      role: 'ADMIN',
+    });
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).toContain('Nenhum usuário corresponde aos filtros');
   });
 });
 

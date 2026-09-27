@@ -63,12 +63,12 @@ import {
     .details-list div {
       display: grid;
       grid-template-columns: minmax(8rem, 0.35fr) 1fr;
-      gap: 1rem;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid #e2e8f0;
+      gap: var(--eyes-space-4);
+      padding: var(--eyes-space-3) 0;
+      border-bottom: 1px solid var(--eyes-color-outline);
     }
     dt {
-      color: #475569;
+      color: var(--eyes-color-on-surface-variant);
       font-weight: 700;
     }
     dd {
@@ -78,7 +78,7 @@ import {
     @media (max-width: 36rem) {
       .details-list div {
         grid-template-columns: 1fr;
-        gap: 0.25rem;
+        gap: var(--eyes-space-1);
       }
     }
   `,

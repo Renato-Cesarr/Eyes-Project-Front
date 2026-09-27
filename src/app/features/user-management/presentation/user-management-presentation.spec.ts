@@ -4,6 +4,7 @@ import {
   managedUserRoleLabel,
   managedUserStatusClass,
   managedUserStatusLabel,
+  managedUserStatusTone,
 } from './user-management-presentation';
 
 describe('user management presentation', () => {
@@ -32,6 +33,11 @@ describe('user management presentation', () => {
     );
     expect(managedUserStatusLabel(user)).toBe('Ativo');
     expect(managedUserStatusClass({ ...user, active: false })).toBe('inactive');
+    expect(managedUserStatusTone({ ...user, active: false, invitationPending: true })).toBe(
+      'warning',
+    );
+    expect(managedUserStatusTone(user)).toBe('success');
+    expect(managedUserStatusTone({ ...user, active: false })).toBe('neutral');
   });
 
   it('should format valid dates and handle invalid values safely', () => {

@@ -1,4 +1,5 @@
 import { ManagedUser, ManagedUserRole } from '../domain/models/managed-user.model';
+import { StatusBadgeTone } from '../../../shared/ui/status-badge/status-badge.component';
 
 const dateFormatter = new Intl.DateTimeFormat('pt-BR', {
   dateStyle: 'short',
@@ -21,6 +22,13 @@ export function managedUserStatusClass(user: ManagedUser): string {
     return 'pending';
   }
   return user.active ? 'active' : 'inactive';
+}
+
+export function managedUserStatusTone(user: ManagedUser): StatusBadgeTone {
+  if (user.invitationPending) {
+    return 'warning';
+  }
+  return user.active ? 'success' : 'neutral';
 }
 
 export function formatManagedUserDate(value: string): string {
