@@ -62,13 +62,16 @@ import { InviteUserCommand } from '../../../domain/models/managed-user.model';
     .dialog-introduction {
       max-width: 35rem;
       margin-top: 0;
-      color: #475569;
-      line-height: 1.5;
+      border-left: 0.25rem solid var(--eyes-color-primary);
+      background: var(--eyes-color-primary-container);
+      color: var(--eyes-color-on-primary-container);
+      padding: var(--eyes-space-3) var(--eyes-space-4);
+      line-height: var(--eyes-line-height-body);
     }
     form {
       display: grid;
       min-width: min(34rem, 75vw);
-      gap: 0.25rem;
+      gap: var(--eyes-space-1);
     }
   `,
 })

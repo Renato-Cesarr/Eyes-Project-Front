@@ -7,11 +7,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { filter, switchMap, take } from 'rxjs';
 import { createPtBrPaginatorIntl } from '../../../../../shared/i18n/pt-br-paginator-intl';
+import { FeedbackBannerComponent } from '../../../../../shared/ui/feedback-banner/feedback-banner.component';
+import { IconComponent } from '../../../../../shared/ui/icon/icon.component';
+import { PageShellComponent } from '../../../../../shared/ui/page-shell/page-shell.component';
+import { SkeletonComponent } from '../../../../../shared/ui/skeleton/skeleton.component';
+import { StateViewComponent } from '../../../../../shared/ui/state-view/state-view.component';
+import { StatusBadgeComponent } from '../../../../../shared/ui/status-badge/status-badge.component';
+import { SurfaceCardComponent } from '../../../../../shared/ui/surface-card/surface-card.component';
 import { ToastService } from '../../../../../shared/utils/toast.service';
 import { userManagementErrorMessage } from '../../../application/user-management-error.mapper';
 import { UserManagementFacade } from '../../../application/user-management.facade';
@@ -31,8 +37,8 @@ import { UserDetailsDialogComponent } from '../../components/user-details-dialog
 import {
   formatManagedUserDate,
   managedUserRoleLabel,
-  managedUserStatusClass,
   managedUserStatusLabel,
+  managedUserStatusTone,
 } from '../../user-management-presentation';
 
 type AccountStatusFilter = '' | 'active' | 'inactive';
@@ -46,10 +52,16 @@ type AccountStatusFilter = '' | 'active' | 'inactive';
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule,
     MatSelectModule,
     MatTableModule,
     ReactiveFormsModule,
+    FeedbackBannerComponent,
+    IconComponent,
+    PageShellComponent,
+    SkeletonComponent,
+    StateViewComponent,
+    StatusBadgeComponent,
+    SurfaceCardComponent,
   ],
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
@@ -68,7 +80,7 @@ export class UserListComponent implements OnInit {
   readonly actionError = signal<string | null>(null);
   readonly roleLabel = managedUserRoleLabel;
   readonly statusLabel = managedUserStatusLabel;
-  readonly statusClass = managedUserStatusClass;
+  readonly statusTone = managedUserStatusTone;
   readonly formatDate = formatManagedUserDate;
 
   readonly filterForm = this.fb.nonNullable.group({
@@ -120,6 +132,17 @@ export class UserListComponent implements OnInit {
       page: event.pageIndex,
       size: event.pageSize,
     });
+  }
+
+  hasActiveFilters(): boolean {
+    const query = this.facade.query();
+    return Boolean(
+      query.search ||
+      query.role ||
+      query.active !== undefined ||
+      query.sortBy !== 'NAME' ||
+      query.direction !== 'ASC',
+    );
   }
 
   openInvite(): void {

@@ -295,6 +295,8 @@
   display: grid;
   min-width: min(20rem, 85vw);
   gap: var(--eyes-space-1);
+  background: var(--eyes-color-surface);
+  color: var(--eyes-color-on-surface);
   padding: var(--eyes-space-4);
 }
 

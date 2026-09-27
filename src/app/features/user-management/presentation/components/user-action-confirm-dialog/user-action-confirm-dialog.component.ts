@@ -38,14 +38,17 @@ export interface UserActionConfirmDialogData {
   styles: `
     mat-dialog-content {
       max-width: 36rem;
-      line-height: 1.5;
+      line-height: var(--eyes-line-height-body);
     }
     .dialog-hint {
-      color: #475569;
+      border-left: 0.25rem solid var(--eyes-color-warning);
+      background: var(--eyes-color-surface-variant);
+      color: var(--eyes-color-on-surface-variant);
+      padding: var(--eyes-space-3) var(--eyes-space-4);
     }
     .destructive-action {
-      background: #b91c1c;
-      color: #fff;
+      background: var(--eyes-color-error);
+      color: var(--eyes-color-on-error);
     }
   `,
 })
