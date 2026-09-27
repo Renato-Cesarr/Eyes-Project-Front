@@ -139,6 +139,9 @@ para composição de componentes e regras de consumo.
 O validador confere a estrutura dos quatro temas, o alvo mínimo de interação e
 os pares críticos de contraste. O processo de revisão também exige o
 [`checklist de acessibilidade`](docs/design-system/accessibility-checklist.md).
+Os snapshots determinísticos, a matriz de temas e viewports e o processo de
+aprovação estão em
+[`docs/quality/ui-accessibility-gates.md`](docs/quality/ui-accessibility-gates.md).
 
 ## Acessibilidade e testes de jornada
 
