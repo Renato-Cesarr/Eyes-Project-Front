@@ -1,7 +1,9 @@
 <eyes-page-shell
-  eyebrow="Operação"
-  [title]="'Olá, ' + userName()"
-  description="Acompanhe o que precisa de atenção e acesse rapidamente as tarefas administrativas do dia."
+  eyebrow="Painel administrativo"
+  title="Visão geral"
+  [description]="
+    'Olá, ' + userName() + '. Acompanhe os acessos e as ações que precisam de atenção.'
+  "
 >
   <button
     eyes-page-actions
@@ -56,10 +58,9 @@
     <section class="metrics" aria-labelledby="metrics-title">
       <div class="section-introduction">
         <div>
-          <p class="section-kicker">Situação atual</p>
-          <h2 id="metrics-title">Resumo do sistema</h2>
+          <p class="section-kicker">Em tempo real</p>
+          <h2 id="metrics-title">O que acontece agora</h2>
         </div>
-        <p>Indicadores textuais das áreas essenciais do painel.</p>
       </div>
 
       <div class="metrics-grid">
@@ -117,7 +118,10 @@
     </section>
 
     <div class="content-grid">
-      <eyes-surface-card heading="Prioridades" supportingText="Ações que merecem atenção primeiro.">
+      <eyes-surface-card
+        heading="Para resolver"
+        supportingText="Comece pelo que precisa da sua decisão."
+      >
         @if (summary.requestsUnavailable()) {
           <div class="inline-state inline-state--warning">
             <eyes-icon name="sync_problem" />
@@ -161,7 +165,7 @@
 
       <eyes-surface-card
         heading="Atividade recente"
-        supportingText="Últimas ações administrativas registradas."
+        supportingText="Registro das últimas decisões administrativas."
       >
         @if (summary.auditUnavailable()) {
           <div class="inline-state inline-state--warning">

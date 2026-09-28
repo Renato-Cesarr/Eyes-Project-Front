@@ -37,7 +37,8 @@ test('painel reflui com texto a 200% e preserva navegação por teclado', async 
     document.documentElement.style.fontSize = '200%';
   });
 
-  await expect(page.getByRole('heading', { name: 'Olá, Administradora Eyes' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Visão geral' })).toBeVisible();
+  await expect(page.getByText('Olá, Administradora Eyes.', { exact: false })).toBeVisible();
   await expectNoHorizontalPageOverflow(page);
   await expectNoSeriousAccessibilityViolations(page);
 
@@ -46,6 +47,20 @@ test('painel reflui com texto a 200% e preserva navegação por teclado', async 
   await expect(skipLink).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(page.locator('#main-content')).toBeFocused();
+});
+
+test('filtros da auditoria abrem sem perder acessibilidade no celular', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await prepareDeterministicPage(page, { authenticated: true });
+  await page.goto('/audit');
+
+  const filters = page.getByText('Filtrar histórico');
+  await expect(filters).toBeVisible();
+  await filters.click();
+  await expect(page.getByRole('search')).toBeVisible();
+  await expect(page.getByLabel('Ação', { exact: true })).toBeVisible();
+  await expectNoHorizontalPageOverflow(page);
+  await expectNoSeriousAccessibilityViolations(page);
 });
 
 test('temas suportados mantêm contraste automatizado no catálogo', async ({ page }) => {
