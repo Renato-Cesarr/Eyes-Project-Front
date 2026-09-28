@@ -16,7 +16,7 @@ a eyes-icon {
 
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1.25fr repeat(2, minmax(0, 1fr));
   gap: var(--eyes-space-4);
 }
 
@@ -45,11 +45,6 @@ a eyes-icon {
   margin: 0;
 }
 
-.section-introduction > p {
-  max-width: 30rem;
-  color: var(--eyes-color-on-surface-variant);
-}
-
 .section-kicker {
   color: var(--eyes-color-primary);
   font-size: var(--eyes-font-size-caption);
@@ -66,12 +61,12 @@ a eyes-icon {
 
 .metric {
   display: grid;
-  min-height: 10rem;
+  min-height: 8.75rem;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: start;
+  align-items: center;
   gap: var(--eyes-space-3);
   border: 1px solid var(--eyes-color-outline);
-  border-radius: var(--eyes-radius-large);
+  border-radius: var(--eyes-radius-medium);
   background: var(--eyes-color-surface);
   color: var(--eyes-color-on-surface);
   padding: var(--eyes-space-5);
@@ -79,6 +74,17 @@ a eyes-icon {
   transition:
     border-color var(--eyes-duration-fast) var(--eyes-easing-standard),
     background-color var(--eyes-duration-fast) var(--eyes-easing-standard);
+}
+
+.metric:first-child {
+  border-color: var(--eyes-color-primary);
+  background: var(--eyes-color-primary-container);
+  color: var(--eyes-color-on-primary-container);
+}
+
+.metric:focus-visible {
+  outline: 3px solid var(--eyes-color-primary);
+  outline-offset: 3px;
 }
 
 .metric:hover {
@@ -115,7 +121,7 @@ a eyes-icon {
 }
 
 .metric-copy strong {
-  margin-top: var(--eyes-space-2);
+  margin-top: var(--eyes-space-1);
   font-family: var(--eyes-font-heading);
   font-size: var(--eyes-font-size-display);
   line-height: var(--eyes-line-height-compact);
@@ -137,7 +143,7 @@ a eyes-icon {
 
 .content-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: var(--eyes-space-6);
 }
 
@@ -155,13 +161,11 @@ a eyes-icon {
 
 .inline-state {
   display: grid;
-  min-height: 7rem;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: start;
   gap: var(--eyes-space-3);
-  border-radius: var(--eyes-radius-medium);
-  background: var(--eyes-color-surface-variant);
-  padding: var(--eyes-space-4);
+  border-left: 0.25rem solid var(--eyes-color-primary);
+  padding: var(--eyes-space-2) var(--eyes-space-4);
 }
 
 .inline-state > eyes-icon {
@@ -181,8 +185,9 @@ a eyes-icon {
 }
 
 .quick-links {
-  display: grid;
-  gap: var(--eyes-space-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--eyes-space-3) var(--eyes-space-6);
   margin-top: var(--eyes-space-6);
   border-top: 1px solid var(--eyes-color-outline);
   padding-top: var(--eyes-space-4);
@@ -255,11 +260,15 @@ a eyes-icon {
 
 @media (max-width: 70rem) {
   .metrics-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .metric {
     min-height: 0;
+  }
+
+  .metric:first-child {
+    grid-column: 1 / -1;
   }
 }
 
@@ -270,6 +279,14 @@ a eyes-icon {
 }
 
 @media (max-width: 40rem) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric:first-child {
+    grid-column: auto;
+  }
+
   .section-introduction,
   .activity-list li div {
     align-items: flex-start;
