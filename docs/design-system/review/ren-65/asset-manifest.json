@@ -1,0 +1,110 @@
+{
+  "sourceCommitWeb": "15270355903ca9d072aad3b384a89d3756b2f0f5",
+  "sourceCommitMobile": "a893cacfe289aefd29ea123a9730910ce2a0ace7",
+  "tokenSha256": "f93219aaac578ebdab5e7545c5d251abc19c4ab60119ae297a037c7e3bfde1b6",
+  "fonts": {
+    "lexend": "5.3.0",
+    "atkinson-hyperlegible": "5.3.0",
+    "material-symbols": "0.47.5"
+  },
+  "iconSubset": [
+    "account_circle",
+    "arrow_back",
+    "arrow_forward",
+    "assignment_ind",
+    "center_focus_strong",
+    "chevron_right",
+    "contrast",
+    "dashboard",
+    "error",
+    "expand_more",
+    "fact_check",
+    "group",
+    "help",
+    "history",
+    "info",
+    "menu",
+    "notifications_active",
+    "offline_bolt",
+    "pending_actions",
+    "person_add",
+    "record_voice_over",
+    "refresh",
+    "settings",
+    "vibration",
+    "visibility",
+    "volume_up"
+  ],
+  "iconAliases": {
+    "vibration": "mobile_vibrate"
+  },
+  "fontToolsVersion": "4.66.1",
+  "note": "Reference screenshots are synthetic fixture/golden evidence from the prior audit; no new physical capture.",
+  "files": [
+    {
+      "path": "assets/atkinson-hyperlegible-latin-400-normal.woff2",
+      "bytes": 17208,
+      "sha256": "d64ba838ef5472bba248620ec4fd8b5aa7cf0db2908e0bb230600caf279ba7bc"
+    },
+    {
+      "path": "assets/atkinson-hyperlegible-latin-700-normal.woff2",
+      "bytes": 17524,
+      "sha256": "140e2bd25a7315c8a062508391426b0d8c3297400c947b8d847be28f73a199f0"
+    },
+    {
+      "path": "assets/atkinson-hyperlegible-LICENSE.txt",
+      "bytes": 4603,
+      "sha256": "e137caeef2ff7c04fbf87078ad09cf3dcba8a3a58a4aa4e2f399d42c50bc4b18"
+    },
+    {
+      "path": "assets/icons.js",
+      "bytes": 706,
+      "sha256": "c43f74b33b2fafcb0d46dc58e03d5bbb0eff520567f115756ab858941d940ba9"
+    },
+    {
+      "path": "assets/lexend-latin-600-normal.woff2",
+      "bytes": 14856,
+      "sha256": "c3c291158a48c5172383ec8febb21ca64075b7c9d8413553683b254a247efdda"
+    },
+    {
+      "path": "assets/lexend-LICENSE.txt",
+      "bytes": 4384,
+      "sha256": "cdfed8f91b0660b004befb744757918b7c7d40dc2201b6c6d0a86b2fab9408f8"
+    },
+    {
+      "path": "assets/material-symbols-LICENSE.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "assets/material-symbols-review.woff2",
+      "bytes": 29328,
+      "sha256": "cabf9a454c6dfeb5d5c9abeb740f2a5cb56f2ad1bd55b08e3f1964c3a4abc600"
+    },
+    {
+      "path": "assets/themes.css",
+      "bytes": 2150,
+      "sha256": "21e1bc1f465eaa37c01f5251c8ec7993d2fb70f90edeb9a28129c492e3acb26a"
+    },
+    {
+      "path": "references/mobile-configuracoes.png",
+      "bytes": 47154,
+      "sha256": "4a7307360eb90a46f9ec85fdfc1de467f4bc47f18e8686f77d6d1db1e04d3087"
+    },
+    {
+      "path": "references/mobile-inicio.png",
+      "bytes": 51650,
+      "sha256": "6d394529895076dd938cf473273700e8f325c65ee22f32f4cd0b0481e94d1dea"
+    },
+    {
+      "path": "references/web-dashboard.png",
+      "bytes": 118650,
+      "sha256": "ecfc8df9944dc2f6025913066693459942bd452e7537bf4c8da01fc8f2fe14e7"
+    },
+    {
+      "path": "references/web-login.png",
+      "bytes": 81314,
+      "sha256": "6142ad07d0010d9d9d1a3d60f8d8d40b5b0084ffa067a7b68d24b5dd0e4dc2fe"
+    }
+  ]
+}

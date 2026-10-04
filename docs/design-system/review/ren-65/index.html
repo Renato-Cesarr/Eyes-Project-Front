@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Eyes — revisão visual REN-65</title>
+    <link rel="stylesheet" href="assets/themes.css" />
+    <link rel="stylesheet" href="screen.css" />
+    <link rel="stylesheet" href="review.css" />
+    <script src="review.js" defer></script>
+  </head>
+  <body data-theme="light">
+    <header class="review-heading">
+      <div>
+        <p class="eyebrow">Eyes / revisão de produto</p>
+        <h1>Mais tarefa. Menos ruído.</h1>
+        <p>Quatro composições para aprovação · REN-65 · versão 1</p>
+      </div>
+      <span class="review-badge">Proposta em avaliação</span>
+    </header>
+    <main class="review-main">
+      <section class="review-controls" aria-label="Controles da revisão">
+        <div>
+          <label for="screen">Tela</label
+          ><select id="screen">
+            <option value="login">Web · Login</option>
+            <option value="dashboard">Web · Resumo</option>
+            <option value="home">Mobile · Início</option>
+            <option value="settings">Mobile · Áudio e alertas</option>
+          </select>
+        </div>
+        <div>
+          <label for="theme">Tema</label
+          ><select id="theme">
+            <option value="light">Claro</option>
+            <option value="dark">Escuro</option>
+            <option value="highContrastLight">Alto contraste claro</option>
+            <option value="highContrastDark">Alto contraste escuro</option>
+          </select>
+        </div>
+        <div>
+          <label for="viewport">Viewport</label
+          ><select id="viewport">
+            <option value="1440">Desktop · 1440 × 900</option>
+            <option value="390">Mobile · 390 × 844</option>
+            <option value="320">Compacto · 320 × 800</option>
+          </select>
+        </div>
+        <div>
+          <label for="scale">Texto</label
+          ><select id="scale">
+            <option value="100">100%</option>
+            <option value="150">150%</option>
+            <option value="200">200%</option>
+          </select>
+        </div>
+        <div>
+          <label for="state">Estado</label
+          ><select id="state"></select>
+        </div>
+        <div class="compare-control">
+          <label><input id="compare" type="checkbox" /> Comparar com atual</label>
+        </div>
+      </section>
+      <p class="review-disclaimer">
+        Protótipo visual com dados sintéticos dos testes existentes. Nenhuma ação acessa a API, a
+        câmera, o som ou a vibração. O protótipo não comprova implementação Flutter nem validação
+        física.
+      </p>
+      <section class="comparison" aria-label="Prévia da composição">
+        <div class="preview-panel" id="before-panel" hidden>
+          <h2>Atual · captura de referência</h2>
+          <p id="reference-note"></p>
+          <div class="preview-scroll">
+            <img id="before" alt="Captura da versão atual para comparação" />
+          </div>
+        </div>
+        <div class="preview-panel">
+          <div class="preview-caption">
+            <h2>Proposta <small id="preview-size"></small></h2>
+            <a id="open-screen" href="screen.html" target="_blank" rel="noopener"
+              >Abrir tela isolada</a
+            >
+          </div>
+          <div class="preview-scroll" id="proposal-scroll">
+            <div class="preview-stage">
+              <iframe
+                id="preview"
+                title="Proposta visual Eyes"
+                src="screen.html?screen=login&amp;theme=light&amp;scale=100"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="review-decisions">
+        <h2 id="decision-title">Decisões de composição</h2>
+        <ul id="decisions"></ul>
+        <p><a href="README.md">Contrato, fontes, limites e checklist de aprovação</a></p>
+      </section>
+    </main>
+  </body>
+</html>
