@@ -1,5 +1,5 @@
 <div class="theme-switcher">
-  <label for="eyes-theme">Tema da interface</label>
+  <label for="eyes-theme" [class.eyes-visually-hidden]="!showLabel()">Tema da interface</label>
   <select id="eyes-theme" [ngModel]="theme.preference()" (ngModelChange)="selectTheme($event)">
     <option value="system">Usar preferência do sistema</option>
     <option value="light">Claro</option>

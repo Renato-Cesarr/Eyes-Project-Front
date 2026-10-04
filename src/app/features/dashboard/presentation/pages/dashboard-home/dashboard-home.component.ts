@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthFacade } from '../../../../auth/application/auth.facade';
 import {
   auditActionLabel,
   formatAuditDate,
@@ -36,9 +35,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardHomeComponent implements OnInit {
-  private readonly auth = inject(AuthFacade);
   readonly summary = inject(DashboardSummaryFacade);
-  readonly userName = computed(() => this.auth.user()?.name ?? 'Administrador');
   readonly actionLabel = auditActionLabel;
   readonly formatDate = formatAuditDate;
 

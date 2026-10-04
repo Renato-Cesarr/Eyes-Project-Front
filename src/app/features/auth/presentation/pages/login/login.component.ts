@@ -7,6 +7,7 @@ import { AuthLayout } from '../../../../../shared/ui/auth-layout/auth-layout';
 import { FormCard } from '../../../../../shared/ui/form-card/form-card';
 import { ButtonComponent } from '../../../../../shared/ui/button/button.component';
 import { FeedbackBannerComponent } from '../../../../../shared/ui/feedback-banner/feedback-banner.component';
+import { IconComponent } from '../../../../../shared/ui/icon/icon.component';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ import { FeedbackBannerComponent } from '../../../../../shared/ui/feedback-banne
     FormCard,
     ButtonComponent,
     FeedbackBannerComponent,
+    IconComponent,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['../public-auth-form.scss', './login.component.scss'],

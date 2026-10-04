@@ -1,5 +1,5 @@
 <app-auth-layout>
-  <app-form-card title="Entrar no painel" subtitle="Use sua conta administrativa para continuar">
+  <app-form-card title="Entrar no painel" subtitle="Use sua conta administrativa.">
     @if (sessionNotice(); as message) {
       <eyes-feedback-banner tone="info" title="Entre novamente" [message]="message" />
     }
@@ -29,10 +29,7 @@
       </div>
 
       <div class="form-group" [class.invalid]="isFieldInvalid('password')">
-        <div class="label-wrapper">
-          <label for="password">Senha</label>
-          <a routerLink="/forgot-password" class="forgot-link">Esqueceu a senha?</a>
-        </div>
+        <label for="password">Senha</label>
         <div class="input-wrapper">
           <input
             id="password"
@@ -51,7 +48,7 @@
             [attr.aria-pressed]="passwordVisible()"
             [attr.aria-label]="passwordVisible() ? 'Ocultar senha' : 'Mostrar senha'"
           >
-            {{ passwordVisible() ? 'Ocultar' : 'Ver' }}
+            <eyes-icon [name]="passwordVisible() ? 'visibility_off' : 'visibility'" />
           </button>
         </div>
         <small id="login-password-error" class="error-msg" *ngIf="isFieldInvalid('password')">
@@ -59,17 +56,12 @@
         </small>
       </div>
 
-      <div class="auth-context">
-        <p>
-          O painel é exclusivo para administradores. Seus dados de acesso permanecem somente nesta
-          aba.
-        </p>
-      </div>
+      <a routerLink="/forgot-password" class="forgot-link">Esqueceu a senha?</a>
 
       <div class="form-actions">
         <app-button
           variant="primary"
-          label="Entrar na conta"
+          label="Entrar"
           type="submit"
           [fullWidth]="true"
           [loading]="authFacade.isLoading()"
@@ -78,7 +70,7 @@
       </div>
 
       <div class="footer-links">
-        <span>Não tem uma conta?</span>
+        <span>Precisa de uma conta?</span>
         <a routerLink="/solicitar-acesso">Solicitar acesso</a>
       </div>
     </form>

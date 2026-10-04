@@ -4,6 +4,8 @@
 
 **ADR:** `docs/adr/0004-accessible-administrative-shell.md`
 
+**Atualização de composição:** [REN-59 — direção aprovada em 04/10/2026](approved-composition-2026-10-04.md). Os contratos abaixo permanecem; o breadcrumb é anunciado ao leitor de tela e os nomes da navegação são curtos.
+
 ## Composição do shell
 
 - sidebar persistente a partir de 64 rem;
@@ -14,7 +16,7 @@
 - opções de tema em um submenu da conta para reduzir ruído no header.
 
 O link ativo combina `aria-current="page"`, texto, borda e superfície. O drawer compacto não vira
-uma barra horizontal e não remove descrições ou destinos. O logout continua delegado ao
+uma barra horizontal e preserva os destinos. O logout continua delegado ao
 `AuthFacade`, portanto limpeza de sessão e redirecionamento mantêm uma única responsabilidade.
 
 ## Composição do dashboard
