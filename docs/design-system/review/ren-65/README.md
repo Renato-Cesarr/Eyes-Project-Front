@@ -1,6 +1,8 @@
 # REN-65 — Proposta de composição web e mobile
 
-**Versão 1 · 04/10/2026 · Em avaliação humana.**
+**Versão 1 · 04/10/2026 · Direção aprovada pelo responsável.**
+
+Decisão nesta conversa: “esta bem melhor . Boa vamos continuar avançando, seguindo com esse alto padrão de qualidade e desempenho”. REN-65 concluída; aplicação real em [Front #20](https://github.com/Renato-Cesarr/Eyes-Project-Front/pull/20) e [Mobile #18](https://github.com/Renato-Cesarr/Eyes-Project-Mobile/pull/18), em revisão. Esta aprovação trata da direção v1 e não substitui a homologação física. O recibo `verification.json` preserva o estado histórico no momento dos testes da proposta.
 
 Esta entrega apresenta login e resumo web, início e configurações mobile. É
 um protótipo de composição compatível com os componentes existentes. Sua
@@ -211,7 +213,7 @@ diretório temporário do workspace, sem alterar dependências do produto.
 - [x] Quatro composições e imagens documentadas, com fontes e limites.
 - [x] Hierarquia, alinhamento, grade e estados definidos.
 - [x] Verificação de viewport, temas, texto ampliado e contraste automatizado.
-- [ ] Aprovação humana da direção e ajustes solicitados.
+- [x] Aprovação humana da direção v1 em 04/10/2026.
 - [ ] Aplicação Angular/Flutter em REN-59/60 e verificação dos fluxos reais.
 - [ ] Expansão em REN-66/67; atualização de snapshots após aprovação visual.
 - [ ] Homologação assistiva em aparelho conforme REN-32/41/42.
