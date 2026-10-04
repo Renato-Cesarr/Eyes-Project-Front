@@ -1,13 +1,13 @@
 <app-auth-layout>
   <app-form-card
     title="Solicitar acesso"
-    subtitle="Envie seus dados para análise da equipe administradora"
+    subtitle="Seu pedido será analisado pela equipe."
   >
     <eyes-feedback-banner
       *ngIf="successMessage() as message"
       tone="success"
       title="Solicitação recebida"
-      [message]="message + ' A equipe enviará as próximas instruções por e-mail.'"
+      [message]="message"
     />
 
     <eyes-feedback-banner
@@ -61,9 +61,9 @@
           <textarea
             id="reason"
             formControlName="reason"
-            rows="4"
+            rows="3"
             maxlength="500"
-            placeholder="Conte brevemente como o Eyes pode ajudar"
+            placeholder="Descreva o motivo do pedido"
             [attr.aria-invalid]="isFieldInvalid('reason')"
             [attr.aria-describedby]="
               isFieldInvalid('reason') ? 'reason-help reason-error' : 'reason-help'

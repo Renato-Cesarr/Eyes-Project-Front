@@ -4,6 +4,7 @@
 
 .banner {
   display: grid;
+  overflow-wrap: anywhere;
   grid-template-columns: auto minmax(0, 1fr);
   gap: var(--eyes-space-3);
   border: 2px solid var(--eyes-color-primary);
@@ -51,4 +52,14 @@ p {
   flex-wrap: wrap;
   gap: var(--eyes-space-3);
   margin-top: var(--eyes-space-3);
+}
+
+@media (max-width: 30rem) {
+  .banner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .banner__mark {
+    display: none;
+  }
 }

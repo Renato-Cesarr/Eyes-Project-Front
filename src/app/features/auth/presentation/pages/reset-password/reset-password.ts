@@ -12,6 +12,7 @@ import { FeedbackBannerComponent } from '../../../../../shared/ui/feedback-banne
 import { FormCard } from '../../../../../shared/ui/form-card/form-card';
 import { ToastService } from '../../../../../shared/utils/toast.service';
 import { passwordsMatchValidator } from '../../validators/passwords-match.validator';
+import { IconComponent } from '../../../../../shared/ui/icon/icon.component';
 
 @Component({
   selector: 'app-reset-password',
@@ -24,6 +25,7 @@ import { passwordsMatchValidator } from '../../validators/passwords-match.valida
     FormCard,
     ButtonComponent,
     FeedbackBannerComponent,
+    IconComponent,
   ],
   templateUrl: './reset-password.html',
   styleUrls: ['../public-auth-form.scss', './reset-password.scss'],

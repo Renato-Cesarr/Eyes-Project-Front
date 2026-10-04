@@ -81,3 +81,33 @@ test('gestão responsiva permanece visualmente estável', async ({ page }) => {
 
   await expect(page).toHaveScreenshot('users-mobile-high-contrast-dark.png', { fullPage: true });
 });
+
+for (const [name, route, width, theme] of [
+  ['requests-desktop-light', '/requests', 1440, 'light'],
+  ['requests-mobile-dark', '/requests', 390, 'dark'],
+  ['users-desktop-light', '/users', 1440, 'light'],
+  ['users-desktop-dark', '/users', 1440, 'dark'],
+  ['request-access-mobile-light', '/solicitar-acesso', 320, 'light'],
+  ['setup-password-desktop-light', '/setup-password?token=e2e-visual-invite', 1440, 'light'],
+  ['forgot-password-mobile-light', '/forgot-password', 320, 'light'],
+  ['reset-password-mobile-dark', '/reset-password?token=e2e-visual-reset', 390, 'dark'],
+  ['reset-password-missing-token', '/reset-password', 320, 'high-contrast-light'],
+  ['access-denied-mobile', '/acesso-negado', 320, 'high-contrast-dark'],
+] as const) {
+  test(`${name}: extensão visual permanece estável`, async ({ page }) => {
+    await page.setViewportSize({ width, height: width === 1440 ? 900 : 844 });
+    await prepareDeterministicPage(page, {
+      theme,
+      authenticated: route === '/users' || route === '/requests',
+    });
+    await page.goto(route);
+    await settleVisualState(page);
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    if (route === '/users' || route === '/requests') {
+      await expect(
+        page.locator('.eyes-desktop-table, .eyes-compact-list').filter({ visible: true }),
+      ).toBeVisible();
+    }
+    await expect(page).toHaveScreenshot(`${name}.png`, { fullPage: true });
+  });
+}
