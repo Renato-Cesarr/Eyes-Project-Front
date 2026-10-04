@@ -23,9 +23,11 @@ for (const viewport of viewports) {
 
     await page.getByLabel('E-mail').focus();
     await page.keyboard.press('Tab');
-    await expect(page.getByRole('link', { name: 'Esqueceu a senha?' })).toBeFocused();
-    await page.keyboard.press('Tab');
     await expect(page.getByRole('textbox', { name: 'Senha', exact: true })).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('button', { name: 'Mostrar senha' })).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('link', { name: 'Esqueceu a senha?' })).toBeFocused();
   });
 }
 
@@ -37,8 +39,10 @@ test('painel reflui com texto a 200% e preserva navegação por teclado', async 
     document.documentElement.style.fontSize = '200%';
   });
 
-  await expect(page.getByRole('heading', { name: 'Visão geral' })).toBeVisible();
-  await expect(page.getByText('Olá, Administradora Eyes.', { exact: false })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Resumo' })).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: 'Abrir menu da conta de Administradora Eyes' }),
+  ).toBeVisible();
   await expectNoHorizontalPageOverflow(page);
   await expectNoSeriousAccessibilityViolations(page);
 

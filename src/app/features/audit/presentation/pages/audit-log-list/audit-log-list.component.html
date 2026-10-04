@@ -1,6 +1,5 @@
 <eyes-page-shell
   class="eyes-admin-data"
-  eyebrow="Administração"
   title="Auditoria"
   description="Encontre decisões administrativas por ação, responsável ou período."
 >
@@ -10,10 +9,10 @@
   >
 
   <details class="audit-filter-disclosure">
-    <summary>
+    <summary role="button">
       <eyes-icon name="filter_alt" />
       <span>Filtrar histórico</span>
-      <small>Ação, resultado, período e responsável</small>
+      <small>Ação, resultado e período</small>
     </summary>
     <form
       class="eyes-admin-filters"
@@ -122,10 +121,8 @@
   } @else {
     <section class="eyes-data-region" aria-labelledby="audit-result-title">
       <div class="eyes-section-heading">
-        <div>
-          <h2 id="audit-result-title">Histórico administrativo</h2>
-          <p>Os registros são somente para consulta e não podem ser alterados pelo painel.</p>
-        </div>
+        <h2 id="audit-result-title" class="eyes-visually-hidden">Eventos de auditoria</h2>
+        <p>Registro das decisões administrativas. Somente para consulta.</p>
       </div>
       <div class="eyes-desktop-table" role="region" tabindex="0" aria-label="Tabela de auditoria">
         <table mat-table [dataSource]="facade.logs()">
@@ -142,14 +139,7 @@
           <ng-container matColumnDef="target"
             ><th mat-header-cell *matHeaderCellDef scope="col">Alvo</th>
             <td mat-cell *matCellDef="let log">
-              {{ targetLabel(log.targetType)
-              }}<span class="eyes-identifier" [title]="log.targetId">{{ log.targetId }}</span>
-            </td></ng-container
-          >
-          <ng-container matColumnDef="actor"
-            ><th mat-header-cell *matHeaderCellDef scope="col">Administrador</th>
-            <td mat-cell *matCellDef="let log">
-              <span class="eyes-identifier" [title]="log.actorUserId">{{ log.actorUserId }}</span>
+              {{ targetLabel(log.targetType) }}
             </td></ng-container
           >
           <ng-container matColumnDef="result"
@@ -160,6 +150,12 @@
                 [tone]="resultTone(log.result)"
               /></td
           ></ng-container>
+          <ng-container matColumnDef="details">
+            <th mat-header-cell *matHeaderCellDef scope="col">Detalhes</th>
+            <td mat-cell *matCellDef="let log">
+              <ng-container *ngTemplateOutlet="technicalDetails; context: { $implicit: log }" />
+            </td>
+          </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
@@ -178,31 +174,8 @@
                   [tone]="resultTone(log.result)"
                 />
               </header>
-              <dl>
-                <div>
-                  <dt>Alvo</dt>
-                  <dd>
-                    {{ targetLabel(log.targetType) }}
-                    <span class="eyes-identifier" [title]="log.targetId">{{ log.targetId }}</span>
-                  </dd>
-                </div>
-                <div>
-                  <dt>Administrador</dt>
-                  <dd>
-                    <span class="eyes-identifier" [title]="log.actorUserId">{{
-                      log.actorUserId
-                    }}</span>
-                  </dd>
-                </div>
-                <div>
-                  <dt>Correlação</dt>
-                  <dd>
-                    <span class="eyes-identifier" [title]="log.correlationId">{{
-                      log.correlationId
-                    }}</span>
-                  </dd>
-                </div>
-              </dl>
+              <p>{{ targetLabel(log.targetType) }}</p>
+              <ng-container *ngTemplateOutlet="technicalDetails; context: { $implicit: log }" />
             </article>
           </li>
         }
@@ -219,3 +192,30 @@
     </section>
   }
 </eyes-page-shell>
+
+<ng-template #technicalDetails let-log>
+  <details class="event-details">
+    <summary
+      role="button"
+      [attr.aria-label]="
+        'Ver detalhes de ' + actionLabel(log.action) + ' em ' + formatDate(log.occurredAt)
+      "
+    >
+      Ver detalhes <eyes-icon name="expand_more" />
+    </summary>
+    <dl>
+      <div>
+        <dt>ID do alvo</dt>
+        <dd>{{ log.targetId }}</dd>
+      </div>
+      <div>
+        <dt>ID do administrador</dt>
+        <dd>{{ log.actorUserId }}</dd>
+      </div>
+      <div>
+        <dt>Correlação</dt>
+        <dd>{{ log.correlationId }}</dd>
+      </div>
+    </dl>
+  </details>
+</ng-template>

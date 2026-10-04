@@ -16,8 +16,8 @@
           <eyes-icon name="visibility" />
         </span>
         <span>
-          <strong>Eyes Project</strong>
-          <small>Painel administrativo</small>
+          <strong>Eyes</strong>
+          <small>Administração</small>
         </span>
       </a>
 
@@ -34,7 +34,7 @@
     </header>
 
     <nav class="primary-navigation" aria-label="Navegação principal">
-      <p class="navigation-label">Administração</p>
+      <p class="navigation-label">Painel</p>
       <ul>
         @for (item of navigationItems; track item.path) {
           <li>
@@ -47,7 +47,6 @@
               <eyes-icon [name]="item.icon" />
               <span>
                 <strong>{{ item.label }}</strong>
-                <small>{{ item.description }}</small>
               </span>
             </a>
           </li>
@@ -56,10 +55,7 @@
     </nav>
 
     <footer class="navigation-footer">
-      <div class="navigation-security">
-        <eyes-icon name="verified_user" />
-        <p><strong>Acesso restrito</strong><span>Ambiente exclusivo para administradores.</span></p>
-      </div>
+      <span>Conta administrativa</span>
     </footer>
   </mat-sidenav>
 
@@ -82,7 +78,7 @@
         <nav class="breadcrumb" aria-label="Localização atual">
           <ol>
             <li>Administração</li>
-            <li aria-current="page">{{ currentSection() }}</li>
+            <li class="eyes-visually-hidden" aria-current="page">{{ currentSection() }}</li>
           </ol>
         </nav>
       </div>

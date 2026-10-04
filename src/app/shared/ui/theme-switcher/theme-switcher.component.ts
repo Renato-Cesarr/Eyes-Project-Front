@@ -12,6 +12,7 @@ import { EyesThemePreference, ThemeService } from '../../../core/theme/theme.ser
 })
 export class ThemeSwitcherComponent {
   readonly showStatus = input(true);
+  readonly showLabel = input(true);
   protected readonly theme = inject(ThemeService);
 
   protected selectTheme(value: string): void {

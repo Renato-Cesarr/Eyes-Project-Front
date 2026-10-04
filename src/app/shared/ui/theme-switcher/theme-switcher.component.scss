@@ -1,5 +1,6 @@
 .theme-switcher {
   display: grid;
+  min-width: 0;
   max-width: 28rem;
   gap: var(--eyes-space-2);
 }
@@ -9,6 +10,8 @@ label {
 }
 
 select {
+  width: 100%;
+  min-width: 0;
   min-height: var(--eyes-size-touch-target);
   border: 2px solid var(--eyes-color-outline);
   border-radius: var(--eyes-radius-small);

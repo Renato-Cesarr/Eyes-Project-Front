@@ -5,3 +5,46 @@ eyes-feedback-banner + eyes-feedback-banner {
 eyes-feedback-banner + .public-form {
   margin-top: var(--eyes-space-5);
 }
+
+.public-form {
+  gap: var(--eyes-space-6);
+}
+
+.input-wrapper {
+  border-width: 1px;
+  min-height: 3.25rem;
+}
+
+.toggle-btn {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  padding-inline: var(--eyes-space-3);
+}
+
+.forgot-link {
+  display: flex;
+  min-height: var(--eyes-size-touch-target);
+  align-items: center;
+  justify-content: flex-end;
+  font-weight: var(--eyes-font-weight-regular);
+}
+
+.form-actions {
+  margin-top: 0;
+}
+
+.footer-links {
+  display: grid;
+  gap: var(--eyes-space-2);
+  border-top: 1px solid var(--eyes-color-outline);
+  padding-top: var(--eyes-space-4);
+}
+
+.footer-links a {
+  display: flex;
+  min-height: var(--eyes-size-touch-target);
+  align-items: center;
+  justify-content: center;
+}

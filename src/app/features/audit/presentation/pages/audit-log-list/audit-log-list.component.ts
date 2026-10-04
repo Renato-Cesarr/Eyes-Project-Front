@@ -54,7 +54,7 @@ export class AuditLogListComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   readonly facade = inject(AuditLogFacade);
   readonly actions = AUDIT_ACTIONS;
-  readonly displayedColumns = ['occurredAt', 'action', 'target', 'actor', 'result'];
+  readonly displayedColumns = ['occurredAt', 'action', 'target', 'result', 'details'];
   readonly pageSizeOptions = [10, 20, 50];
   readonly actionLabel = auditActionLabel;
   readonly resultLabel = auditResultLabel;

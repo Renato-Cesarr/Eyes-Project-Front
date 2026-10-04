@@ -64,7 +64,6 @@ describe('DashboardHomeComponent', () => {
   it('loads and displays the API-backed operational summary', () => {
     expect(load).toHaveBeenCalledOnce();
     const text = fixture.nativeElement.textContent as string;
-    expect(text).toContain('Ana Silva');
     expect(text).toContain('Solicitações pendentes');
     expect(text).toContain('3');
     expect(text).toContain('12');

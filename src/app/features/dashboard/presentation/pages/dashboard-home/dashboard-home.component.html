@@ -1,10 +1,4 @@
-<eyes-page-shell
-  eyebrow="Painel administrativo"
-  title="Visão geral"
-  [description]="
-    'Olá, ' + userName() + '. Acompanhe os acessos e as ações que precisam de atenção.'
-  "
->
+<eyes-page-shell title="Resumo" description="Acessos e decisões administrativas">
   <button
     eyes-page-actions
     mat-stroked-button
@@ -14,7 +8,7 @@
     [attr.aria-busy]="summary.isRefreshing()"
   >
     <eyes-icon name="refresh" />
-    {{ summary.isRefreshing() ? 'Atualizando…' : 'Atualizar resumo' }}
+    {{ summary.isRefreshing() ? 'Atualizando…' : 'Atualizar' }}
   </button>
 
   @if (summary.isInitialLoading()) {
@@ -56,16 +50,10 @@
     }
 
     <section class="metrics" aria-labelledby="metrics-title">
-      <div class="section-introduction">
-        <div>
-          <p class="section-kicker">Em tempo real</p>
-          <h2 id="metrics-title">O que acontece agora</h2>
-        </div>
-      </div>
+      <h2 id="metrics-title" class="eyes-visually-hidden">Indicadores administrativos</h2>
 
       <div class="metrics-grid">
         <a class="metric" routerLink="/requests">
-          <span class="metric-icon" aria-hidden="true"><eyes-icon name="assignment_ind" /></span>
           <span class="metric-copy">
             <span>Solicitações pendentes</span>
             @if (summary.requestsUnavailable()) {
@@ -82,11 +70,9 @@
               </small>
             }
           </span>
-          <eyes-icon name="arrow_forward" />
         </a>
 
         <a class="metric" routerLink="/users">
-          <span class="metric-icon" aria-hidden="true"><eyes-icon name="group" /></span>
           <span class="metric-copy">
             <span>Usuários ativos</span>
             @if (summary.usersUnavailable()) {
@@ -97,11 +83,9 @@
               <small>contas com acesso ao sistema</small>
             }
           </span>
-          <eyes-icon name="arrow_forward" />
         </a>
 
         <a class="metric" routerLink="/audit">
-          <span class="metric-icon" aria-hidden="true"><eyes-icon name="fact_check" /></span>
           <span class="metric-copy">
             <span>Ações recentes</span>
             @if (summary.auditUnavailable()) {
@@ -112,16 +96,12 @@
               <small>registros exibidos neste resumo</small>
             }
           </span>
-          <eyes-icon name="arrow_forward" />
         </a>
       </div>
     </section>
 
     <div class="content-grid">
-      <eyes-surface-card
-        heading="Para resolver"
-        supportingText="Comece pelo que precisa da sua decisão."
-      >
+      <eyes-surface-card heading="Solicitações">
         @if (summary.requestsUnavailable()) {
           <div class="inline-state inline-state--warning">
             <eyes-icon name="sync_problem" />
@@ -163,10 +143,7 @@
         </div>
       </eyes-surface-card>
 
-      <eyes-surface-card
-        heading="Atividade recente"
-        supportingText="Registro das últimas decisões administrativas."
-      >
+      <eyes-surface-card heading="Atividade recente">
         @if (summary.auditUnavailable()) {
           <div class="inline-state inline-state--warning">
             <eyes-icon name="sync_problem" />

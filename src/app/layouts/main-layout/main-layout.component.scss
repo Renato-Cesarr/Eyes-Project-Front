@@ -29,7 +29,7 @@
 }
 
 .admin-navigation {
-  width: min(var(--eyes-size-sidebar-expanded), 88vw);
+  width: min(14rem, 88vw);
   border-right: 1px solid var(--eyes-color-outline);
   background: var(--eyes-color-surface);
   color: var(--eyes-color-on-surface);
@@ -42,7 +42,7 @@
 
 .navigation-header {
   display: flex;
-  min-height: 5rem;
+  min-height: 4rem;
   align-items: center;
   justify-content: space-between;
   gap: var(--eyes-space-3);
@@ -61,13 +61,17 @@
 
 .brand-symbol {
   display: grid;
-  width: var(--eyes-size-touch-target);
-  height: var(--eyes-size-touch-target);
+  width: 2.25rem;
+  height: 2.25rem;
   flex: 0 0 auto;
   place-items: center;
-  border-radius: var(--eyes-radius-medium);
+  border-radius: var(--eyes-radius-small);
   background: var(--eyes-color-primary);
   color: var(--eyes-color-on-primary);
+}
+
+.brand-symbol eyes-icon {
+  background: var(--eyes-color-primary);
 }
 
 .brand > span:last-child,
@@ -115,8 +119,8 @@
 .primary-navigation a {
   position: relative;
   display: grid;
-  min-height: 4.25rem;
-  grid-template-columns: var(--eyes-size-touch-target) minmax(0, 1fr);
+  min-height: var(--eyes-size-touch-target);
+  grid-template-columns: 1.5rem minmax(0, 1fr);
   align-items: center;
   gap: var(--eyes-space-2);
   border: 1px solid transparent;
@@ -193,17 +197,18 @@
   top: 0;
   z-index: 20;
   display: flex;
-  min-height: 5rem;
+  min-height: 4rem;
   align-items: center;
   justify-content: space-between;
   gap: var(--eyes-space-4);
   border-bottom: 1px solid var(--eyes-color-outline);
   background: var(--eyes-color-surface);
   color: var(--eyes-color-on-surface);
-  padding: var(--eyes-space-3) clamp(var(--eyes-space-4), 4vw, var(--eyes-space-8));
+  padding: var(--eyes-space-2) clamp(var(--eyes-space-4), 4vw, var(--eyes-space-8));
 }
 
 .workspace-context {
+  flex: 1;
   display: flex;
   min-width: 0;
   align-items: center;
@@ -222,7 +227,7 @@
 
 .breadcrumb li {
   color: var(--eyes-color-on-surface-variant);
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .breadcrumb li + li {
@@ -260,8 +265,8 @@
 
 .avatar {
   display: grid;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2rem;
+  height: 2rem;
   flex: 0 0 auto;
   place-items: center;
   border-radius: var(--eyes-radius-pill);
@@ -283,7 +288,7 @@
 }
 
 .workspace-content {
-  min-height: calc(100dvh - 5rem);
+  min-height: calc(100dvh - 4rem);
   padding: clamp(var(--eyes-space-4), 4vw, var(--eyes-space-8));
 }
 
@@ -306,10 +311,9 @@
 
 @media (max-width: 40rem) {
   .workspace-header {
-    min-height: 4.5rem;
+    min-height: 4rem;
   }
 
-  .breadcrumb li:first-child,
   .account-copy,
   .account-trigger > eyes-icon {
     display: none;
@@ -320,7 +324,7 @@
   }
 
   .workspace-content {
-    min-height: calc(100dvh - 4.5rem);
+    min-height: calc(100dvh - 4rem);
   }
 }
 

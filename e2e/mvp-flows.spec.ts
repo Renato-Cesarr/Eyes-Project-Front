@@ -91,7 +91,7 @@ test('faz login e preserva navegação acessível do painel', async ({ page }) =
   await page.keyboard.type('admin@eyes.test');
   await page.getByRole('textbox', { name: 'Senha', exact: true }).focus();
   await page.keyboard.type('SenhaSegura123!');
-  const submitButton = page.getByRole('button', { name: 'Entrar na conta' });
+  const submitButton = page.getByRole('button', { name: 'Entrar', exact: true });
   await expect(submitButton).toBeEnabled();
   await submitButton.focus();
   await page.keyboard.press('Enter');
@@ -109,9 +109,11 @@ test('apresenta o resumo operacional com navegação e conta acessíveis', async
   await authenticateAsAdmin(page);
   await page.goto('/dashboard');
 
-  await expect(page.getByRole('heading', { name: 'Visão geral', level: 1 })).toBeVisible();
-  await expect(page.getByText('Olá, Administradora Eyes.', { exact: false })).toBeVisible();
-  await expect(page.getByRole('link', { name: /Resumo Visão geral do painel/ })).toHaveAttribute(
+  await expect(page.getByRole('heading', { name: 'Resumo', level: 1 })).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: 'Abrir menu da conta de Administradora Eyes' }),
+  ).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Resumo', exact: true })).toHaveAttribute(
     'aria-current',
     'page',
   );
@@ -145,7 +147,7 @@ test('usa drawer acessível e mantém o painel sem rolagem horizontal', async ({
 
   await page.getByRole('button', { name: 'Abrir menu de navegação' }).click();
   await expect(page.getByRole('navigation', { name: 'Navegação principal' })).toBeVisible();
-  await page.getByRole('link', { name: /Usuários Gerenciar contas/ }).click();
+  await page.getByRole('link', { name: 'Usuários', exact: true }).click();
 
   await expect(page).toHaveURL(/\/users$/);
   await expect(page.getByRole('heading', { name: 'Usuários', level: 1 })).toBeVisible();
