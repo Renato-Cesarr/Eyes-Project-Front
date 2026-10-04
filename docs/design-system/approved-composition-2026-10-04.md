@@ -22,9 +22,9 @@ Identificadores de auditoria não são removidos, abreviados ou substituídos po
 
 ## Verificação local
 
-- 170 testes unitários passaram em Chromium. A execução local com cobertura encontrou uma limitação de carregamento do Vitest através da junction de dependências; cobertura deve ser confirmada no checkout limpo da CI.
+- 170 testes unitários passaram em Chromium. A execução local com cobertura encontrou uma limitação de carregamento do Vitest através da junction de dependências; a execução com cobertura passou no checkout limpo da CI, run 37236984024.
 - 30 testes de fluxos/acessibilidade passaram. A nova matriz cobre login, resumo e auditoria em quatro temas, larguras 320/390/1440 e texto 100%/200%: 72 combinações. Os fluxos anteriores permanecem na suíte.
-- 11 capturas Windows foram atualizadas após aprovação da direção e inspecionadas. As referências Linux devem ser obtidas no ambiente Linux e revisadas antes de consolidar o resultado da CI.
+- 11 capturas Windows foram atualizadas após aprovação da direção e inspecionadas; a comparação posterior passou sem atualização. As 11 referências Linux vieram do run 37236984024, foram revisadas individualmente e mostraram bytes idênticos nas três tentativas. O manifesto [approved-composition-linux.json](approved-composition-linux.json) registra origem, hashes e dimensões implícitas nos PNGs. A primeira CI falhou somente nas referências visuais antigas; 30 E2E passaram. As referências foram atualizadas com capturas Linux, preservando limites e regras; a CI do novo commit deve confirmar a comparação e o Sonar.
 - Build de produção: 378,12 kB iniciais; transferência estimada de 103,25 kB. Dentro do orçamento Angular de 500 kB para aviso. Esses números não representam tempo de carregamento nem uma medição de Lighthouse.
 
 Comandos reproduzíveis: `npm run design-system:validate`, `npm run build`, `npm run test:ci`, `npm run e2e`. O orçamento, os limites de comparação e as regras de axe permanecem ativos.

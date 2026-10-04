@@ -1,0 +1,75 @@
+{
+  "issue": "REN-59",
+  "sourceRun": "https://github.com/Renato-Cesarr/Eyes-Project-Front/actions/runs/37236984024",
+  "sourceCommit": "690d9cfdc9b20a531e3584762fc6e9c3420a750b",
+  "status": "reviewed",
+  "note": "11 diferenças esperadas contra a composição anterior; 170 unitários com cobertura e 30 E2E passaram. Capturas Linux revisadas antes da adoção; referências Windows permanecem separadas.",
+  "files": [
+    {
+      "baseline": "audit-desktop-light.png",
+      "sha256": "f999cc762cf4e9ef142c8352e4ea7daa5378e091e048135b474912644db1af4e",
+      "bytes": 61772,
+      "identicalAttempts": 3
+    },
+    {
+      "baseline": "design-system-high-contrast-dark.png",
+      "sha256": "535643ad61187c48947ca32da070b47ff8ee3426dee768c61de431f5adfd2912",
+      "bytes": 101432,
+      "identicalAttempts": 3
+    },
+    {
+      "baseline": "design-system-high-contrast-light.png",
+      "sha256": "e82d18188fd57a4c97233d53c9d5087c46dc636ad512aab880c1c7d8629c620a",
+      "bytes": 98939,
+      "identicalAttempts": 3
+    },
+    {
+      "baseline": "design-system-light.png",
+      "sha256": "daf876f5d04037d7c6ff2c8038927fcdb67f2ed9842a71b548fe0135e901a1db",
+      "bytes": 111975,
+      "identicalAttempts": 3
+    },
+    {
+      "baseline": "design-system-dark.png",
+      "sha256": "108a0e3ba658b6f02f79bdc05cccf07aecfe0f7befa19c555560a7bac338bc94",
+      "bytes": 112781,
+      "identicalAttempts": 3
+    },
+    {
+      "baseline": "dashboard-desktop-dark.png",
+      "sha256": "4f0701cb299dd8a7ab58af54614b8d917d2ef8c02e45502d009a75ea3ce4ae74",
+      "bytes": 71517,
+      "identicalAttempts": 3
+    },
+    {
+      "baseline": "dashboard-desktop-light.png",
+      "sha256": "e6b84d02314faf403420c8cc2835436470d8ecb48dabca255046d8c139d4fec3",
+      "bytes": 70886,
+      "identicalAttempts": 3
+    },
+    {
+      "baseline": "users-mobile-high-contrast-dark.png",
+      "sha256": "0fb68ee76ccc4d52894cccc8f35eb9a7cafa803aeece9ab606d118b51b628165",
+      "bytes": 60761,
+      "identicalAttempts": 3
+    },
+    {
+      "baseline": "login-mobile-light.png",
+      "sha256": "d64f7bad5a968cf9f3f22c5b9531f8f8a1c749ee21f4600b351e73449a62e506",
+      "bytes": 27016,
+      "identicalAttempts": 3
+    },
+    {
+      "baseline": "login-desktop-light.png",
+      "sha256": "84548464b601ccca9ff07edfe8a624da8582656b07c60a2a05959cd7406c21dd",
+      "bytes": 53309,
+      "identicalAttempts": 3
+    },
+    {
+      "baseline": "login-desktop-dark.png",
+      "sha256": "956543a3bd6dfb9d60058411b2e0ec52ad1fb30b1e4af1ce04f991e5237ce3bf",
+      "bytes": 53247,
+      "identicalAttempts": 3
+    }
+  ]
+}
