@@ -21,7 +21,7 @@ test('solicita acesso com feedback acessível', async ({ page }) => {
   await page.getByRole('button', { name: 'Enviar solicitação' }).focus();
   await page.keyboard.press('Enter');
 
-  await expect(page.getByRole('status')).toContainText('Solicitação enviada com sucesso');
+  await expect(page.getByRole('status')).toContainText('Solicitação recebida para análise');
 });
 
 test('ativa a conta por teclado', async ({ page }) => {
