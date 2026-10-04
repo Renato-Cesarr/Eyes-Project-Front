@@ -44,7 +44,21 @@ contratos da API, dependências ou lógica de autenticação e administração.
 
 ## Validação e evidência
 
-Resultados finais serão registrados junto ao PR e no checkpoint do Linear.
+Head de implementação `47ddf5303c577f370af96bc9bce6de2b1663eb20`,
+[PR draft #21](https://github.com/Renato-Cesarr/Eyes-Project-Front/pull/21).
+No Windows, 170 testes unitários e 99 E2E passaram na fonte final. A suíte E2E
+inclui 21 verificações visuais. Build: 380,30 kB inicial / 103,53 kB de
+transferência estimada, dentro do orçamento de 500 kB. Tokens: quatro temas e
+16 pares de contraste aprovados. Não é um benchmark de latência.
+
+As onze referências afetadas/adicionadas de cada plataforma foram inspecionadas
+individualmente. Linux foi capturado pelo CI 37242796536 na implementação acima;
+a execução passou os 170 unitários com cobertura e 88 E2E, falhando apenas nas
+dez referências novas ainda ausentes e na referência de usuários alterada.
+`remaining-composition-linux.json` registra origem, bytes e SHA-256 dos onze
+PNGs. As três capturas da referência existente alterada têm hashes idênticos.
+Resultado da repetição final do CI será registrado no PR e no checkpoint vivo.
+Revisão do responsável ainda pendente.
 
 - `e2e/remaining-composition.spec.ts`: nove rotas/estados, quatro temas,
   larguras 320/390/1440 e texto 100/200%: 216 combinações; usuários/solicitações
