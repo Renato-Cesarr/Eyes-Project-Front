@@ -65,7 +65,7 @@ export async function mockApi(page: Page): Promise<void> {
       return route.fulfill({ status: 204 });
     }
     if (path.endsWith('/v1/access-requests') && method === 'POST') {
-      return json(route, { message: 'Solicitação enviada com sucesso.' }, 201);
+      return json(route, { message: 'Solicitação recebida para análise' }, 202);
     }
     if (path.includes('/v1/access-requests/') && path.endsWith('/approve') && method === 'POST') {
       return json(route, { ...pendingRequest, status: 'APPROVED' });
