@@ -2,18 +2,19 @@
   class="eyes-admin-data"
   eyebrow="Administração"
   title="Auditoria"
-  description="Consulte o histórico imutável das ações administrativas e identifique quem realizou cada operação."
+  description="Encontre decisões administrativas por ação, responsável ou período."
 >
   <span eyes-page-actions class="eyes-record-count" aria-live="polite"
     ><eyes-icon name="history" /> {{ facade.totalElements() }}
     {{ facade.totalElements() === 1 ? 'evento' : 'eventos' }}</span
   >
 
-  <eyes-surface-card
-    heading="Filtrar eventos"
-    supportingText="Restrinja o histórico por responsável, ação, resultado ou período."
-    appearance="subtle"
-  >
+  <details class="audit-filter-disclosure">
+    <summary>
+      <eyes-icon name="filter_alt" />
+      <span>Filtrar histórico</span>
+      <small>Ação, resultado, período e responsável</small>
+    </summary>
     <form
       class="eyes-admin-filters"
       [formGroup]="filterForm"
@@ -70,25 +71,25 @@
         </button>
       </div>
     </form>
-    @if (hasActiveFilters()) {
-      <div class="eyes-active-filters" aria-label="Filtros ativos">
-        <strong>Filtros ativos:</strong>
-        @if (facade.query().actorUserId) {
-          <span>Administrador: {{ facade.query().actorUserId }}</span>
-        }
-        @if (facade.query().action) {
-          <span>Ação: {{ actionLabel(facade.query().action!) }}</span>
-        }
-        @if (facade.query().result) {
-          <span>Resultado: {{ resultLabel(facade.query().result!) }}</span>
-        }
-        @if (facade.query().occurredFrom || facade.query().occurredTo) {
-          <span>Período personalizado</span>
-        }
-        <button mat-button type="button" (click)="clearFilters()">Remover todos</button>
-      </div>
-    }
-  </eyes-surface-card>
+  </details>
+  @if (hasActiveFilters()) {
+    <div class="eyes-active-filters" aria-label="Filtros ativos">
+      <strong>Filtros ativos:</strong>
+      @if (facade.query().actorUserId) {
+        <span>Administrador: {{ facade.query().actorUserId }}</span>
+      }
+      @if (facade.query().action) {
+        <span>Ação: {{ actionLabel(facade.query().action!) }}</span>
+      }
+      @if (facade.query().result) {
+        <span>Resultado: {{ resultLabel(facade.query().result!) }}</span>
+      }
+      @if (facade.query().occurredFrom || facade.query().occurredTo) {
+        <span>Período personalizado</span>
+      }
+      <button mat-button type="button" (click)="clearFilters()">Remover todos</button>
+    </div>
+  }
 
   @if (facade.loadError()) {
     <eyes-state-view

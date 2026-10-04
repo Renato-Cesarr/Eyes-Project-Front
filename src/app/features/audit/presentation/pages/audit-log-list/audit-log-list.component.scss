@@ -2,6 +2,56 @@
   display: block;
 }
 
+.audit-filter-disclosure {
+  border: 1px solid var(--eyes-color-outline);
+  border-radius: var(--eyes-radius-medium);
+  background: var(--eyes-color-surface);
+  color: var(--eyes-color-on-surface);
+}
+
+.audit-filter-disclosure summary {
+  display: flex;
+  min-height: var(--eyes-size-touch-target);
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--eyes-space-3);
+  padding: var(--eyes-space-4) var(--eyes-space-5);
+  color: var(--eyes-color-primary);
+  cursor: pointer;
+  font-weight: var(--eyes-font-weight-bold);
+  list-style: none;
+}
+
+.audit-filter-disclosure summary::-webkit-details-marker {
+  display: none;
+}
+
+.audit-filter-disclosure summary:focus-visible {
+  outline: 3px solid var(--eyes-color-primary);
+  outline-offset: 2px;
+}
+
+.audit-filter-disclosure summary small {
+  margin-left: auto;
+  color: var(--eyes-color-on-surface-variant);
+  font-weight: var(--eyes-font-weight-regular);
+}
+
+.audit-filter-disclosure[open] summary {
+  border-bottom: 1px solid var(--eyes-color-outline);
+}
+
+.audit-filter-disclosure form {
+  padding: var(--eyes-space-5);
+}
+
 table {
   min-width: 65rem;
+}
+
+@media (max-width: 40rem) {
+  .audit-filter-disclosure summary small {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
 }

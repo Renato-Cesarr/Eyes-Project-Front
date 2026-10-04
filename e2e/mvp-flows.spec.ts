@@ -109,9 +109,8 @@ test('apresenta o resumo operacional com navegação e conta acessíveis', async
   await authenticateAsAdmin(page);
   await page.goto('/dashboard');
 
-  await expect(
-    page.getByRole('heading', { name: 'Olá, Administradora Eyes', level: 1 }),
-  ).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Visão geral', level: 1 })).toBeVisible();
+  await expect(page.getByText('Olá, Administradora Eyes.', { exact: false })).toBeVisible();
   await expect(page.getByRole('link', { name: /Resumo Visão geral do painel/ })).toHaveAttribute(
     'aria-current',
     'page',

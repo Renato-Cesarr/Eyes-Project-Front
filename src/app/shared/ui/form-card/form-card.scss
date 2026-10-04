@@ -1,25 +1,16 @@
 .form-card {
   position: relative;
-  overflow: hidden;
   border: 1px solid var(--eyes-color-outline);
   border-radius: var(--eyes-radius-large);
   background: var(--eyes-color-surface);
   color: var(--eyes-color-on-surface);
-  box-shadow: var(--eyes-elevation-medium);
+  box-shadow: var(--eyes-elevation-small);
   padding: clamp(var(--eyes-space-5), 5vw, var(--eyes-space-10));
-}
-
-.form-card::before {
-  position: absolute;
-  height: var(--eyes-space-1);
-  inset: 0 0 auto;
-  background: var(--eyes-color-primary);
-  content: '';
 }
 
 .card-header {
   margin-bottom: var(--eyes-space-8);
-  text-align: center;
+  text-align: left;
 }
 
 .card-title {

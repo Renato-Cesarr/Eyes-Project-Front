@@ -43,6 +43,15 @@ jobs:
       - name: Rodar fluxos E2E, regressão visual e acessibilidade
         run: npm run e2e
 
+      - name: Guardar capturas de falhas visuais
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-failures
+          path: test-results/
+          retention-days: 7
+          if-no-files-found: ignore
+
       - name: De-bug Coverage
         run: |
           ls -R coverage || echo "Coverage not found"
