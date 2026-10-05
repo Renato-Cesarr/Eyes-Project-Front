@@ -1,0 +1,294 @@
+[
+  {
+    "name": "@angular/build",
+    "severity": "critical",
+    "versions": [
+      "21.2.21"
+    ],
+    "consumers": [
+      {
+        "path": "(root)",
+        "group": "devDependencies",
+        "range": "^21.2.21"
+      }
+    ],
+    "afterVersions": [
+      "21.2.25"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "@angular/router",
+    "severity": "high",
+    "versions": [
+      "21.2.21"
+    ],
+    "consumers": [
+      {
+        "path": "(root)",
+        "group": "dependencies",
+        "range": "^21.2.20"
+      }
+    ],
+    "afterVersions": [
+      "21.2.25"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "@sonar/scan",
+    "severity": "high",
+    "versions": [
+      "5.0.0"
+    ],
+    "consumers": [
+      {
+        "path": "(root)",
+        "group": "devDependencies",
+        "range": "5.0.0"
+      }
+    ],
+    "afterVersions": [
+      "5.0.1"
+    ],
+    "remaining": true
+  },
+  {
+    "name": "adm-zip",
+    "severity": "high",
+    "versions": [
+      "0.6.0"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/@sonar/scan",
+        "group": "dependencies",
+        "range": "0.6.0"
+      }
+    ],
+    "afterVersions": [
+      "0.6.1"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "axios",
+    "severity": "high",
+    "versions": [
+      "1.18.1"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/@sonar/scan",
+        "group": "dependencies",
+        "range": "1.18.1"
+      }
+    ],
+    "afterVersions": [
+      "1.20.0"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "brace-expansion",
+    "severity": "high",
+    "versions": [
+      "5.0.9"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/minimatch",
+        "group": "dependencies",
+        "range": "^5.0.8"
+      }
+    ],
+    "afterVersions": [
+      "5.0.12"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "fast-uri",
+    "severity": "high",
+    "versions": [
+      "3.1.5"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/ajv",
+        "group": "dependencies",
+        "range": "^3.0.1"
+      }
+    ],
+    "afterVersions": [
+      "3.1.8"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "hono",
+    "severity": "moderate",
+    "versions": [
+      "4.13.3"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/@modelcontextprotocol/sdk",
+        "group": "dependencies",
+        "range": "^4.11.4"
+      }
+    ],
+    "afterVersions": [
+      "4.13.13"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "http-cache-semantics",
+    "severity": "high",
+    "versions": [
+      "4.2.0"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/make-fetch-happen",
+        "group": "dependencies",
+        "range": "^4.1.1"
+      }
+    ],
+    "afterVersions": [
+      "4.3.0"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "ip-address",
+    "severity": "moderate",
+    "versions": [
+      "10.5.0"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/express-rate-limit",
+        "group": "dependencies",
+        "range": "^10.2.0"
+      },
+      {
+        "path": "node_modules/socks",
+        "group": "dependencies",
+        "range": "^10.1.1"
+      }
+    ],
+    "afterVersions": [
+      "10.7.3"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "js-yaml",
+    "severity": "high",
+    "versions": [
+      "3.15.1"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/@istanbuljs/load-nyc-config",
+        "group": "dependencies",
+        "range": "^3.13.1"
+      }
+    ],
+    "afterVersions": [
+      "3.15.2"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "node-forge",
+    "severity": "high",
+    "versions": [
+      "1.4.0"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/@sonar/scan",
+        "group": "dependencies",
+        "range": "1.4.0"
+      }
+    ],
+    "afterVersions": [
+      "1.4.0"
+    ],
+    "remaining": true
+  },
+  {
+    "name": "piscina",
+    "severity": "critical",
+    "versions": [
+      "5.2.0"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/@angular/build",
+        "group": "dependencies",
+        "range": "5.2.0"
+      }
+    ],
+    "afterVersions": [
+      "5.3.2"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "qs",
+    "severity": "moderate",
+    "versions": [
+      "6.15.3"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/body-parser",
+        "group": "dependencies",
+        "range": "^6.15.2"
+      },
+      {
+        "path": "node_modules/express",
+        "group": "dependencies",
+        "range": "^6.14.0"
+      }
+    ],
+    "afterVersions": [
+      "6.16.0"
+    ],
+    "remaining": false
+  },
+  {
+    "name": "undici",
+    "severity": "high",
+    "versions": [
+      "6.28.0",
+      "7.29.0"
+    ],
+    "consumers": [
+      {
+        "path": "node_modules/@angular/build",
+        "group": "dependencies",
+        "range": "7.29.0"
+      },
+      {
+        "path": "node_modules/jsdom",
+        "group": "dependencies",
+        "range": "^7.21.0"
+      },
+      {
+        "path": "node_modules/node-gyp",
+        "group": "dependencies",
+        "range": "^6.25.0"
+      }
+    ],
+    "afterVersions": [
+      "6.29.0",
+      "7.29.1"
+    ],
+    "remaining": false
+  }
+]

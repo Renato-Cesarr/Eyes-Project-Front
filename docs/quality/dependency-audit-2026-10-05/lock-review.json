@@ -1,0 +1,773 @@
+{
+  "baseline": "1749f141a82bc490ac737ba75e3eb63651ef83a0",
+  "toolchain": {
+    "node": "22.23.2",
+    "npm": "10.9.8"
+  },
+  "directDependencies": [
+    {
+      "name": "@angular/animations",
+      "range": "^21.2.25",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "name": "@angular/cdk",
+      "range": "^21.2.14",
+      "before": "21.2.14",
+      "after": "21.2.14"
+    },
+    {
+      "name": "@angular/common",
+      "range": "^21.2.25",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "name": "@angular/compiler",
+      "range": "^21.2.25",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "name": "@angular/core",
+      "range": "^21.2.25",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "name": "@angular/forms",
+      "range": "^21.2.25",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "name": "@angular/material",
+      "range": "^21.2.14",
+      "before": "21.2.14",
+      "after": "21.2.14"
+    },
+    {
+      "name": "@angular/platform-browser",
+      "range": "^21.2.25",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "name": "@angular/router",
+      "range": "^21.2.25",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "name": "@fontsource/atkinson-hyperlegible",
+      "range": "5.3.0",
+      "before": "5.3.0",
+      "after": "5.3.0"
+    },
+    {
+      "name": "@fontsource/lexend",
+      "range": "5.3.0",
+      "before": "5.3.0",
+      "after": "5.3.0"
+    },
+    {
+      "name": "material-symbols",
+      "range": "0.47.5",
+      "before": "0.47.5",
+      "after": "0.47.5"
+    },
+    {
+      "name": "rxjs",
+      "range": "~7.8.0",
+      "before": "7.8.2",
+      "after": "7.8.2"
+    },
+    {
+      "name": "tslib",
+      "range": "^2.3.0",
+      "before": "2.8.1",
+      "after": "2.8.1"
+    },
+    {
+      "name": "zone.js",
+      "range": "^0.16.2",
+      "before": "0.16.2",
+      "after": "0.16.2"
+    },
+    {
+      "name": "@angular/build",
+      "range": "^21.2.25",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "name": "@angular/cli",
+      "range": "^21.2.25",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "name": "@angular/compiler-cli",
+      "range": "^21.2.25",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "name": "@axe-core/playwright",
+      "range": "^4.13.0",
+      "before": "4.13.0",
+      "after": "4.13.0"
+    },
+    {
+      "name": "@playwright/test",
+      "range": "^1.63.0",
+      "before": "1.63.0",
+      "after": "1.63.0"
+    },
+    {
+      "name": "@sonar/scan",
+      "range": "5.0.1",
+      "before": "5.0.0",
+      "after": "5.0.1"
+    },
+    {
+      "name": "@vitest/browser-playwright",
+      "range": "^4.1.11",
+      "before": "4.1.11",
+      "after": "4.1.11"
+    },
+    {
+      "name": "@vitest/coverage-istanbul",
+      "range": "^4.1.11",
+      "before": "4.1.11",
+      "after": "4.1.11"
+    },
+    {
+      "name": "@vitest/coverage-v8",
+      "range": "^4.1.11",
+      "before": "4.1.11",
+      "after": "4.1.11"
+    },
+    {
+      "name": "jsdom",
+      "range": "^28.0.0",
+      "before": "28.1.0",
+      "after": "28.1.0"
+    },
+    {
+      "name": "nyc",
+      "range": "18.0.0",
+      "before": "18.0.0",
+      "after": "18.0.0"
+    },
+    {
+      "name": "prettier",
+      "range": "^3.8.1",
+      "before": "3.9.6",
+      "after": "3.9.6"
+    },
+    {
+      "name": "typescript",
+      "range": "~5.9.2",
+      "before": "5.9.3",
+      "after": "5.9.3"
+    },
+    {
+      "name": "vitest",
+      "range": "^4.1.11",
+      "before": "4.1.11",
+      "after": "4.1.11"
+    }
+  ],
+  "changes": [
+    {
+      "path": "node_modules/@angular-devkit/architect",
+      "before": "0.2102.21",
+      "after": "0.2102.25"
+    },
+    {
+      "path": "node_modules/@angular-devkit/core",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@angular-devkit/schematics",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@angular/animations",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@angular/build",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@angular/cli",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@angular/common",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@angular/compiler",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@angular/compiler-cli",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@angular/core",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@angular/forms",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@angular/platform-browser",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@angular/router",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@asamuzakjp/dom-selector/node_modules/lru-cache",
+      "before": "11.5.2",
+      "after": "11.5.3"
+    },
+    {
+      "path": "node_modules/@babel/parser",
+      "before": "7.29.8",
+      "after": "7.29.9"
+    },
+    {
+      "path": "node_modules/@csstools/color-helpers",
+      "before": "6.1.1",
+      "after": "6.1.2"
+    },
+    {
+      "path": "node_modules/@csstools/css-calc",
+      "before": "3.3.0",
+      "after": "3.4.3"
+    },
+    {
+      "path": "node_modules/@csstools/css-color-parser",
+      "before": "4.2.0",
+      "after": "4.2.6"
+    },
+    {
+      "path": "node_modules/@csstools/css-parser-algorithms",
+      "before": "4.0.0",
+      "after": "4.0.2"
+    },
+    {
+      "path": "node_modules/@csstools/css-syntax-patches-for-csstree",
+      "before": "1.1.8",
+      "after": "1.1.15"
+    },
+    {
+      "path": "node_modules/@csstools/css-tokenizer",
+      "before": "4.0.0",
+      "after": "4.0.2"
+    },
+    {
+      "path": "node_modules/@exodus/bytes",
+      "before": "1.15.1",
+      "after": "1.16.0"
+    },
+    {
+      "path": "node_modules/@hono/node-server",
+      "before": "2.1.1",
+      "after": "2.1.3"
+    },
+    {
+      "path": "node_modules/@jridgewell/sourcemap-codec",
+      "before": "1.5.5",
+      "after": "1.6.0"
+    },
+    {
+      "path": "node_modules/@napi-rs/wasm-runtime",
+      "before": "1.2.3",
+      "after": "1.2.5"
+    },
+    {
+      "path": "node_modules/@npmcli/agent/node_modules/lru-cache",
+      "before": "11.5.2",
+      "after": "11.5.3"
+    },
+    {
+      "path": "node_modules/@npmcli/git/node_modules/lru-cache",
+      "before": "11.5.2",
+      "after": "11.5.3"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-android-arm-eabi",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-android-arm64",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-darwin-arm64",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-darwin-x64",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-freebsd-arm64",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-freebsd-x64",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-arm-gnueabihf",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-arm-musleabihf",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-arm64-gnu",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-arm64-musl",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-loong64-gnu",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-loong64-musl",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-ppc64-gnu",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-ppc64-musl",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-riscv64-gnu",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-riscv64-musl",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-s390x-gnu",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-x64-gnu",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-linux-x64-musl",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-openbsd-x64",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-openharmony-arm64",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-win32-arm64-msvc",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-win32-ia32-msvc",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-win32-x64-gnu",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@rollup/rollup-win32-x64-msvc",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/@schematics/angular",
+      "before": "21.2.21",
+      "after": "21.2.25"
+    },
+    {
+      "path": "node_modules/@sigstore/protobuf-specs",
+      "before": "0.5.1",
+      "after": "0.5.2"
+    },
+    {
+      "path": "node_modules/@sonar/scan",
+      "before": "5.0.0",
+      "after": "5.0.1"
+    },
+    {
+      "path": "node_modules/@tybys/wasm-util",
+      "before": "0.10.3",
+      "after": "0.10.4"
+    },
+    {
+      "path": "node_modules/adm-zip",
+      "before": "0.6.0",
+      "after": "0.6.1"
+    },
+    {
+      "path": "node_modules/ansi-regex",
+      "before": "6.3.0",
+      "after": "6.4.0"
+    },
+    {
+      "path": "node_modules/ast-v8-to-istanbul",
+      "before": "1.0.5",
+      "after": "1.0.7"
+    },
+    {
+      "path": "node_modules/axios",
+      "before": "1.18.1",
+      "after": "1.20.0"
+    },
+    {
+      "path": "node_modules/b4a",
+      "before": "1.8.1",
+      "after": "1.9.0"
+    },
+    {
+      "path": "node_modules/bare-events",
+      "before": "2.9.1",
+      "after": "2.9.2"
+    },
+    {
+      "path": "node_modules/bare-fs",
+      "before": "4.8.0",
+      "after": "4.8.2"
+    },
+    {
+      "path": "node_modules/bare-path",
+      "before": "3.1.1",
+      "after": "3.1.2"
+    },
+    {
+      "path": "node_modules/bare-stream",
+      "before": "2.13.3",
+      "after": "2.13.4"
+    },
+    {
+      "path": "node_modules/bare-url",
+      "before": "2.5.2",
+      "after": "2.5.4"
+    },
+    {
+      "path": "node_modules/baseline-browser-mapping",
+      "before": "2.11.16",
+      "after": "2.11.27"
+    },
+    {
+      "path": "node_modules/bidi-js",
+      "before": "1.0.3",
+      "after": "1.1.0"
+    },
+    {
+      "path": "node_modules/brace-expansion",
+      "before": "5.0.9",
+      "after": "5.0.12"
+    },
+    {
+      "path": "node_modules/browserslist",
+      "before": "4.28.8",
+      "after": "4.29.3"
+    },
+    {
+      "path": "node_modules/cacache/node_modules/lru-cache",
+      "before": "11.5.2",
+      "after": "11.5.3"
+    },
+    {
+      "path": "node_modules/cacache/node_modules/p-map",
+      "before": "7.0.6",
+      "after": "7.0.8"
+    },
+    {
+      "path": "node_modules/caniuse-lite",
+      "before": "1.0.30001809",
+      "after": "1.0.30001814"
+    },
+    {
+      "path": "node_modules/chai",
+      "before": "6.2.2",
+      "after": "6.3.0"
+    },
+    {
+      "path": "node_modules/cssstyle/node_modules/lru-cache",
+      "before": "11.5.2",
+      "after": "11.5.3"
+    },
+    {
+      "path": "node_modules/electron-to-chromium",
+      "before": "1.5.411",
+      "after": "1.5.444"
+    },
+    {
+      "path": "node_modules/express-rate-limit",
+      "before": "8.6.2",
+      "after": "8.7.0"
+    },
+    {
+      "path": "node_modules/fast-uri",
+      "before": "3.1.5",
+      "after": "3.1.8"
+    },
+    {
+      "path": "node_modules/follow-redirects",
+      "before": "1.16.0",
+      "after": "1.16.1"
+    },
+    {
+      "path": "node_modules/fsevents",
+      "before": "2.3.2",
+      "after": "2.3.3"
+    },
+    {
+      "path": "node_modules/get-east-asian-width",
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": "node_modules/hono",
+      "before": "4.13.3",
+      "after": "4.13.13"
+    },
+    {
+      "path": "node_modules/hosted-git-info/node_modules/lru-cache",
+      "before": "11.5.2",
+      "after": "11.5.3"
+    },
+    {
+      "path": "node_modules/http-cache-semantics",
+      "before": "4.2.0",
+      "after": "4.3.0"
+    },
+    {
+      "path": "node_modules/ip-address",
+      "before": "10.5.0",
+      "after": "10.7.3"
+    },
+    {
+      "path": "node_modules/jose",
+      "before": "6.2.9",
+      "after": "6.2.12"
+    },
+    {
+      "path": "node_modules/js-yaml",
+      "before": "3.15.1",
+      "after": "3.15.2"
+    },
+    {
+      "path": "node_modules/magicast",
+      "before": "0.5.4",
+      "after": "0.5.5"
+    },
+    {
+      "path": "node_modules/nanoid",
+      "before": "3.3.18",
+      "after": "3.3.20"
+    },
+    {
+      "path": "node_modules/node-gyp/node_modules/undici",
+      "before": "6.28.0",
+      "after": "6.29.0"
+    },
+    {
+      "path": "node_modules/node-releases",
+      "before": "2.0.53",
+      "after": "2.0.57"
+    },
+    {
+      "path": "node_modules/obug",
+      "before": "2.1.4",
+      "after": "2.2.1"
+    },
+    {
+      "path": "node_modules/ordered-binary",
+      "before": "1.6.1",
+      "after": "1.6.2"
+    },
+    {
+      "path": "node_modules/parse5/node_modules/entities",
+      "before": "8.0.0",
+      "after": "8.1.0"
+    },
+    {
+      "path": "node_modules/path-scurry/node_modules/lru-cache",
+      "before": "11.5.2",
+      "after": "11.5.3"
+    },
+    {
+      "path": "node_modules/piscina",
+      "before": "5.2.0",
+      "after": "5.3.2"
+    },
+    {
+      "path": "node_modules/postcss",
+      "before": "8.5.26",
+      "after": "8.5.29"
+    },
+    {
+      "path": "node_modules/postcss-safe-parser",
+      "before": "7.0.1",
+      "after": "7.1.0"
+    },
+    {
+      "path": "node_modules/properties-file",
+      "before": "5.0.5",
+      "after": "5.0.7"
+    },
+    {
+      "path": "node_modules/proxy-addr",
+      "before": "2.0.7",
+      "after": "2.0.8"
+    },
+    {
+      "path": "node_modules/qs",
+      "before": "6.15.3",
+      "after": "6.16.0"
+    },
+    {
+      "path": "node_modules/rollup",
+      "before": "4.62.5",
+      "after": "4.64.0"
+    },
+    {
+      "path": "node_modules/socks",
+      "before": "2.8.9",
+      "after": "2.8.10"
+    },
+    {
+      "path": "node_modules/source-map-js",
+      "before": "1.2.1",
+      "after": "1.2.2"
+    },
+    {
+      "path": "node_modules/spdx-license-ids",
+      "before": "3.0.23",
+      "after": "3.0.24"
+    },
+    {
+      "path": "node_modules/std-env",
+      "before": "4.2.0",
+      "after": "4.3.0"
+    },
+    {
+      "path": "node_modules/streamx",
+      "before": "2.28.0",
+      "after": "2.28.1"
+    },
+    {
+      "path": "node_modules/string-width",
+      "before": "8.2.2",
+      "after": "8.3.0"
+    },
+    {
+      "path": "node_modules/tar-stream",
+      "before": "3.2.0",
+      "after": "3.2.1"
+    },
+    {
+      "path": "node_modules/tinyexec",
+      "before": "1.3.0",
+      "after": "1.3.1"
+    },
+    {
+      "path": "node_modules/tinyrainbow",
+      "before": "3.1.1",
+      "after": "3.2.0"
+    },
+    {
+      "path": "node_modules/tldts",
+      "before": "7.4.10",
+      "after": "7.4.16"
+    },
+    {
+      "path": "node_modules/tldts-core",
+      "before": "7.4.10",
+      "after": "7.4.16"
+    },
+    {
+      "path": "node_modules/undici",
+      "before": "7.29.0",
+      "after": "7.29.1"
+    },
+    {
+      "path": "node_modules/update-browserslist-db",
+      "before": "1.3.1",
+      "after": "1.3.3"
+    },
+    {
+      "path": "node_modules/ws",
+      "before": "8.21.3",
+      "after": "8.22.0"
+    }
+  ],
+  "majorChanges": [],
+  "addedPaths": [],
+  "removedPaths": [
+    "node_modules/vite/node_modules/fsevents"
+  ],
+  "beforeLockSha256": "9186beee118ccebb96cba7918f2d538747e4bf290b58308b73e64fc1af83a75b",
+  "afterLockSha256": "8d9d88590e9ed4ddd03546362713c8533dbee721655b65fdc38e92dcbd716e2c",
+  "hashNormalization": "UTF-8, CRLF converted to LF"
+}

@@ -24,6 +24,14 @@ Não regenere o `package-lock.json` usando outra versão de Node ou npm sem uma
 revisão explícita. A CI lê a versão diretamente de `.nvmrc` e executa o mesmo
 script de diagnóstico antes do build.
 
+## Manutenção de dependências
+
+A auditoria de 05/10/2026, as correções compatíveis e o risco residual do scanner
+estão documentados em [REN-48 · Manutenção de dependências](docs/quality/dependency-maintenance.md).
+Produção: zero alertas na data da verificação. Auditoria completa: duas entradas
+altas do mesmo advisory de node-forge, sem correção publicada. Consulte o documento
+antes de atualizar dependências ou congelar a entrega.
+
 ## Sessão e autorização do painel
 
 O painel web é exclusivo para usuários com papel `ADMIN`. A aplicação não
