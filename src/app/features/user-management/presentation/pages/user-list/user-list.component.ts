@@ -74,7 +74,7 @@ export class UserListComponent implements OnInit {
   private readonly toast = inject(ToastService);
   readonly facade = inject(UserManagementFacade);
 
-  readonly displayedColumns = ['name', 'email', 'role', 'status', 'createdAt', 'actions'];
+  readonly displayedColumns = ['name', 'role', 'status', 'createdAt', 'actions'];
   readonly pageSizeOptions = [10, 20, 50];
   readonly actionFeedback = signal<string | null>(null);
   readonly actionError = signal<string | null>(null);

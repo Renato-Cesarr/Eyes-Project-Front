@@ -2,3 +2,10 @@ eyes-feedback-banner + eyes-feedback-banner,
 eyes-feedback-banner + .public-form {
   margin-top: var(--eyes-space-3);
 }
+.public-form {
+  gap: var(--eyes-space-4);
+}
+
+.input-wrapper textarea {
+  min-height: 6rem;
+}

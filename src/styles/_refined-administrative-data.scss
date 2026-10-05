@@ -1,0 +1,103 @@
+.eyes-admin-data--refined {
+  button.mat-mdc-button-base {
+    height: auto;
+    min-height: var(--eyes-size-touch-target);
+    padding-block: var(--eyes-space-2);
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .eyes-record-count {
+    min-width: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--eyes-color-on-surface-variant);
+    padding-inline: 0;
+    font-weight: var(--eyes-font-weight-regular);
+    white-space: normal;
+  }
+
+  .eyes-filter-disclosure {
+    margin-block-end: 0;
+    border: 1px solid var(--eyes-color-outline);
+    border-radius: var(--eyes-radius-medium);
+    background: var(--eyes-color-surface);
+    color: var(--eyes-color-on-surface);
+
+    summary {
+      display: flex;
+      min-height: var(--eyes-size-touch-target);
+      align-items: center;
+      gap: var(--eyes-space-3);
+      padding: var(--eyes-space-3) var(--eyes-space-4);
+      color: var(--eyes-color-primary);
+      cursor: pointer;
+      font-weight: var(--eyes-font-weight-bold);
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .eyes-filter-chevron {
+      flex-shrink: 0;
+      margin-inline-start: auto;
+    }
+
+    &[open] {
+      summary {
+        border-bottom: 1px solid var(--eyes-color-outline);
+      }
+
+      .eyes-filter-chevron {
+        transform: rotate(180deg);
+      }
+    }
+
+    form {
+      padding: var(--eyes-space-4);
+    }
+  }
+
+  .eyes-active-filters {
+    margin-block: 0;
+    padding-block: 0;
+    border: 0;
+  }
+
+  .eyes-data-region {
+    box-shadow: none;
+    border-radius: var(--eyes-radius-medium);
+  }
+
+  .eyes-desktop-table td {
+    padding-block: var(--eyes-space-3);
+  }
+
+  .eyes-desktop-table td,
+  .eyes-cell-secondary {
+    overflow-wrap: anywhere;
+  }
+
+  .eyes-compact-list {
+    padding: 0;
+  }
+
+  .eyes-compact-list li + li {
+    margin-block-start: 0;
+    border-top: 1px solid var(--eyes-color-outline);
+  }
+
+  .eyes-data-card {
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .eyes-admin-data--refined .eyes-filter-disclosure {
+    border-color: CanvasText;
+  }
+}

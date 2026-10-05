@@ -12,6 +12,7 @@ import { FormCard } from '../../../../../shared/ui/form-card/form-card';
 import { ToastService } from '../../../../../shared/utils/toast.service';
 import { FeedbackBannerComponent } from '../../../../../shared/ui/feedback-banner/feedback-banner.component';
 import { passwordsMatchValidator } from '../../validators/passwords-match.validator';
+import { IconComponent } from '../../../../../shared/ui/icon/icon.component';
 
 @Component({
   selector: 'app-setup-password',
@@ -24,6 +25,7 @@ import { passwordsMatchValidator } from '../../validators/passwords-match.valida
     FormCard,
     ButtonComponent,
     FeedbackBannerComponent,
+    IconComponent,
   ],
   templateUrl: './setup-password.component.html',
   styleUrls: ['../public-auth-form.scss', './setup-password.component.scss'],

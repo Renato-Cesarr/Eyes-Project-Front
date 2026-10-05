@@ -62,7 +62,7 @@ export class AccessRequestListComponent implements OnInit {
   private readonly toast = inject(ToastService);
   readonly facade = inject(AccessRequestsFacade);
 
-  readonly displayedColumns = ['name', 'email', 'status', 'createdAt', 'actions'];
+  readonly displayedColumns = ['name', 'status', 'createdAt', 'actions'];
   readonly pageSizeOptions = [10, 20, 50];
   readonly actionFeedback = signal<string | null>(null);
   readonly actionError = signal<string | null>(null);

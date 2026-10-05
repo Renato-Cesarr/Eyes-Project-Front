@@ -17,6 +17,7 @@
   color: var(--eyes-color-on-surface);
   font-size: var(--eyes-font-size-title);
   font-weight: var(--eyes-font-weight-bold);
+  overflow-wrap: anywhere;
 }
 
 .card-title:focus-visible {

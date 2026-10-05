@@ -1,7 +1,8 @@
 @use '../public-auth-form';
 
 .access-denied__actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   margin-top: var(--eyes-space-5);
 }
 

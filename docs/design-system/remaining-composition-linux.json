@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "issue": "REN-66",
+  "implementationCommit": "47ddf5303c577f370af96bc9bce6de2b1663eb20",
+  "platform": "linux",
+  "ciRun": "https://github.com/Renato-Cesarr/Eyes-Project-Front/actions/runs/37242796536",
+  "artifact": {
+    "id": 11318066762,
+    "name": "playwright-failures"
+  },
+  "review": {
+    "date": "2026-10-04",
+    "reviewer": "Codex visual inspection",
+    "scope": "All 11 affected/additional Linux PNGs inspected individually; existing unrelated references preserved.",
+    "responsibleApproval": "Pending in REN-66",
+    "findings": "Composition follows approved REN-65/59 direction; text, controls, boundaries and state labels visible in selected desktop/mobile themes. Fixtures use .test domains."
+  },
+  "tolerance": {
+    "maxDiffPixelRatio": 0.01,
+    "changed": false
+  },
+  "files": [
+    {
+      "filename": "users-desktop-dark.png",
+      "bytes": 59329,
+      "sha256": "f3699a72abeadcb9f488e952ff754c9fb3f19f292c050c76f0c8c62642e91db0",
+      "artifactPath": "visual-regression-users-de-eb764-ão-visual-permanece-estável-chromium/users-desktop-dark-actual.png",
+      "capturedAttempts": 1,
+      "identicalAttemptHashes": true
+    },
+    {
+      "filename": "users-desktop-light.png",
+      "bytes": 59305,
+      "sha256": "4175d1727093aae7ada9e5c5ee0f40530868f70f97495a7960762cdf555ba783",
+      "artifactPath": "visual-regression-users-de-ccf6a-ão-visual-permanece-estável-chromium/users-desktop-light-actual.png",
+      "capturedAttempts": 1,
+      "identicalAttemptHashes": true
+    },
+    {
+      "filename": "setup-password-desktop-light.png",
+      "bytes": 57039,
+      "sha256": "0749d3e46f6db6786a5163151ee1ab3e99458e0e8cd8b87e41a2d54b409ea2e9",
+      "artifactPath": "visual-regression-setup-pa-64525-ão-visual-permanece-estável-chromium/setup-password-desktop-light-actual.png",
+      "capturedAttempts": 1,
+      "identicalAttemptHashes": true
+    },
+    {
+      "filename": "reset-password-missing-token.png",
+      "bytes": 23183,
+      "sha256": "4b4bd653a8627b1375667531fdf0d2df4292f0d9104f26d3ac0aaa3d4e9849d1",
+      "artifactPath": "visual-regression-reset-pa-855a9-ão-visual-permanece-estável-chromium/reset-password-missing-token-actual.png",
+      "capturedAttempts": 1,
+      "identicalAttemptHashes": true
+    },
+    {
+      "filename": "reset-password-mobile-dark.png",
+      "bytes": 32999,
+      "sha256": "aef8061671413cf57242009f5eec26acc10797cc55eccb85da236321dedef0c1",
+      "artifactPath": "visual-regression-reset-pa-528b8-ão-visual-permanece-estável-chromium/reset-password-mobile-dark-actual.png",
+      "capturedAttempts": 1,
+      "identicalAttemptHashes": true
+    },
+    {
+      "filename": "requests-desktop-light.png",
+      "bytes": 60577,
+      "sha256": "9f3aea4336dd2e1f753389781340d735e4c8c1f9007ebbf20bc749c12e527a02",
+      "artifactPath": "visual-regression-requests-658f3-ão-visual-permanece-estável-chromium/requests-desktop-light-actual.png",
+      "capturedAttempts": 1,
+      "identicalAttemptHashes": true
+    },
+    {
+      "filename": "requests-mobile-dark.png",
+      "bytes": 41309,
+      "sha256": "50e43a1bed46cd561671745381be1b081faf2a927dc38336696fd38ee933bd6a",
+      "artifactPath": "visual-regression-requests-2d38d-ão-visual-permanece-estável-chromium/requests-mobile-dark-actual.png",
+      "capturedAttempts": 1,
+      "identicalAttemptHashes": true
+    },
+    {
+      "filename": "request-access-mobile-light.png",
+      "bytes": 36450,
+      "sha256": "b0584c4d1d765e71400606978901e470c1011ef8526b2499b87251373f774769",
+      "artifactPath": "visual-regression-request--233d8-ão-visual-permanece-estável-chromium/request-access-mobile-light-actual.png",
+      "capturedAttempts": 1,
+      "identicalAttemptHashes": true
+    },
+    {
+      "filename": "users-mobile-high-contrast-dark.png",
+      "bytes": 33296,
+      "sha256": "8c69a9bd74e16b5f460a6597e2295b48a1823b13a129eaa9126b06926d4c13d3",
+      "artifactPath": "visual-regression-gestão-r-d3fc8-rmanece-visualmente-estável-chromium/users-mobile-high-contrast-dark-actual.png",
+      "capturedAttempts": 3,
+      "identicalAttemptHashes": true
+    },
+    {
+      "filename": "forgot-password-mobile-light.png",
+      "bytes": 23138,
+      "sha256": "50e36500d69f081596410148e654ce6f200d0d637858a3ce344b80180e608a74",
+      "artifactPath": "visual-regression-forgot-p-75afb-ão-visual-permanece-estável-chromium/forgot-password-mobile-light-actual.png",
+      "capturedAttempts": 1,
+      "identicalAttemptHashes": true
+    },
+    {
+      "filename": "access-denied-mobile.png",
+      "bytes": 25240,
+      "sha256": "a16c22a210c6a1bf0aaee105f61af159aafadc99cc0e7486a458c792e06ac3b3",
+      "artifactPath": "visual-regression-access-d-ec2d6-ão-visual-permanece-estável-chromium/access-denied-mobile-actual.png",
+      "capturedAttempts": 1,
+      "identicalAttemptHashes": true
+    }
+  ]
+}
