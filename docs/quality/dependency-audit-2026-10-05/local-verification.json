@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "issue": "REN-48",
+  "executedAt": "2026-10-05T17:39:41.691Z",
+  "baseline": "1749f141a82bc490ac737ba75e3eb63651ef83a0",
+  "platform": "win32",
+  "toolchain": {
+    "node": "22.23.2",
+    "npm": "10.9.8"
+  },
+  "hashNormalization": "UTF-8, CRLF converted to LF",
+  "packageSha256": "c0e29bdd3674e680cbb38d5795d6f0119b841b1a85a4fe9715c2faffb3728040",
+  "lockSha256": "8d9d88590e9ed4ddd03546362713c8533dbee721655b65fdc38e92dcbd716e2c",
+  "commands": [
+    {
+      "command": "scripts/check-toolchain.ps1",
+      "exitCode": 0
+    },
+    {
+      "command": "npm ci",
+      "exitCode": 0
+    },
+    {
+      "command": "npm ls --all",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run design-system:validate",
+      "exitCode": 0,
+      "themes": 4,
+      "contrastPairs": 16
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "initialKilobytes": 380.92,
+      "estimatedTransferKilobytes": 103.67
+    },
+    {
+      "command": "npm run test:ci",
+      "exitCode": 0,
+      "testFiles": 44,
+      "passed": 170,
+      "failed": 0,
+      "coverage": {
+        "statements": 81.45,
+        "branches": 84.81,
+        "functions": 66.03,
+        "lines": 84.85
+      }
+    },
+    {
+      "command": "npm run e2e",
+      "exitCode": 0,
+      "passed": 99,
+      "failed": 0,
+      "retries": 0,
+      "visualComparisons": 21,
+      "remainingCompositionCombinations": 216,
+      "api": "mocked"
+    },
+    {
+      "command": "npm audit --json",
+      "exitCode": 1,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 2,
+        "critical": 0,
+        "total": 2
+      }
+    },
+    {
+      "command": "npm audit --omit=dev --json",
+      "exitCode": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      }
+    }
+  ],
+  "lockReview": {
+    "changedEntries": 116,
+    "majorChanges": 0,
+    "unrelatedDirectVersionChanges": 0
+  },
+  "unchangedVisualBaselines": 42,
+  "preservedPhysicalEvidenceFiles": 31,
+  "limits": [
+    "CI Linux and SonarCloud are independently verified on the PR head; results recorded in Linear and the continuity checkpoint.",
+    "One unresolved advisory in node-forge and propagation to @sonar/scan; both development only.",
+    "No new physical collection, TalkBack validation or real web/API integration."
+  ]
+}
