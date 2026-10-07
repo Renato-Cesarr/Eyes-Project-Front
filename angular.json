@@ -72,7 +72,14 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "setupFiles": ["src/test-setup.ts"]
+            "setupFiles": ["src/test-setup.ts"],
+            "coverageReporters": [
+              "text",
+              "text-summary",
+              "html",
+              "json",
+              ["lcovonly", { "file": "../lcov.info" }]
+            ]
           }
         }
       }

@@ -1,0 +1,30 @@
+[
+  {
+    "path": "package.json",
+    "sha256Utf8Lf": "748e35a2f5f8d326147b67919a8ceee94652fbfc0dc0640741c309562ed35467"
+  },
+  {
+    "path": "package-lock.json",
+    "sha256Utf8Lf": "9cccaceed222e693230e8ea48f8ff0199a415dcaed7cc72e875aec1240e2cb62"
+  },
+  {
+    "path": "angular.json",
+    "sha256Utf8Lf": "9fc461be3415ba21b3606221fcbcb9e2991c9411b95b328a6bf0969dd198608a"
+  },
+  {
+    "path": ".github/workflows/ci.yml",
+    "sha256Utf8Lf": "3d46ee7741a7cb601fe013c1ae9f185113bd7f31f41bcfab928c046ce83dbd83"
+  },
+  {
+    "path": "sonar-project.properties",
+    "sha256Utf8Lf": "f365167401a15cac99e0e87dcc6c4ecff4025af42864044b024bca47140e4739"
+  },
+  {
+    "path": ".nvmrc",
+    "sha256Utf8Lf": "08062faf0d7a2d22f5d7933c50e975dd1527034275597be7c1b3b9fd2b9d079a"
+  },
+  {
+    "path": "playwright.config.ts",
+    "sha256Utf8Lf": "dde27b00f0c197b6e65034330bedee8abcd4c541248c3e34cbe18f678884166a"
+  }
+]

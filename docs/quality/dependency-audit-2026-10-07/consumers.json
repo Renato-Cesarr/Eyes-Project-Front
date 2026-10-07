@@ -1,0 +1,16 @@
+{
+  "nycInstalled": false,
+  "sprintfInstalled": false,
+  "sonarScannerVersion": "5.0.1",
+  "forgeVersion": "1.4.0",
+  "scannerTruststoreUse": {
+    "file": "node_modules/@sonar/scan/src/request.js",
+    "operations": [
+      "forge.util.decode64",
+      "forge.asn1.fromDer",
+      "forge.pkcs12.pkcs12FromAsn1",
+      "forge.pki.certificateToPem"
+    ]
+  },
+  "npmLsProblems": []
+}

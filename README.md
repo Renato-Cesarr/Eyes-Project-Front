@@ -26,11 +26,15 @@ script de diagnóstico antes do build.
 
 ## Manutenção de dependências
 
-A auditoria de 05/10/2026, as correções compatíveis e o risco residual do scanner
-estão documentados em [REN-48 · Manutenção de dependências](docs/quality/dependency-maintenance.md).
-Produção: zero alertas na data da verificação. Auditoria completa: duas entradas
-altas do mesmo advisory de node-forge, sem correção publicada. Consulte o documento
-antes de atualizar dependências ou congelar a entrega.
+A manutenção de 07/10/2026 está documentada em
+[REN-48 · Novos alertas e LCOV nativo](docs/quality/dependency-maintenance-2026-10-07.md):
+CLI corrigida, retirada do conversor nyc e cobertura equivalente para o Sonar.
+Produção: zero alertas; auditoria completa: duas entradas altas do mesmo advisory
+de node-forge, sem correção publicada. Reconsultar fornecedores e auditorias antes
+de atualizar dependências ou congelar a entrega.
+
+A [verificação de 05/10](docs/quality/dependency-maintenance.md) permanece como
+registro histórico, com seus resultados e limites daquela data.
 
 ## Sessão e autorização do painel
 

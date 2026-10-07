@@ -1,0 +1,97 @@
+{
+  "method": "JSON: mesmos arquivos, mapas e estados coberto/não coberto de statements/functions/branches. LCOV: todos os registros originais comparados por linhas, functions, branches e totais; barras normalizadas e hits reduzidos a coberto/não coberto. Totais obtidos pela istanbul-lib-coverage instalada.",
+  "beforeFiles": 81,
+  "afterFiles": 81,
+  "beforeSummary": {
+    "lines": {
+      "total": 2205,
+      "covered": 1871,
+      "skipped": 0,
+      "pct": 84.85
+    },
+    "statements": {
+      "total": 3101,
+      "covered": 2526,
+      "skipped": 0,
+      "pct": 81.45
+    },
+    "functions": {
+      "total": 421,
+      "covered": 278,
+      "skipped": 0,
+      "pct": 66.03
+    },
+    "branches": {
+      "total": 1093,
+      "covered": 927,
+      "skipped": 0,
+      "pct": 84.81
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "afterSummary": {
+    "lines": {
+      "total": 2205,
+      "covered": 1871,
+      "skipped": 0,
+      "pct": 84.85
+    },
+    "statements": {
+      "total": 3101,
+      "covered": 2526,
+      "skipped": 0,
+      "pct": 81.45
+    },
+    "functions": {
+      "total": 421,
+      "covered": 278,
+      "skipped": 0,
+      "pct": 66.03
+    },
+    "branches": {
+      "total": 1093,
+      "covered": 927,
+      "skipped": 0,
+      "pct": 84.81
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "coveredJsonDifferences": [],
+  "baselineLcovRecords": 61,
+  "nativeLcovRecords": 81,
+  "lcovDifferences": [],
+  "extraLcovRecords": [
+    "src/app/app.html",
+    "src/app/features/access-requests/presentation/pages/access-request-list/access-request-list.component.html",
+    "src/app/features/audit/presentation/pages/audit-log-list/audit-log-list.component.html",
+    "src/app/features/auth/presentation/pages/access-denied/access-denied.component.html",
+    "src/app/features/auth/presentation/pages/forgot-password/forgot-password.html",
+    "src/app/features/auth/presentation/pages/login/login.component.html",
+    "src/app/features/auth/presentation/pages/register/register.component.html",
+    "src/app/features/auth/presentation/pages/reset-password/reset-password.html",
+    "src/app/features/auth/presentation/pages/setup-password/setup-password.component.html",
+    "src/app/features/dashboard/presentation/pages/dashboard-home/dashboard-home.component.html",
+    "src/app/features/user-management/presentation/pages/user-list/user-list.component.html",
+    "src/app/layouts/main-layout/main-layout.component.html",
+    "src/app/shared/ui/auth-layout/auth-layout.html",
+    "src/app/shared/ui/button/button.component.html",
+    "src/app/shared/ui/feedback-banner/feedback-banner.component.html",
+    "src/app/shared/ui/form-card/form-card.html",
+    "src/app/shared/ui/page-shell/page-shell.component.html",
+    "src/app/shared/ui/state-view/state-view.component.html",
+    "src/app/shared/ui/surface-card/surface-card.component.html",
+    "src/app/shared/ui/theme-switcher/theme-switcher.component.html"
+  ],
+  "extraRecordsAreHtmlOutsideSonarTsScope": true,
+  "equivalent": true
+}
