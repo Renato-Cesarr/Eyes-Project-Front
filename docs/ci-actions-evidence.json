@@ -1,0 +1,36 @@
+{
+  "issue": "REN-49",
+  "verifiedOn": "2026-10-07",
+  "scope": "Actions references only; product runtimes, workflow parameters and quality gates unchanged.",
+  "actions": [
+    {
+      "repo": "actions/checkout",
+      "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "tag": "v7.0.1",
+      "runtime": "node24",
+      "source": "https://github.com/actions/checkout/releases/tag/v7.0.1"
+    },
+    {
+      "repo": "actions/setup-node",
+      "sha": "820762786026740c76f36085b0efc47a31fe5020",
+      "tag": "v7.0.0",
+      "runtime": "node24",
+      "source": "https://github.com/actions/setup-node/releases/tag/v7.0.0"
+    },
+    {
+      "repo": "actions/upload-artifact",
+      "sha": "043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+      "tag": "v7.0.1",
+      "runtime": "node24",
+      "source": "https://github.com/actions/upload-artifact/releases/tag/v7.0.1"
+    }
+  ],
+  "productRuntime": {
+    "node": "22.23.2",
+    "npm": "10.9.8"
+  },
+  "limits": [
+    "CI approval must be verified independently on the PR head.",
+    "Mobile dev has pre-existing Sonar/New Code issue REN-63."
+  ]
+}
