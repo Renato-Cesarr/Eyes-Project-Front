@@ -1,0 +1,170 @@
+[
+  {
+    "path": "visual-regression.spec.ts/linux/access-denied-mobile.png",
+    "sha256": "a16c22a210c6a1bf0aaee105f61af159aafadc99cc0e7486a458c792e06ac3b3"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/audit-desktop-light.png",
+    "sha256": "f999cc762cf4e9ef142c8352e4ea7daa5378e091e048135b474912644db1af4e"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/dashboard-desktop-dark.png",
+    "sha256": "4f0701cb299dd8a7ab58af54614b8d917d2ef8c02e45502d009a75ea3ce4ae74"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/dashboard-desktop-light.png",
+    "sha256": "e6b84d02314faf403420c8cc2835436470d8ecb48dabca255046d8c139d4fec3"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/design-system-dark.png",
+    "sha256": "108a0e3ba658b6f02f79bdc05cccf07aecfe0f7befa19c555560a7bac338bc94"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/design-system-high-contrast-dark.png",
+    "sha256": "535643ad61187c48947ca32da070b47ff8ee3426dee768c61de431f5adfd2912"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/design-system-high-contrast-light.png",
+    "sha256": "e82d18188fd57a4c97233d53c9d5087c46dc636ad512aab880c1c7d8629c620a"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/design-system-light.png",
+    "sha256": "daf876f5d04037d7c6ff2c8038927fcdb67f2ed9842a71b548fe0135e901a1db"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/forgot-password-mobile-light.png",
+    "sha256": "50e36500d69f081596410148e654ce6f200d0d637858a3ce344b80180e608a74"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/login-desktop-dark.png",
+    "sha256": "956543a3bd6dfb9d60058411b2e0ec52ad1fb30b1e4af1ce04f991e5237ce3bf"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/login-desktop-light.png",
+    "sha256": "84548464b601ccca9ff07edfe8a624da8582656b07c60a2a05959cd7406c21dd"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/login-mobile-light.png",
+    "sha256": "d64f7bad5a968cf9f3f22c5b9531f8f8a1c749ee21f4600b351e73449a62e506"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/request-access-mobile-light.png",
+    "sha256": "b0584c4d1d765e71400606978901e470c1011ef8526b2499b87251373f774769"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/requests-desktop-light.png",
+    "sha256": "9f3aea4336dd2e1f753389781340d735e4c8c1f9007ebbf20bc749c12e527a02"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/requests-mobile-dark.png",
+    "sha256": "50e43a1bed46cd561671745381be1b081faf2a927dc38336696fd38ee933bd6a"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/reset-password-missing-token.png",
+    "sha256": "4b4bd653a8627b1375667531fdf0d2df4292f0d9104f26d3ac0aaa3d4e9849d1"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/reset-password-mobile-dark.png",
+    "sha256": "aef8061671413cf57242009f5eec26acc10797cc55eccb85da236321dedef0c1"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/setup-password-desktop-light.png",
+    "sha256": "0749d3e46f6db6786a5163151ee1ab3e99458e0e8cd8b87e41a2d54b409ea2e9"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/users-desktop-dark.png",
+    "sha256": "f3699a72abeadcb9f488e952ff754c9fb3f19f292c050c76f0c8c62642e91db0"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/users-desktop-light.png",
+    "sha256": "4175d1727093aae7ada9e5c5ee0f40530868f70f97495a7960762cdf555ba783"
+  },
+  {
+    "path": "visual-regression.spec.ts/linux/users-mobile-high-contrast-dark.png",
+    "sha256": "8c69a9bd74e16b5f460a6597e2295b48a1823b13a129eaa9126b06926d4c13d3"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/access-denied-mobile.png",
+    "sha256": "5fd31b6ce34518f5f6279aea87f659db4d2130124c21fca88ed48bfa7769cf8f"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/audit-desktop-light.png",
+    "sha256": "a2acde821657fab6c3cf3349f692f168b4a4eeb26dcbcb55ca2f41ee4f314e2e"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/dashboard-desktop-dark.png",
+    "sha256": "18639bacbdf1d4eec7f22eb6baf4689a32049e0499598323c96f2c6be4773323"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/dashboard-desktop-light.png",
+    "sha256": "53b9b2a5ecdacd751394a70f7bfc8d027fac044726b9b27735f7735cacea6d7d"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/design-system-dark.png",
+    "sha256": "b4c837efde8e5bd9156c51c5a91dae1a8aebb5f826fe1fd1c565ded0d8c1c6c5"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/design-system-high-contrast-dark.png",
+    "sha256": "5fccc444f45c39cb39071007058afbb6e4810415dd0347d65581328310bd04d9"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/design-system-high-contrast-light.png",
+    "sha256": "579def1b02001bcecbcd200f24d26b18828c90e10d7bedc0803908cee249bc5a"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/design-system-light.png",
+    "sha256": "79dca8c9e2a537104e8369be0a8ca186eb562add8ccaaa1b9e58fb647a2ef053"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/forgot-password-mobile-light.png",
+    "sha256": "dfe61cc9f41035320f02fdc3e4728823f09e3287c501f89b7ce7b760ec69fd4b"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/login-desktop-dark.png",
+    "sha256": "b288e4210f7d3e4b10ed5be4694c66bbd6e1f6a6f9e9ac0ed1c1cecad7e0d410"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/login-desktop-light.png",
+    "sha256": "68fbcfcb13efe68f35e10e008fa8f507cdc77c615b09f35d918b588fb8ad5126"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/login-mobile-light.png",
+    "sha256": "2869269103c89cd688c3566d401eabd41bb14743ac996b6cbafb060f2a484873"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/request-access-mobile-light.png",
+    "sha256": "b5907d9b312aa3a301ebee01b38c07f33958de0b4caf25032411bebc755b9c1e"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/requests-desktop-light.png",
+    "sha256": "ca89a33218fcf18a109a2eec77ecb014055b1c6c33140a791355afee09f1c775"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/requests-mobile-dark.png",
+    "sha256": "64b6e746c2780ba0be2d6bf97474882f7afdc53098c4d17a4bddc662af76e626"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/reset-password-missing-token.png",
+    "sha256": "94903a70d6210d2383f836459f0faec144e4a194da814a72d0d2048f59b9e19b"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/reset-password-mobile-dark.png",
+    "sha256": "974b6d94a01815a0cec9f3fc726557e2eb11e23a5e538a884702a4e0a0febccf"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/setup-password-desktop-light.png",
+    "sha256": "a36d5771a8a5e0005e3b057fce5f61933f1b54494646f50f940d6adec1a44916"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/users-desktop-dark.png",
+    "sha256": "b4602008a8ac96a572e8da012f6a5da2b0dc89c7a0ac312805d96636e09fcb20"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/users-desktop-light.png",
+    "sha256": "2b7a47b10201d89076fda8b3386db1161bde8fd13dcf816bb39a858b890bbe41"
+  },
+  {
+    "path": "visual-regression.spec.ts/win32/users-mobile-high-contrast-dark.png",
+    "sha256": "1199d825d6a7b6f0f951206dfe482003f3bb62186f9b1186f520ca498486f780"
+  }
+]

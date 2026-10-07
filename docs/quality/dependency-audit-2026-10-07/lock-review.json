@@ -1,0 +1,132 @@
+{
+  "changed": [
+    {
+      "path": "node_modules/@angular-devkit/schematics",
+      "before": "21.2.25",
+      "after": "21.2.26"
+    },
+    {
+      "path": "node_modules/@angular/cli",
+      "before": "21.2.25",
+      "after": "21.2.26"
+    },
+    {
+      "path": "node_modules/@modelcontextprotocol/sdk",
+      "before": "1.30.0",
+      "after": "1.31.0"
+    },
+    {
+      "path": "node_modules/@schematics/angular",
+      "before": "21.2.25",
+      "after": "21.2.26"
+    },
+    {
+      "path": "node_modules/express-rate-limit",
+      "before": "8.7.0",
+      "after": "8.7.1"
+    }
+  ],
+  "removed": [
+    "node_modules/@istanbuljs/load-nyc-config",
+    "node_modules/aggregate-error",
+    "node_modules/append-transform",
+    "node_modules/archy",
+    "node_modules/argparse",
+    "node_modules/caching-transform",
+    "node_modules/caching-transform/node_modules/make-dir",
+    "node_modules/caching-transform/node_modules/semver",
+    "node_modules/camelcase",
+    "node_modules/clean-stack",
+    "node_modules/commondir",
+    "node_modules/decamelize",
+    "node_modules/default-require-extensions",
+    "node_modules/es6-error",
+    "node_modules/esprima",
+    "node_modules/find-cache-dir",
+    "node_modules/find-cache-dir/node_modules/make-dir",
+    "node_modules/find-cache-dir/node_modules/semver",
+    "node_modules/find-up",
+    "node_modules/foreground-child",
+    "node_modules/fromentries",
+    "node_modules/get-package-type",
+    "node_modules/hasha",
+    "node_modules/imurmurhash",
+    "node_modules/indent-string",
+    "node_modules/is-stream",
+    "node_modules/is-typedarray",
+    "node_modules/is-windows",
+    "node_modules/istanbul-lib-hook",
+    "node_modules/istanbul-lib-processinfo",
+    "node_modules/istanbul-lib-source-maps",
+    "node_modules/istanbul-lib-source-maps/node_modules/source-map",
+    "node_modules/js-yaml",
+    "node_modules/locate-path",
+    "node_modules/lodash.flattendeep",
+    "node_modules/node-preload",
+    "node_modules/nyc",
+    "node_modules/nyc/node_modules/ansi-regex",
+    "node_modules/nyc/node_modules/cliui",
+    "node_modules/nyc/node_modules/emoji-regex",
+    "node_modules/nyc/node_modules/is-fullwidth-code-point",
+    "node_modules/nyc/node_modules/make-dir",
+    "node_modules/nyc/node_modules/semver",
+    "node_modules/nyc/node_modules/signal-exit",
+    "node_modules/nyc/node_modules/string-width",
+    "node_modules/nyc/node_modules/strip-ansi",
+    "node_modules/nyc/node_modules/y18n",
+    "node_modules/nyc/node_modules/yargs",
+    "node_modules/nyc/node_modules/yargs-parser",
+    "node_modules/p-limit",
+    "node_modules/p-locate",
+    "node_modules/p-map",
+    "node_modules/p-try",
+    "node_modules/package-hash",
+    "node_modules/package-json-from-dist",
+    "node_modules/path-exists",
+    "node_modules/pkg-dir",
+    "node_modules/process-on-spawn",
+    "node_modules/release-zalgo",
+    "node_modules/require-directory",
+    "node_modules/require-main-filename",
+    "node_modules/resolve-from",
+    "node_modules/rimraf",
+    "node_modules/set-blocking",
+    "node_modules/spawn-wrap",
+    "node_modules/spawn-wrap/node_modules/foreground-child",
+    "node_modules/spawn-wrap/node_modules/make-dir",
+    "node_modules/spawn-wrap/node_modules/semver",
+    "node_modules/spawn-wrap/node_modules/signal-exit",
+    "node_modules/sprintf-js",
+    "node_modules/strip-bom",
+    "node_modules/test-exclude",
+    "node_modules/type-fest",
+    "node_modules/typedarray-to-buffer",
+    "node_modules/which-module",
+    "node_modules/write-file-atomic",
+    "node_modules/write-file-atomic/node_modules/signal-exit"
+  ],
+  "added": [
+    "node_modules/@angular-devkit/schematics/node_modules/@angular-devkit/core",
+    "node_modules/@angular/cli/node_modules/@angular-devkit/architect",
+    "node_modules/@angular/cli/node_modules/@angular-devkit/core",
+    "node_modules/@schematics/angular/node_modules/@angular-devkit/core"
+  ],
+  "directChanges": {
+    "dependencies": [],
+    "devDependencies": [
+      {
+        "name": "@angular/cli",
+        "before": "^21.2.25",
+        "after": "^21.2.26"
+      },
+      {
+        "name": "nyc",
+        "before": "18.0.0",
+        "after": null
+      }
+    ]
+  },
+  "nonOfficialResolved": [],
+  "changedVersionMajors": [],
+  "hasOverrides": false
+}

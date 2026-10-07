@@ -52,11 +52,10 @@ jobs:
           retention-days: 7
           if-no-files-found: ignore
 
-      - name: De-bug Coverage
+      - name: Validar cobertura LCOV nativa
         run: |
-          ls -R coverage || echo "Coverage not found"
-          # Converte o JSON do Angular para LCOV para o Sonar entender
-          npx --no-install nyc report --reporter=lcovonly --temp-dir=coverage/eyes-project-front --report-dir=coverage
+          test -s coverage/lcov.info
+          grep -q "^SF:src/.*\.ts$" coverage/lcov.info
 
       - name: Rodar SonarCloud
         env:
