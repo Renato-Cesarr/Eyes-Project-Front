@@ -45,33 +45,6 @@
   color: var(--eyes-color-on-background);
   text-decoration: none;
 }
-.brand__mark {
-  display: grid;
-  width: 2.25rem;
-  height: 2.25rem;
-  flex: 0 0 auto;
-  place-items: center;
-  border-radius: var(--eyes-radius-small);
-  background: var(--eyes-color-primary);
-  color: var(--eyes-color-on-primary);
-}
-
-.brand__mark eyes-icon {
-  background: var(--eyes-color-primary);
-}
-.brand strong,
-.brand small {
-  display: block;
-}
-.brand strong {
-  font-family: var(--eyes-font-heading);
-  font-size: var(--eyes-font-size-title-small);
-  line-height: var(--eyes-line-height-compact);
-}
-.brand small {
-  color: var(--eyes-color-on-surface-variant);
-  font-size: var(--eyes-font-size-caption);
-}
 .auth-theme {
   width: min(100%, 13rem);
   min-width: 0;
@@ -87,9 +60,12 @@
 .auth-intro {
   min-width: 0;
 }
+.auth-intro eyes-orbit-emblem {
+  margin-bottom: var(--eyes-space-8);
+}
 .auth-intro__eyebrow {
   margin: 0 0 var(--eyes-space-6);
-  color: var(--eyes-color-secondary);
+  color: var(--eyes-color-primary);
   font-weight: var(--eyes-font-weight-bold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -132,15 +108,7 @@
   .auth-footer {
     padding-inline: var(--eyes-space-5);
   }
-  .brand small {
-    display: none;
-  }
   .auth-theme {
     width: min(100%, 11rem);
-  }
-}
-@media (forced-colors: active) {
-  .brand__mark {
-    border: 2px solid ButtonText;
   }
 }

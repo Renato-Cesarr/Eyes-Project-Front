@@ -4,6 +4,11 @@ Aplicação front-end do Eyes Project, desenvolvida em Angular, responsável pel
 
 ## Toolchain fixado
 
+Identidade visual **Orbit**, com temas claro, escuro e dois modos de alto contraste.
+Marca, indicadores, superfícies e estados são reutilizados entre as telas.
+Consulte o [contrato de implementação](docs/design-system/orbit-implementation.md)
+para componentes, limites e verificações de regressão.
+
 - Node.js `22.23.2` LTS, declarado em `.nvmrc` e `engines`;
 - npm `10.9.8`, declarado em `packageManager` e `engines`;
 - dependências instaladas exclusivamente com `npm ci` a partir do

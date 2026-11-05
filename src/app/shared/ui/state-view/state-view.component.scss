@@ -7,7 +7,7 @@
   max-width: var(--eyes-size-reading-maximum);
   justify-items: start;
   gap: var(--eyes-space-3);
-  border: 1px solid var(--eyes-color-outline);
+  border: 1px solid var(--eyes-color-border);
   border-radius: var(--eyes-radius-large);
   background: var(--eyes-color-surface);
   color: var(--eyes-color-on-surface);
@@ -61,9 +61,14 @@ p {
 }
 
 @keyframes eyes-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spinner { animation: none; border-right-color: currentColor; }
+  .spinner {
+    animation: none;
+    border-right-color: currentColor;
+  }
 }

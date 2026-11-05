@@ -12,13 +12,7 @@
   >
     <header class="navigation-header">
       <a class="brand" routerLink="/dashboard" (click)="closeNavigation()">
-        <span class="brand-symbol" aria-hidden="true">
-          <eyes-icon name="visibility" />
-        </span>
-        <span>
-          <strong>Eyes</strong>
-          <small>Administração</small>
-        </span>
+        <eyes-brand />
       </a>
 
       @if (isCompact()) {

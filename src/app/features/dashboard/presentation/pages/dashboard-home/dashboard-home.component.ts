@@ -6,6 +6,7 @@ import {
   auditActionLabel,
   formatAuditDate,
 } from '../../../../audit/presentation/audit-log-presentation';
+import { MetricLinkComponent } from '../../../../../shared/ui/metric-link/metric-link.component';
 import { DashboardSummaryFacade } from '../../../application/dashboard-summary.facade';
 import {
   FeedbackBannerComponent,
@@ -25,6 +26,7 @@ import {
     RouterLink,
     FeedbackBannerComponent,
     IconComponent,
+    MetricLinkComponent,
     PageShellComponent,
     SkeletonComponent,
     StateViewComponent,

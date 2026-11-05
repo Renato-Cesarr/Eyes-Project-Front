@@ -19,6 +19,7 @@ import { filter, map } from 'rxjs';
 import { AuthFacade } from '../../features/auth/application/auth.facade';
 import { EyesThemePreference, ThemeService } from '../../core/theme/theme.service';
 import { IconComponent } from '../../shared/ui';
+import { BrandComponent } from '../../shared/ui/brand/brand.component';
 
 const COMPACT_BREAKPOINT = '(max-width: 63.99rem)';
 
@@ -46,6 +47,7 @@ interface ThemeOption {
     MatMenuModule,
     MatSidenavModule,
     IconComponent,
+    BrandComponent,
   ],
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss'],

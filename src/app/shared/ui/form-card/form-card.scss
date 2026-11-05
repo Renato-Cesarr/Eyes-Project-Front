@@ -1,9 +1,11 @@
 .form-card {
   position: relative;
-  border: 1px solid var(--eyes-color-outline);
+  border: 1px solid var(--eyes-color-border);
   border-radius: var(--eyes-radius-large);
   background: var(--eyes-color-surface);
   color: var(--eyes-color-on-surface);
+  border-top: 2px solid var(--eyes-color-primary);
+  box-shadow: var(--eyes-elevation-medium);
   padding: var(--eyes-space-8);
 }
 

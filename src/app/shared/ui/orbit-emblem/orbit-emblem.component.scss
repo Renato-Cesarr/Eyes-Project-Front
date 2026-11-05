@@ -1,0 +1,50 @@
+:host {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 12rem;
+  height: 10rem;
+}
+.ring {
+  position: absolute;
+  width: 10rem;
+  height: 6rem;
+  border: 1px solid var(--eyes-color-border);
+  border-radius: 50%;
+  transform: rotate(-25deg);
+}
+.ring--cross {
+  width: 8rem;
+  height: 8rem;
+  transform: rotate(37deg);
+}
+.ring--outer {
+  width: 12rem;
+  height: 9rem;
+  transform: rotate(-14deg);
+  border-style: dashed;
+}
+.core {
+  display: grid;
+  place-items: center;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid var(--eyes-color-primary);
+  border-radius: var(--eyes-radius-large);
+  background: var(--eyes-color-primary-container);
+  color: var(--eyes-color-on-primary-container);
+  transform: rotate(-8deg);
+}
+.core eyes-icon {
+  transform: rotate(8deg);
+  font-size: 2rem;
+}
+.satellite {
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  top: 1.75rem;
+  left: 1.25rem;
+  border-radius: 50%;
+  background: var(--eyes-color-primary);
+}

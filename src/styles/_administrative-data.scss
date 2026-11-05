@@ -13,7 +13,7 @@
     min-height: var(--eyes-size-touch-target);
     align-items: center;
     gap: var(--eyes-space-2);
-    border: 1px solid var(--eyes-color-outline);
+    border: 1px solid var(--eyes-color-border);
     border-radius: var(--eyes-radius-pill);
     background: var(--eyes-color-primary-container);
     color: var(--eyes-color-on-primary-container);
@@ -49,13 +49,13 @@
     flex-wrap: wrap;
     align-items: center;
     gap: var(--eyes-space-2);
-    border-top: 1px solid var(--eyes-color-outline);
+    border-top: 1px solid var(--eyes-color-border);
     margin-block-start: var(--eyes-space-2);
     padding-block-start: var(--eyes-space-3);
     color: var(--eyes-color-on-surface-variant);
 
     span {
-      border: 1px solid var(--eyes-color-outline);
+      border: 1px solid var(--eyes-color-border);
       border-radius: var(--eyes-radius-pill);
       background: var(--eyes-color-surface);
       padding: var(--eyes-space-1) var(--eyes-space-3);
@@ -64,7 +64,7 @@
 
   .eyes-data-region {
     overflow: hidden;
-    border: 1px solid var(--eyes-color-outline);
+    border: 1px solid var(--eyes-color-border);
     border-radius: var(--eyes-radius-large);
     background: var(--eyes-color-surface);
     box-shadow: var(--eyes-elevation-low);
@@ -76,7 +76,7 @@
     justify-content: space-between;
     gap: var(--eyes-space-4);
     padding: var(--eyes-space-5) var(--eyes-space-6);
-    border-bottom: 1px solid var(--eyes-color-outline);
+    border-bottom: 1px solid var(--eyes-color-border);
 
     h2,
     p {
@@ -163,7 +163,7 @@
   .eyes-data-card {
     display: grid;
     gap: var(--eyes-space-4);
-    border: 1px solid var(--eyes-color-outline);
+    border: 1px solid var(--eyes-color-border);
     border-radius: var(--eyes-radius-medium);
     background: var(--eyes-color-surface);
     padding: var(--eyes-space-4);
@@ -214,7 +214,7 @@
   }
 
   mat-paginator {
-    border-top: 1px solid var(--eyes-color-outline);
+    border-top: 1px solid var(--eyes-color-border);
     background: var(--eyes-color-surface);
     color: var(--eyes-color-on-surface);
   }
