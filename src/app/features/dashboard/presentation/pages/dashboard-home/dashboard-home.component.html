@@ -53,50 +53,31 @@
       <h2 id="metrics-title" class="eyes-visually-hidden">Indicadores administrativos</h2>
 
       <div class="metrics-grid">
-        <a class="metric" routerLink="/requests">
-          <span class="metric-copy">
-            <span>Solicitações pendentes</span>
-            @if (summary.requestsUnavailable()) {
-              <strong class="metric-unavailable">Indisponível</strong>
-              <small>Atualize para tentar novamente</small>
-            } @else {
-              <strong>{{ summary.pendingRequests() }}</strong>
-              <small>
-                {{
-                  summary.pendingRequests() === 1
-                    ? 'pedido aguardando análise'
-                    : 'pedidos aguardando análise'
-                }}
-              </small>
-            }
-          </span>
-        </a>
-
-        <a class="metric" routerLink="/users">
-          <span class="metric-copy">
-            <span>Usuários ativos</span>
-            @if (summary.usersUnavailable()) {
-              <strong class="metric-unavailable">Indisponível</strong>
-              <small>Atualize para tentar novamente</small>
-            } @else {
-              <strong>{{ summary.activeUsers() }}</strong>
-              <small>contas com acesso ao sistema</small>
-            }
-          </span>
-        </a>
-
-        <a class="metric" routerLink="/audit">
-          <span class="metric-copy">
-            <span>Ações recentes</span>
-            @if (summary.auditUnavailable()) {
-              <strong class="metric-unavailable">Indisponível</strong>
-              <small>Atualize para tentar novamente</small>
-            } @else {
-              <strong>{{ summary.recentActionCount() }}</strong>
-              <small>registros exibidos neste resumo</small>
-            }
-          </span>
-        </a>
+        <eyes-metric-link
+          destination="/requests"
+          label="Solicitações pendentes"
+          [value]="summary.pendingRequests()"
+          [unavailable]="summary.requestsUnavailable()"
+          [caption]="
+            summary.pendingRequests() === 1
+              ? 'pedido aguardando análise'
+              : 'pedidos aguardando análise'
+          "
+        />
+        <eyes-metric-link
+          destination="/users"
+          label="Usuários ativos"
+          [value]="summary.activeUsers()"
+          [unavailable]="summary.usersUnavailable()"
+          caption="contas com acesso ao sistema"
+        />
+        <eyes-metric-link
+          destination="/audit"
+          label="Ações recentes"
+          [value]="summary.recentActionCount()"
+          [unavailable]="summary.auditUnavailable()"
+          caption="registros exibidos neste resumo"
+        />
       </div>
     </section>
 

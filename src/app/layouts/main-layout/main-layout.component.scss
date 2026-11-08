@@ -29,8 +29,8 @@
 }
 
 .admin-navigation {
-  width: min(14rem, 88vw);
-  border-right: 1px solid var(--eyes-color-outline);
+  width: min(15rem, 88vw);
+  border-right: 1px solid var(--eyes-color-border);
   background: var(--eyes-color-surface);
   color: var(--eyes-color-on-surface);
 }
@@ -46,7 +46,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--eyes-space-3);
-  border-bottom: 1px solid var(--eyes-color-outline);
+  border-bottom: 1px solid var(--eyes-color-border);
   padding: var(--eyes-space-4);
 }
 
@@ -59,35 +59,12 @@
   text-decoration: none;
 }
 
-.brand-symbol {
-  display: grid;
-  width: 2.25rem;
-  height: 2.25rem;
-  flex: 0 0 auto;
-  place-items: center;
-  border-radius: var(--eyes-radius-small);
-  background: var(--eyes-color-primary);
-  color: var(--eyes-color-on-primary);
-}
-
-.brand-symbol eyes-icon {
-  background: var(--eyes-color-primary);
-}
-
-.brand > span:last-child,
 .primary-navigation a > span,
 .account-copy {
   display: grid;
   min-width: 0;
 }
 
-.brand strong {
-  font-family: var(--eyes-font-heading);
-  font-size: var(--eyes-font-size-title-small);
-}
-
-.brand small,
-.primary-navigation small,
 .account-copy small,
 .account-menu__identity span {
   color: var(--eyes-color-on-surface-variant);
@@ -143,7 +120,7 @@
 }
 
 .primary-navigation a.active {
-  border-color: var(--eyes-color-primary);
+  border-color: transparent;
   background: var(--eyes-color-primary-container);
   color: var(--eyes-color-on-primary-container);
 }
@@ -166,7 +143,7 @@
 .navigation-footer {
   display: grid;
   gap: var(--eyes-space-4);
-  border-top: 1px solid var(--eyes-color-outline);
+  border-top: 1px solid var(--eyes-color-border);
   padding: var(--eyes-space-4);
   color: var(--eyes-color-on-surface-variant);
 }
@@ -201,7 +178,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--eyes-space-4);
-  border-bottom: 1px solid var(--eyes-color-outline);
+  border-bottom: 1px solid var(--eyes-color-border);
   background: var(--eyes-color-surface);
   color: var(--eyes-color-on-surface);
   padding: var(--eyes-space-2) clamp(var(--eyes-space-4), 4vw, var(--eyes-space-8));
@@ -270,8 +247,8 @@
   flex: 0 0 auto;
   place-items: center;
   border-radius: var(--eyes-radius-pill);
-  background: var(--eyes-color-secondary);
-  color: var(--eyes-color-on-secondary);
+  background: var(--eyes-color-primary-container);
+  color: var(--eyes-color-on-primary-container);
   font-weight: var(--eyes-font-weight-bold);
 }
 
@@ -336,7 +313,6 @@
 }
 
 @media (forced-colors: active) {
-  .brand-symbol,
   .avatar,
   .primary-navigation a.active {
     border: 2px solid ButtonText;

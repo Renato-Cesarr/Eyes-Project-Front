@@ -23,6 +23,7 @@ const requiredColors = [
   'onSurface',
   'surfaceVariant',
   'onSurfaceVariant',
+  'border',
   'outline',
   'primary',
   'onPrimary',

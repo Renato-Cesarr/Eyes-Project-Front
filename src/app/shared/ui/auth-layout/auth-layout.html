@@ -3,13 +3,7 @@
 <div class="auth-shell">
   <header class="auth-toolbar">
     <a class="brand" routerLink="/login" aria-label="Eyes Project — ir para o login">
-      <span class="brand__mark" aria-hidden="true">
-        <eyes-icon name="visibility" />
-      </span>
-      <span>
-        <strong>Eyes</strong>
-        <small>Painel administrativo</small>
-      </span>
+      <eyes-brand subtitle="Painel administrativo" />
     </a>
 
     <eyes-theme-switcher class="auth-theme" [showStatus]="false" [showLabel]="false" />
@@ -17,6 +11,7 @@
 
   <div class="auth-layout">
     <aside class="auth-intro" aria-labelledby="auth-intro-title">
+      <eyes-orbit-emblem />
       <p class="auth-intro__eyebrow">Administração Eyes</p>
       <h2 id="auth-intro-title">Acessos organizados.<br />Decisões claras.</h2>
       <p>Analise solicitações, gerencie usuários e consulte o histórico de decisões.</p>

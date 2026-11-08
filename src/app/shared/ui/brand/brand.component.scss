@@ -1,0 +1,37 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eyes-space-3);
+  min-width: 0;
+  color: var(--eyes-color-on-surface);
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--eyes-radius-medium);
+  background: var(--eyes-color-primary);
+  color: var(--eyes-color-on-primary);
+}
+.brand-copy {
+  display: grid;
+  min-width: 0;
+}
+.brand-mark eyes-icon {
+  background: var(--eyes-color-primary);
+}
+strong {
+  font: var(--eyes-font-weight-semibold) var(--eyes-font-size-title) / 1.2 var(--eyes-font-heading);
+  letter-spacing: -0.04em;
+}
+small {
+  color: var(--eyes-color-on-surface-variant);
+  font-size: var(--eyes-font-size-caption);
+}
+@media (forced-colors: active) {
+  .brand-mark {
+    border: 2px solid ButtonText;
+  }
+}

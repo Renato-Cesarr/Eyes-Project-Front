@@ -14,10 +14,7 @@ a eyes-icon {
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  overflow: hidden;
-  border: 1px solid var(--eyes-color-outline);
-  border-radius: var(--eyes-radius-large);
-  background: var(--eyes-color-surface);
+  gap: var(--eyes-space-4);
 }
 .metric-skeleton,
 .panel-skeleton {
@@ -25,46 +22,6 @@ a eyes-icon {
 }
 .panel-skeleton {
   min-height: 14rem;
-}
-.metric {
-  display: grid;
-  min-width: 0;
-  align-items: start;
-  color: var(--eyes-color-on-surface);
-  padding: var(--eyes-space-6);
-  text-decoration: none;
-}
-.metric + .metric {
-  border-left: 1px solid var(--eyes-color-outline);
-}
-.metric:focus-visible {
-  outline-offset: calc(-1 * var(--eyes-size-focus-ring));
-}
-.metric:hover {
-  background: var(--eyes-color-surface-variant);
-}
-.metric-copy {
-  display: grid;
-  min-width: 0;
-  gap: var(--eyes-space-1);
-  overflow-wrap: anywhere;
-}
-.metric-copy strong {
-  margin-top: var(--eyes-space-1);
-  font-family: var(--eyes-font-heading);
-  font-size: var(--eyes-font-size-headline);
-  line-height: var(--eyes-line-height-compact);
-}
-.metric:first-child .metric-copy strong {
-  color: var(--eyes-color-primary);
-}
-.metric-copy .metric-unavailable {
-  color: var(--eyes-color-error);
-  font-family: var(--eyes-font-body);
-  font-size: var(--eyes-font-size-body-large);
-}
-.metric-copy small {
-  color: var(--eyes-color-on-surface-variant);
 }
 .content-grid {
   display: grid;
@@ -122,7 +79,7 @@ a eyes-icon {
   flex-wrap: wrap;
   gap: var(--eyes-space-3) var(--eyes-space-5);
   margin-top: var(--eyes-space-6);
-  border-top: 1px solid var(--eyes-color-outline);
+  border-top: 1px solid var(--eyes-color-border);
   padding-top: var(--eyes-space-3);
 }
 .quick-links a,
@@ -144,7 +101,7 @@ a eyes-icon {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: var(--eyes-space-3);
-  border-bottom: 1px solid var(--eyes-color-outline);
+  border-bottom: 1px solid var(--eyes-color-border);
   padding: var(--eyes-space-4) 0;
 }
 .activity-list li:first-child {
@@ -182,13 +139,6 @@ a eyes-icon {
 @media (max-width: 40rem) {
   .metrics-grid {
     grid-template-columns: minmax(0, 1fr);
-  }
-  .metric + .metric {
-    border-left: 0;
-    border-top: 1px solid var(--eyes-color-outline);
-  }
-  .metric {
-    padding: var(--eyes-space-5);
   }
   .priority-item {
     grid-template-columns: minmax(0, 1fr);
