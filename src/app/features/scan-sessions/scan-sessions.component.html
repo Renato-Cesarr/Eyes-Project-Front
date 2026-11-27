@@ -1,0 +1,91 @@
+<eyes-page-shell
+  title="Sessões de varredura"
+  description="Ensaios documentados e registros inseridos pela equipe."
+>
+  <button
+    eyes-page-actions
+    mat-flat-button
+    type="button"
+    [attr.aria-expanded]="showForm()"
+    (click)="showForm.update((value) => !value)"
+  >
+    {{ showForm() ? 'Fechar formulário' : 'Registrar sessão' }}
+  </button>
+
+  <p class="eyes-visually-hidden" role="status">{{ status() }}</p>
+
+  @if (showForm()) {
+    <eyes-surface-card heading="Novo registro">
+      <p>Preencha os dados técnicos disponíveis. O registro fica neste navegador.</p>
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="fields">
+          <label>Data do ensaio <input type="date" formControlName="date" required /></label>
+          <label>
+            Câmera
+            <select formControlName="camera">
+              <option value="Interna">Interna</option>
+              <option value="USB">USB</option>
+            </select>
+          </label>
+          <label
+            >Duração em minutos
+            <input type="number" formControlName="minutes" min="0" max="1440" step="any"
+          /></label>
+          <label
+            >Quadros processados
+            <input type="number" formControlName="frames" min="0" max="1000000" step="1"
+          /></label>
+          <label
+            >Avisos registrados
+            <input type="number" formControlName="alerts" min="0" max="1000000" step="1"
+          /></label>
+        </div>
+        <label
+          >Observações <textarea formControlName="summary" maxlength="240" rows="2"></textarea>
+        </label>
+        @if (saveError()) {
+          <p role="alert">{{ saveError() }}</p>
+        }
+        <button mat-flat-button type="submit" [disabled]="form.invalid">Salvar sessão</button>
+      </form>
+    </eyes-surface-card>
+  }
+
+  <eyes-surface-card heading="Histórico de ensaios">
+    <p class="table-description">
+      A origem de cada linha aparece na tabela. Os registros desta página foram lançados fora da
+      sincronização do aplicativo.
+    </p>
+    <div class="table-scroll" role="region" aria-label="Registros de sessões" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Data</th>
+            <th scope="col">Câmera</th>
+            <th scope="col">Duração</th>
+            <th scope="col">Quadros</th>
+            <th scope="col">Avisos</th>
+            <th scope="col">Registro</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (record of records(); track record.id) {
+            <tr>
+              <th scope="row">{{ record.date + 'T00:00:00Z' | date: 'dd/MM/yyyy' : 'UTC' }}</th>
+              <td>{{ record.camera }}</td>
+              <td>{{ record.duration ?? '—' }}</td>
+              <td>{{ formatCount(record.frames) }}</td>
+              <td>{{ formatCount(record.alerts) }}</td>
+              <td class="notes">
+                <strong>{{ record.source }}</strong>
+                @if (record.summary) {
+                  <span>{{ record.summary }}</span>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </eyes-surface-card>
+</eyes-page-shell>

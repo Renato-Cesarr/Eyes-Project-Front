@@ -123,7 +123,8 @@ export class AuthFacade {
       return '/dashboard';
     }
 
-    const supportedDestination = /^\/(dashboard|requests|users|audit|design-system)(?:[/?#].*)?$/;
+    const supportedDestination =
+      /^\/(dashboard|requests|users|audit|sessions|design-system)(?:[/?#].*)?$/;
     return supportedDestination.test(returnUrl) ? returnUrl : '/dashboard';
   }
 }

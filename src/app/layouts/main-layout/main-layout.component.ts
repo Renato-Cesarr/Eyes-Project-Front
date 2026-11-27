@@ -86,6 +86,12 @@ export class MainLayoutComponent {
       description: 'Consultar ações administrativas',
       icon: 'fact_check',
     },
+    {
+      path: '/sessions',
+      label: 'Sessões',
+      description: 'Consultar e registrar ensaios de varredura',
+      icon: 'history',
+    },
   ];
   readonly themeOptions: ReadonlyArray<ThemeOption> = [
     { value: 'system', label: 'Preferência do sistema' },
