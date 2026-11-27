@@ -8,6 +8,34 @@ eyes-surface-card {
   color: var(--eyes-color-on-surface-variant);
 }
 
+.totals-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--eyes-space-2) var(--eyes-space-4);
+}
+
+.totals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: var(--eyes-space-3);
+  margin: var(--eyes-space-3) 0 0;
+}
+
+.totals-grid > div {
+  padding: var(--eyes-space-4);
+  border: 1px solid var(--eyes-color-border);
+  border-radius: var(--eyes-radius-medium);
+}
+
+.totals-grid dd {
+  margin: var(--eyes-space-1) 0 0;
+  color: var(--eyes-color-primary);
+  font-size: 1.5rem;
+  font-weight: var(--eyes-font-weight-bold);
+}
+
 .table-scroll {
   overflow-x: auto;
 }

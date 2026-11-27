@@ -1,6 +1,6 @@
 <eyes-page-shell
   title="Sessões de varredura"
-  description="Ensaios documentados e registros inseridos pela equipe."
+  description="Totais do aplicativo e histórico de ensaios."
 >
   <button
     eyes-page-actions
@@ -13,6 +13,50 @@
   </button>
 
   <p class="eyes-visually-hidden" role="status">{{ status() }}</p>
+
+  <eyes-surface-card heading="Sessões sincronizadas pelo app">
+    <div class="totals-toolbar">
+      <p class="table-description">
+        Totais de sessões enviadas com consentimento nos últimos 30 dias.
+      </p>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="reloadTotals()"
+        [disabled]="totals() === undefined"
+      >
+        Atualizar totais
+      </button>
+    </div>
+    <div class="totals-content" aria-live="polite">
+      @if (totals(); as result) {
+        <dl class="totals-grid">
+          <div>
+            <dt>Sessões concluídas</dt>
+            <dd>{{ formatCount(result.completedSessions) }}</dd>
+          </div>
+          <div>
+            <dt>Quadros processados</dt>
+            <dd>{{ formatCount(result.processedFrames) }}</dd>
+          </div>
+          <div>
+            <dt>Avisos registrados</dt>
+            <dd>{{ formatCount(result.announcedEvents) }}</dd>
+          </div>
+        </dl>
+        @if (result.sessions === 0) {
+          <p class="table-description">Nenhuma sessão sincronizada neste período.</p>
+        }
+      } @else if (totals() === null) {
+        <p>
+          Não foi possível consultar os totais agora. Clique em Atualizar totais para tentar de
+          novo.
+        </p>
+      } @else {
+        <p>Carregando totais do aplicativo…</p>
+      }
+    </div>
+  </eyes-surface-card>
 
   @if (showForm()) {
     <eyes-surface-card heading="Novo registro">
@@ -53,8 +97,7 @@
 
   <eyes-surface-card heading="Histórico de ensaios">
     <p class="table-description">
-      A origem de cada linha aparece na tabela. Os registros desta página foram lançados fora da
-      sincronização do aplicativo.
+      A tabela reúne ensaios documentados e registros manuais. Cada linha indica a origem.
     </p>
     <div class="table-scroll" role="region" aria-label="Registros de sessões" tabindex="0">
       <table>

@@ -1,7 +1,11 @@
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { catchError, of, startWith, Subject, switchMap, timeout } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { PageShellComponent, SurfaceCardComponent } from '../../shared/ui';
 
 type Camera = 'Interna' | 'USB';
@@ -15,6 +19,13 @@ interface SessionRecord {
   alerts: number | null;
   summary: string;
   source: string;
+}
+
+interface ScanTotals {
+  sessions: number;
+  completedSessions: number;
+  processedFrames: number;
+  announcedEvents: number;
 }
 
 const STORAGE_KEY = 'eyes-manual-scan-sessions-v1';
@@ -87,6 +98,20 @@ function readManualSessions(): SessionRecord[] {
 })
 export class ScanSessionsComponent {
   private readonly builder = inject(FormBuilder);
+  private readonly http = inject(HttpClient);
+  private readonly refreshTotals = new Subject<void>();
+  protected readonly totals = toSignal(
+    this.refreshTotals.pipe(
+      startWith(undefined),
+      switchMap(() =>
+        this.http.get<ScanTotals>(`${environment.apiUrl}/v1/scan-sessions/aggregate`).pipe(
+          timeout(12000),
+          catchError(() => of(null)),
+          startWith(undefined),
+        ),
+      ),
+    ),
+  );
   private readonly manual = signal<SessionRecord[]>(readManualSessions());
   protected readonly showForm = signal(false);
   protected readonly status = signal('');
@@ -138,6 +163,10 @@ export class ScanSessionsComponent {
 
   protected formatCount(value: number | null): string {
     return value === null ? '—' : countFormat.format(value);
+  }
+
+  protected reloadTotals(): void {
+    this.refreshTotals.next();
   }
 
   private countField() {

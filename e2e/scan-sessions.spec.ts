@@ -29,3 +29,33 @@ test('sessões exibem o acervo e guardam o lançamento manual após recarregar',
   await expect(saved).toContainText('1.234');
   await expect(page.getByRole('row')).toHaveCount(6);
 });
+
+test('totais usam a API e distinguem ausência de sessões de indisponibilidade', async ({
+  page,
+}) => {
+  await prepareDeterministicPage(page, { authenticated: true });
+  const empty = { sessions: 0, completedSessions: 0, processedFrames: 0, announcedEvents: 0 };
+  const populated = {
+    sessions: 3,
+    completedSessions: 2,
+    processedFrames: 3456,
+    announcedEvents: 7,
+  };
+  let response = 0;
+  await page.route('**/api/v1/scan-sessions/aggregate', (route) => {
+    expect(route.request().headers().authorization).toBe('Bearer e2e-session-token');
+    response += 1;
+    if (response === 3) return route.fulfill({ status: 503, json: {} });
+    return route.fulfill({ json: response === 1 ? empty : populated });
+  });
+  await page.goto('/sessions');
+  await expect(page.getByText('Nenhuma sessão sincronizada neste período.')).toBeVisible();
+  await expect(page.locator('.totals-grid dd')).toHaveText(['0', '0', '0']);
+
+  await page.getByRole('button', { name: 'Atualizar totais' }).click();
+  await expect(page.locator('.totals-grid dd')).toHaveText(['2', '3.456', '7']);
+
+  await page.getByRole('button', { name: 'Atualizar totais' }).click();
+  await expect(page.getByText(/Não foi possível consultar os totais agora/)).toBeVisible();
+  await expect(page.getByRole('row').filter({ hasText: 'Diagnóstico local' })).toBeVisible();
+});
