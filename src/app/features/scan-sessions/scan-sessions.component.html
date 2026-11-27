@@ -1,0 +1,167 @@
+<eyes-page-shell
+  title="Sessões de varredura"
+  description="Totais do aplicativo e histórico de ensaios."
+>
+  <button
+    eyes-page-actions
+    mat-flat-button
+    type="button"
+    [attr.aria-expanded]="showForm()"
+    [disabled]="saving()"
+    (click)="showForm.update((value) => !value)"
+  >
+    {{ showForm() ? 'Fechar formulário' : 'Registrar sessão' }}
+  </button>
+
+  <p class="eyes-visually-hidden" role="status">{{ status() }}</p>
+
+  <eyes-surface-card heading="Sessões sincronizadas pelo app">
+    <div class="totals-toolbar">
+      <p class="table-description">
+        Totais de sessões enviadas com consentimento nos últimos 30 dias.
+      </p>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="reloadTotals()"
+        [disabled]="totals() === undefined"
+      >
+        Atualizar totais
+      </button>
+    </div>
+    <div class="totals-content" aria-live="polite">
+      @if (totals(); as result) {
+        <dl class="totals-grid">
+          <div>
+            <dt>Sessões concluídas</dt>
+            <dd>{{ formatCount(result.completedSessions) }}</dd>
+          </div>
+          <div>
+            <dt>Quadros processados</dt>
+            <dd>{{ formatCount(result.processedFrames) }}</dd>
+          </div>
+          <div>
+            <dt>Avisos registrados</dt>
+            <dd>{{ formatCount(result.announcedEvents) }}</dd>
+          </div>
+        </dl>
+        @if (result.sessions === 0) {
+          <p class="table-description">Nenhuma sessão sincronizada neste período.</p>
+        }
+      } @else if (totals() === null) {
+        <p>
+          Não foi possível consultar os totais agora. Clique em Atualizar totais para tentar de
+          novo.
+        </p>
+      } @else {
+        <p>Carregando totais do aplicativo…</p>
+      }
+    </div>
+  </eyes-surface-card>
+
+  @if (showForm()) {
+    <eyes-surface-card heading="Novo registro">
+      <p>O registro fica disponível para administradores em qualquer navegador.</p>
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="fields">
+          <label>Data do ensaio <input type="date" formControlName="date" required /></label>
+          <label>
+            Câmera
+            <select formControlName="camera">
+              <option value="Interna">Interna</option>
+              <option value="USB">USB</option>
+            </select>
+          </label>
+          <label
+            >Duração em minutos
+            <input type="number" formControlName="minutes" min="0" max="1440" step="any"
+          /></label>
+          <label
+            >Quadros processados
+            <input type="number" formControlName="frames" min="0" max="1000000" step="1"
+          /></label>
+          <label
+            >Avisos registrados
+            <input type="number" formControlName="alerts" min="0" max="1000000" step="1"
+          /></label>
+        </div>
+        <label>
+          Tipo de registro
+          <select formControlName="source">
+            <option value="Registro manual">Registro manual</option>
+            <option value="Simulação">Simulação</option>
+          </select>
+        </label>
+        <label
+          >Observações <textarea formControlName="summary" maxlength="240" rows="2"></textarea>
+        </label>
+        @if (saveError()) {
+          <p role="alert">{{ saveError() }}</p>
+        }
+        <button mat-flat-button type="submit" [disabled]="form.invalid || saving()">
+          {{ saving() ? 'Salvando…' : 'Salvar sessão' }}
+        </button>
+      </form>
+    </eyes-surface-card>
+  }
+
+  <eyes-surface-card heading="Histórico de ensaios">
+    <p class="table-description">Ensaios documentados, registros manuais e simulações.</p>
+    @if (importError()) {
+      <p role="alert">{{ importError() }}</p>
+    }
+    @if (pendingLocalRecords().length) {
+      <p>{{ pendingLocalRecords().length }} registro(s) anterior(es) neste navegador.</p>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="importLocalRecords()"
+        [disabled]="importing()"
+      >
+        {{ importing() ? 'Importando…' : 'Importar para o histórico' }}
+      </button>
+    }
+    @if (records(); as history) {
+      @if (!history.length) {
+        <p>Nenhum registro no histórico.</p>
+      } @else {
+        <div class="table-scroll" role="region" aria-label="Registros de sessões" tabindex="0">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Câmera</th>
+                <th scope="col">Duração</th>
+                <th scope="col">Quadros</th>
+                <th scope="col">Avisos</th>
+                <th scope="col">Registro</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (record of history; track record.id) {
+                <tr>
+                  <th scope="row">{{ record.date + 'T00:00:00Z' | date: 'dd/MM/yyyy' : 'UTC' }}</th>
+                  <td>{{ record.camera }}</td>
+                  <td>{{ record.duration ?? '—' }}</td>
+                  <td>{{ formatCount(record.frames) }}</td>
+                  <td>{{ formatCount(record.alerts) }}</td>
+                  <td class="notes">
+                    <strong>{{ record.source }}</strong>
+                    @if (record.summary) {
+                      <span>{{ record.summary }}</span>
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    } @else if (records() === null) {
+      <p role="alert">Não foi possível consultar o histórico.</p>
+      <button mat-stroked-button type="button" (click)="reloadHistory()">Tentar novamente</button>
+    } @else {
+      <p role="status">Carregando histórico…</p>
+    }
+  </eyes-surface-card>
+</eyes-page-shell>

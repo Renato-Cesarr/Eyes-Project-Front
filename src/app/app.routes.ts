@@ -87,6 +87,15 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'sessions',
+        title: 'Sessões de varredura | Eyes Project',
+        data: { navigationLabel: 'Sessões' },
+        loadComponent: () =>
+          import('./features/scan-sessions/scan-sessions.component').then(
+            (m) => m.ScanSessionsComponent,
+          ),
+      },
+      {
         path: 'design-system',
         title: 'Design System | Eyes Project',
         data: { navigationLabel: 'Design System' },

@@ -1,0 +1,98 @@
+eyes-surface-card {
+  display: block;
+  margin-bottom: var(--eyes-space-5);
+}
+
+.table-description,
+.notes span {
+  color: var(--eyes-color-on-surface-variant);
+}
+
+.totals-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--eyes-space-2) var(--eyes-space-4);
+}
+
+.totals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: var(--eyes-space-3);
+  margin: var(--eyes-space-3) 0 0;
+}
+
+.totals-grid > div {
+  padding: var(--eyes-space-4);
+  border: 1px solid var(--eyes-color-border);
+  border-radius: var(--eyes-radius-medium);
+}
+
+.totals-grid dd {
+  margin: var(--eyes-space-1) 0 0;
+  color: var(--eyes-color-primary);
+  font-size: 1.5rem;
+  font-weight: var(--eyes-font-weight-bold);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: var(--eyes-space-3) var(--eyes-space-2);
+  border-bottom: 1px solid var(--eyes-color-border);
+  text-align: start;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+tr:last-child td,
+tbody tr:last-child th {
+  border-bottom: 0;
+}
+
+.notes {
+  min-width: 13rem;
+  white-space: normal;
+}
+
+.notes span {
+  display: block;
+  margin-top: var(--eyes-space-1);
+}
+
+form,
+.fields,
+label {
+  display: grid;
+  gap: var(--eyes-space-3);
+}
+
+.fields {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: var(--eyes-size-touch-target);
+  padding: var(--eyes-space-2) var(--eyes-space-3);
+  border: 1px solid var(--eyes-color-border);
+  border-radius: var(--eyes-radius-medium);
+  background: var(--eyes-color-surface);
+  color: var(--eyes-color-on-surface);
+  font: inherit;
+}
+
+form button {
+  justify-self: start;
+}
