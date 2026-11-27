@@ -1,0 +1,14 @@
+**
+!package.json
+!package-lock.json
+!angular.json
+!tsconfig.json
+!tsconfig.app.json
+!src/
+!src/**
+!public/
+!public/**
+!scripts/
+!scripts/configure-cloud-build.mjs
+!deploy/
+!deploy/nginx.conf
